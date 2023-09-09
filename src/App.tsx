@@ -9,12 +9,7 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyles from "styles/global";
 import { darkTheme, lightTheme } from "styles/theme";
 
-import { ImportContacts } from "@mui/icons-material";
-import NavbarIcon from "component/Navbar/Icon/Icon";
-import NavbarItem from "component/Navbar/Item/Item";
-import Navbar from "component/Navbar/Navbar";
 import type { RootState } from "core/store/store";
-import NavbarAvatar from "component/Navbar/Avatar/Avatar";
 // import { uiActions } from "core/store/slices/ui.slice";
 
 // const Wrapper = styled.div`
