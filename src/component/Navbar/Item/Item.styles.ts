@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { media } from "styles/media";
 
-export const LinkStyled = styled.a<{ $isActive: boolean }>`
+export const LinkStyled = styled.a`
   @media ${media.small} {
     display: flex;
     align-items: center;
@@ -12,25 +12,31 @@ export const LinkStyled = styled.a<{ $isActive: boolean }>`
     gap: 4px;
     font-size: 12px;
     line-height: 16px;
-    font-weight: ${({ $isActive }) => $isActive ? 600 : 500 };
-    color: ${({ $isActive, theme }) => $isActive ? theme.colors.contrast : theme.colors.text};
+    font-weight: 500;
+    color: ${({ theme }) => theme.colors.text};
     background-color: transparent;
-
     &:hover, &:focus {
       color: ${({ theme }) => theme.colors.contrast};
-      .IconContainer {
+
+      .Container {
         background-color: ${({ theme }) => theme.colors.secondaryContainer};        
       }
     }
-  
-    .IconContainer {
+    &[data-active="true"] {
+      color: ${({ theme }) => theme.colors.contrast};
+      font-weight: 600;
+
+      .Container {
+        background-color: ${({ theme }) => theme.colors.secondaryContainer};
+      }
+    }
+    .Container {
       display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
       height: 32px;
       border-radius: 16px;
-      background-color: ${({ $isActive, theme }) => $isActive && theme.colors.secondaryContainer};
       letter-spacing: 0.5px;
       .IconBadge {
         display: flex;
