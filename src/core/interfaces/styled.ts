@@ -6,5 +6,11 @@ export enum ThemeEnum {
 export interface ITheme {
     colors: {
         primary: string;
+        secondary: string;
+        secondaryContainer: string;
+        contrast: string;
+        text: string;
+        bgError: string;
+        textError: string;
     };
 }
