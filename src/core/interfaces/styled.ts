@@ -1,18 +1,39 @@
 export interface ITheme {
     colors: {
-        white: string;
-        textContrast: string;
-        text: string;
-        textGray: string;
-        textDarkGray: string;
         primary: string;
+        primaryText: string;
         secondary: string;
+
         secondaryContainer: string;
-        contrast: string;
+        surfaceContainer: string;
+
+        navbarChip: string;
+        modalBg: string;
+        modalCloseElement: string;
+
+        appBackground: string;
+        windowBackground: string;
+        surface: string;
+        surfaceVariant: string;
+
         text: string;
+        textDarker: string;
+        textContrast: string;
+        textCalendar: string;
+
+        emojiColor: string;
+        iconColor: string;
+
         bgError: string;
         textError: string;
-        surface: string;
+
         outline: string;
     };
+}
+
+export interface IMedia {
+    extraLarge: string;
+    large: string;
+    medium: string;
+    small: string;
 }

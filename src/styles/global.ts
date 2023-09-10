@@ -25,6 +25,8 @@ const GlobalStyles = createGlobalStyle`
 
         font-family: "Roboto", sans-serif;
         font-size: 14px;
+
+        background-color: ${({ theme }) => theme.colors.appBackground};
     }
 `;
 
