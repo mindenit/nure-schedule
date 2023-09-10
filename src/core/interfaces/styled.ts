@@ -6,6 +6,12 @@ export interface ITheme {
         textGray: string;
         textDarkGray: string;
         primary: string;
+        secondary: string;
+        secondaryContainer: string;
+        contrast: string;
+        text: string;
+        bgError: string;
+        textError: string;
         surface: string;
         outline: string;
     };
