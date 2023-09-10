@@ -1,36 +1,34 @@
-/*
- * All the code that is written and commented out below
- * is code that shows the principle of changing themes.
- */
-
-import { useSelector, useDispatch } from "react-redux";
-import styled, { ThemeProvider } from "styled-components";
+import { useSelector } from "react-redux";
+import { ThemeProvider } from "styled-components";
 
 import GlobalStyles from "styles/global";
 import { darkTheme, lightTheme } from "styles/theme";
+import * as C from "styles/components";
 
 import type { RootState } from "core/store/store";
-// import { uiActions } from "core/store/slices/ui.slice";
-
-// const Wrapper = styled.div`
-//     width: 200px;
-//     height: 200px;
-//     background-color: ${({ theme }) => theme.colors.primary};
-// `;
+import Card from "components/Card/Card";
 
 const App: React.FC = () => {
     const { theme } = useSelector((state: RootState) => state.ui);
     const currentTheme = theme === "light" ? lightTheme : darkTheme;
-    // const dispatch = useDispatch();
 
     return (
         <ThemeProvider theme={currentTheme}>
             <GlobalStyles />
-            <h1>Hello world</h1>
-            {/* <Wrapper>1</Wrapper> */}
-            {/* <button onClick={() => dispatch(uiActions.toggleTheme())}>
-                Change theme
-            </button> */}
+            <C.Container>
+                <Card avatar="ПР">
+                    <C.TitleMedium>
+                        <b>11:15</b> Практичне заняття
+                    </C.TitleMedium>
+                    <C.TitleBig>Фізичне виховання</C.TitleBig>
+                </Card>
+                <Card avatar="">
+                    <C.TitleMedium>
+                        <b>11:15</b> Практичне заняття
+                    </C.TitleMedium>
+                    <C.TitleBig>Фізичне виховання</C.TitleBig>
+                </Card>
+            </C.Container>
         </ThemeProvider>
     );
 };
