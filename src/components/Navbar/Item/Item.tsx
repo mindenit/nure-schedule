@@ -5,7 +5,7 @@ interface NavbarItemProps extends ComponentPropsWithoutRef<"a"> {
     isActive?: boolean;
 }
 
-const NavbarItem = forwardRef<ElementRef<"a">, NavbarItemProps>(
+export const NavbarItem = forwardRef<ElementRef<"a">, NavbarItemProps>(
     ({ children, isActive, ...props }, ref) => {
         return (
             <S.LinkStyled ref={ref} data-active={isActive} {...props}>
@@ -18,5 +18,3 @@ const NavbarItem = forwardRef<ElementRef<"a">, NavbarItemProps>(
 NavbarItem.defaultProps = {
     isActive: false,
 };
-
-export default NavbarItem;

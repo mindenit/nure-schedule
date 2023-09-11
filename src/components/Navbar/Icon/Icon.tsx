@@ -6,7 +6,7 @@ interface NavbarIconProps extends ComponentPropsWithoutRef<"div"> {
     badgeCount?: number;
 }
 
-const NavbarIcon = forwardRef<ElementRef<"div">, NavbarIconProps>(
+export const NavbarIcon = forwardRef<ElementRef<"div">, NavbarIconProps>(
     ({ badgeCount, children, ...props }, ref) => {
         return (
             <C.StyledNavbarContainer className="Container" ref={ref} {...props}>
@@ -21,4 +21,3 @@ const NavbarIcon = forwardRef<ElementRef<"div">, NavbarIconProps>(
     }
 );
 
-export default NavbarIcon;

@@ -6,12 +6,10 @@ interface NavbarAvatarProps extends ComponentPropsWithoutRef<"img"> {
   badgeCount?: number
 }
 
-const NavbarAvatar = forwardRef<ElementRef<"img">, NavbarAvatarProps>(({ ...props }, ref) => {
+export const NavbarAvatar = forwardRef<ElementRef<"img">, NavbarAvatarProps>(({ ...props }, ref) => {
   return (
     <C.StyledNavbarContainer className="Container">
       <S.StyledNavbarAvatar ref={ref} {...props} />
     </C.StyledNavbarContainer>
   )
 })
-
-export default NavbarAvatar;
