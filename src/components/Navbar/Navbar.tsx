@@ -7,9 +7,9 @@ interface NavbarProps extends ComponentPropsWithoutRef<"header"> {}
 const Navbar = forwardRef<ElementRef<"header">, NavbarProps>(
     ({ children, ...props }, ref) => {
         return (
-            <S.NavbarStyles ref={ref} {...props}>
+            <S.StyledNavbar ref={ref} {...props}>
                 {children}
-            </S.NavbarStyles>
+            </S.StyledNavbar>
         );
     }
 );
