@@ -1,11 +1,15 @@
 import { ReactNode } from "react";
 import * as S from "./Card.styles";
-import CardAvatar from "components/Card/CardAvatar/CardAvatar";
+import { CardAvatar } from "./CardAvatar/CardAvatar";
 
 interface Props {
     avatar: string;
     children: ReactNode;
 }
+
+/*
+TODO: Create normal color system for card avatars, not like now
+*/
 
 const Card: React.FC<Props> = ({ avatar, children }) => {
     return (
@@ -22,4 +26,4 @@ const Card: React.FC<Props> = ({ avatar, children }) => {
     );
 };
 
-export default Card;
+export { Card };

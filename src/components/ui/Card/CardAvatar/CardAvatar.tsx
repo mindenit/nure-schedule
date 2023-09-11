@@ -14,4 +14,4 @@ const CardAvatar: React.FC<Props> = ({ bgColor, children }) => {
     );
 };
 
-export default CardAvatar;
+export { CardAvatar };

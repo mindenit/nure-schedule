@@ -2,38 +2,66 @@ import { ITheme } from "core/interfaces/styled";
 
 export const lightTheme: ITheme = {
     colors: {
-        white: "#FFFFFF",
-        textContrast: "#000000",
-        text: "#1D1B20",
-        textGray: "#CAC4D0",
-        textDarkGray: "#808080",
         primary: "#5086A4",
-        secondary: "#edf3f7",
+        primaryText: "#FFFFFF",
+        secondary: "#625B71",
+
         secondaryContainer: "#DEF3F8",
-        bgError: "#B3261E",
-        textError: "#fff",
-        contrast: "#000",
-        text: "#49454F",
+        surfaceContainer: "#EDF3F7",
+
+        navbarChip: "#DEF3F8",
+        modalBg: "#FFFFFF",
+        modalCloseElement: "#000000",
+
+        appBackground: "#F7FEFF",
+        windowBackground: "#FFFFFF",
         surface: "#F7FEFF",
+        surfaceVariant: "#E0ECEB",
+
+        text: "#49454F",
+        textDarker: "#1D1B20",
+        textContrast: "#000000",
+        textCalendar: "#808080",
+
+        emojiColor: "#4A4458",
+        iconColor: "#49454F",
+
+        bgError: "#B3261E",
+        textError: "#FFFFFF",
+
         outline: "#CAC4D0",
     },
 };
 
 export const darkTheme: ITheme = {
     colors: {
-        white: "#FFFFFF",
-        textContrast: "#FFFFFF",
-        text: "#FFFFFF",
-        textGray: "#CAC4D0",
-        textDarkGray: "#808080",
         primary: "#BCF3FF",
-        secondary: "#211f27",
-        secondaryContainer: "#445458",
+        primaryText: "#381E72",
+        secondary: "#CCC2DC",
+
+        secondaryContainer: "#4A4458",
+        surfaceContainer: "#211F26",
+
+        navbarChip: "#445458",
+        modalBg: "#000000",
+        modalCloseElement: "#FFFFFF",
+
+        appBackground: "#141218",
+        windowBackground: "#141218",
+        surface: "#1D1B20",
+        surfaceVariant: "#1D192B",
+
+        text: "#CAC4D0",
+        textDarker: "#FFFFFF",
+        textContrast: "#FFFFFF",
+        textCalendar: "#808080",
+
+        emojiColor: "#E6E0E9",
+        iconColor: "#CAC4D0",
+
         bgError: "#F2B8B5",
         textError: "#601410",
-        contrast: "#fff",
-        text: "#E0ECEB",
-        surface: "#1D1B20",
+
         outline: "#CAC4D0",
     },
 };

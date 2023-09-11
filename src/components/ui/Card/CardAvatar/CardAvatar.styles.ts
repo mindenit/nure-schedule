@@ -23,6 +23,6 @@ export const StyledCardAvatar = styled.div<Props>`
 `;
 
 export const StyledCardAvatarText = styled(TitleMedium)`
-    color: ${({ theme }) => theme.colors.white};
+    color: #ffffff;
     text-align: center;
 `;
