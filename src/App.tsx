@@ -8,13 +8,8 @@ import * as C from "styles/components";
 import type { RootState } from "core/store/store";
 
 import { Card } from "components/ui/Card";
-import Navbar from "components/Navbar/Navbar";
-import NavbarItem from "components/Navbar/Item/Item";
-import NavbarIcon from "components/Navbar/Icon/Icon";
-import NavbarAvatar from "components/Navbar/Avatar/Avatar";
 import { ImportContacts } from "@mui/icons-material";
-
-// TODO: Fix bug in NavBar, when you can select 2 active elements
+import { Navbar } from "components/Navbar/Navbar";
 
 const App: React.FC = () => {
     const { theme } = useSelector((state: RootState) => state.ui);
@@ -38,34 +33,34 @@ const App: React.FC = () => {
                 </Card>
             </C.Container>
             <Navbar>
-                <NavbarItem isActive={true}>
-                    <NavbarIcon badgeCount={4}>
+                <Navbar.Item isActive={true}>
+                    <Navbar.Icon badgeCount={4}>
                         <ImportContacts />
-                    </NavbarIcon>
+                    </Navbar.Icon>
                     Label
-                </NavbarItem>
-                <NavbarItem>
-                    <NavbarIcon>
+                </Navbar.Item>
+                <Navbar.Item>
+                    <Navbar.Icon>
                         <ImportContacts />
-                    </NavbarIcon>
+                    </Navbar.Icon>
                     Label
-                </NavbarItem>
-                <NavbarItem>
-                    <NavbarIcon>
+                </Navbar.Item>
+                <Navbar.Item>
+                    <Navbar.Icon>
                         <ImportContacts />
-                    </NavbarIcon>
+                    </Navbar.Icon>
                     Label
-                </NavbarItem>
-                <NavbarItem>
-                    <NavbarIcon>
+                </Navbar.Item>
+                <Navbar.Item>
+                    <Navbar.Icon>
                         <ImportContacts />
-                    </NavbarIcon>
+                    </Navbar.Icon>
                     Label
-                </NavbarItem>
-                <NavbarItem>
-                    <NavbarAvatar src="https://i.pravatar.cc/80" />
+                </Navbar.Item>
+                <Navbar.Item>
+                    <Navbar.Avatar src="https://i.pravatar.cc/80" />
                     User
-                </NavbarItem>
+                </Navbar.Item>
             </Navbar>
         </ThemeProvider>
     );

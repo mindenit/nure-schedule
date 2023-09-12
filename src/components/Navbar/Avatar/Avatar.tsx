@@ -1,16 +1,15 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from "react";
 import * as S from "./Avatar.styles";
+import * as C from "../Navbar.styles";
 
 interface NavbarAvatarProps extends ComponentPropsWithoutRef<"img"> {
   badgeCount?: number
 }
 
-const NavbarAvatar = forwardRef<ElementRef<"img">, NavbarAvatarProps>(({ ...props }, ref) => {
+export const NavbarAvatar = forwardRef<ElementRef<"img">, NavbarAvatarProps>(({ ...props }, ref) => {
   return (
-    <S.StyledAvatar className="Container">
-      <img ref={ref} {...props} />
-    </S.StyledAvatar>
+    <C.StyledNavbarContainer className="Container">
+      <S.StyledNavbarAvatar ref={ref} {...props} />
+    </C.StyledNavbarContainer>
   )
 })
-
-export default NavbarAvatar;

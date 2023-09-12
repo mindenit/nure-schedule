@@ -1,23 +1,23 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from "react";
 import * as S from "./Icon.styles";
+import * as C from "../Navbar.styles";
 
 interface NavbarIconProps extends ComponentPropsWithoutRef<"div"> {
     badgeCount?: number;
 }
 
-const NavbarIcon = forwardRef<ElementRef<"div">, NavbarIconProps>(
+export const NavbarIcon = forwardRef<ElementRef<"div">, NavbarIconProps>(
     ({ badgeCount, children, ...props }, ref) => {
         return (
-            <S.NavbarIcon ref={ref} className="Container" {...props}>
+            <C.StyledNavbarContainer className="Container" ref={ref} {...props}>
                 {badgeCount && (
-                    <span className="IconBadge" aria-hidden={true}>
+                    <S.StyledIconBadge className="IconBadge" aria-hidden={true}>
                         {badgeCount}
-                    </span>
+                    </S.StyledIconBadge>
                 )}
                 {children}
-            </S.NavbarIcon>
+            </C.StyledNavbarContainer>
         );
     }
 );
 
-export default NavbarIcon;
