@@ -26,4 +26,9 @@ export const StyledCloseButton = styled.button`
   border: 0;
   outline: none;
   color: ${({ theme }) => theme.colors.text};
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
 `;

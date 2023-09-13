@@ -1,17 +1,18 @@
 import { useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
 
+import * as C from "styles/components";
 import GlobalStyles from "styles/global";
 import { darkTheme, lightTheme } from "styles/theme";
-import * as C from "styles/components";
 
 import type { RootState } from "core/store/store";
 
-import { Card } from "components/ui/Card";
-import { ImportContacts } from "@mui/icons-material";
+import { Close, ImportContacts } from "@mui/icons-material";
 import { Navbar } from "components/Navbar/Navbar";
-import { Tabs } from "components/ui/Tabs";
+import { Card } from "components/ui/Card";
 import { Dialog } from "components/ui/Dialog";
+import { List } from "components/ui/List";
+import { Tabs } from "components/ui/Tabs";
 
 const App: React.FC = () => {
     const { theme } = useSelector((state: RootState) => state.ui);
@@ -68,12 +69,18 @@ const App: React.FC = () => {
                     </Dialog.Trigger>
                     <Dialog.Content>
                         <Dialog.Header title="sdsd" />
-                        <p>1212</p>
+                        <List.Root>
+                            <List.Item>
+                                <List.Header>
+                                    Практичні роботи
+                                </List.Header>
+                            </List.Item>
+                        </List.Root>
                     </Dialog.Content>
                 </Dialog.Root>
             </Navbar.Root>
             <Tabs.Root defaultValue="day">
-                <Tabs.List>
+                <Tabs.List variant="compact">
                     <Tabs.Trigger value="day">День</Tabs.Trigger>
                     <Tabs.Trigger value="week">Тиждень</Tabs.Trigger>
                     <Tabs.Trigger value="month">Місяць</Tabs.Trigger>

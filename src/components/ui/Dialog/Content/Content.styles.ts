@@ -18,6 +18,7 @@ export const StyledDialogContent = styled(DialogPrimitive.Content)`
     box-sizing: border-box;
     padding: 1.5rem 2rem;
     border-radius: 20px 20px 0 0; 
+    gap: 1rem;
   }
 `;
 
