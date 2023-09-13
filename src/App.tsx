@@ -10,6 +10,7 @@ import type { RootState } from "core/store/store";
 import { Card } from "components/ui/Card";
 import { ImportContacts } from "@mui/icons-material";
 import { Navbar } from "components/Navbar/Navbar";
+import { Button } from "components/ui/Button";
 
 const App: React.FC = () => {
     const { theme } = useSelector((state: RootState) => state.ui);
@@ -32,6 +33,9 @@ const App: React.FC = () => {
                     <C.TitleBig>Фізичне виховання</C.TitleBig>
                 </Card>
             </C.Container>
+            <Button>Filled</Button>
+            <Button variant="outlined">Outlined</Button>
+            <Button variant="text">Text</Button>
             <Navbar>
                 <Navbar.Item isActive={true}>
                     <Navbar.Icon badgeCount={4}>
