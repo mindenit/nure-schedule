@@ -1,15 +1,14 @@
-import { ReactNode } from "react";
 import * as S from "./CardAvatar.styles";
 
 interface Props {
-    bgColor: "#625B71" | "#5086A4" | "#21005D";
-    children: ReactNode;
+    letters: string;
+    color: string;
 }
 
-const CardAvatar: React.FC<Props> = ({ bgColor, children }) => {
+const CardAvatar: React.FC<Props> = ({ letters, color }) => {
     return (
-        <S.StyledCardAvatar bgColor={bgColor}>
-            <S.StyledCardAvatarText>{children}</S.StyledCardAvatarText>
+        <S.StyledCardAvatar color={color}>
+            <S.StyledCardAvatarText>{letters}</S.StyledCardAvatarText>
         </S.StyledCardAvatar>
     );
 };

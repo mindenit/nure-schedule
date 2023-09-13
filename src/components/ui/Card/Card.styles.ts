@@ -30,3 +30,19 @@ export const StyledCardText = styled.div`
     flex-direction: column;
     row-gap: 5px;
 `;
+
+export const InfoCardText = styled.h5`
+    color: ${({ theme }) => theme.colors.text};
+
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+`;
+
+export const InfoCardGroup = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 32px;
+`;

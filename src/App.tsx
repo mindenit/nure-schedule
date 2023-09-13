@@ -7,7 +7,7 @@ import * as C from "styles/components";
 
 import type { RootState } from "core/store/store";
 
-import { Card } from "components/ui/Card";
+import { Card } from "components/ui/Card/Card";
 import { ImportContacts } from "@mui/icons-material";
 import { Navbar } from "components/Navbar/Navbar";
 
@@ -19,18 +19,22 @@ const App: React.FC = () => {
         <ThemeProvider theme={currentTheme}>
             <GlobalStyles />
             <C.Container>
-                <Card avatar="ПР">
-                    <C.TitleMedium>
-                        <b>11:15</b> Практичне заняття
-                    </C.TitleMedium>
-                    <C.TitleBig>Фізичне виховання</C.TitleBig>
-                </Card>
-                <Card avatar="">
-                    <C.TitleMedium>
-                        <b>11:15</b> Практичне заняття
-                    </C.TitleMedium>
-                    <C.TitleBig>Фізичне виховання</C.TitleBig>
-                </Card>
+                <Card
+                    id="1"
+                    cardType="subject"
+                    startTime="1694765700"
+                    auditory="320"
+                    type="Лб"
+                    subjectBrief="КЛоГ"
+                    subjectName="Комп'ютерна логіка"
+                />
+                <Card
+                    id="2"
+                    cardType="info"
+                    title="Title"
+                    subhead="Subhead"
+                    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+                />
             </C.Container>
             <Navbar>
                 <Navbar.Item isActive={true}>
