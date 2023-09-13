@@ -7,7 +7,7 @@ import { darkTheme, lightTheme } from "styles/theme";
 
 import type { RootState } from "core/store/store";
 
-import { Close, ImportContacts } from "@mui/icons-material";
+import { ImportContacts } from "@mui/icons-material";
 import { Navbar } from "components/Navbar/Navbar";
 import { Card } from "components/ui/Card";
 import { Dialog } from "components/ui/Dialog";
