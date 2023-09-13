@@ -32,6 +32,7 @@ const App: React.FC = () => {
                     <C.TitleBig>Фізичне виховання</C.TitleBig>
                 </Card>
             </C.Container>
+
             <Navbar>
                 <Navbar.Item isActive={true}>
                     <Navbar.Icon badgeCount={4}>
