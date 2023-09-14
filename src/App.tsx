@@ -21,20 +21,6 @@ const App: React.FC = () => {
     return (
         <ThemeProvider theme={currentTheme}>
             <GlobalStyles />
-            <C.Container>
-                <Card avatar="ПР">
-                    <C.TitleMedium>
-                        <b>11:15</b> Практичне заняття
-                    </C.TitleMedium>
-                    <C.TitleBig>Фізичне виховання</C.TitleBig>
-                </Card>
-                <Card avatar="">
-                    <C.TitleMedium>
-                        <b>11:15</b> Практичне заняття
-                    </C.TitleMedium>
-                    <C.TitleBig>Фізичне виховання</C.TitleBig>
-                </Card>
-            </C.Container>
             <Navbar.Root>
                 <Navbar.Item isActive={true}>
                     <Navbar.Icon badgeCount={4}>
