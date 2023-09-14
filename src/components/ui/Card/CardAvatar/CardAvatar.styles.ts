@@ -1,10 +1,8 @@
 import styled from "styled-components";
 import { TitleMedium } from "styles/components";
 
-type ValidBgColor = "#625B71" | "#5086A4" | "#21005D";
-
 interface Props {
-    bgColor: ValidBgColor;
+    color: string;
 }
 
 export const StyledCardAvatar = styled.div<Props>`
@@ -17,7 +15,7 @@ export const StyledCardAvatar = styled.div<Props>`
 
     border-radius: 50%;
 
-    background-color: ${(props) => props.bgColor};
+    background-color: ${(props) => props.color};
 
     text-align: center;
 `;
