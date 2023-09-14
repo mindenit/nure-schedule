@@ -17,8 +17,9 @@ const NavbarComponent = forwardRef<ElementRef<"header">, NavbarProps>(
     }
 );
 
-export const Navbar = Object.assign(NavbarComponent, {
+export const Navbar = { ...{
+    Root: NavbarComponent,
     Avatar: NavbarAvatar,
     Icon: NavbarIcon,
     Item: NavbarItem,
-})
+}};
