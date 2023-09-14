@@ -7,7 +7,6 @@ import * as C from "styles/components";
 
 import type { RootState } from "core/store/store";
 
-import { Card } from "components/ui/Card/Card";
 import { ImportContacts } from "@mui/icons-material";
 import { Navbar } from "components/Navbar/Navbar";
 
@@ -18,24 +17,7 @@ const App: React.FC = () => {
     return (
         <ThemeProvider theme={currentTheme}>
             <GlobalStyles />
-            <C.Container>
-                <Card
-                    id="1"
-                    cardType="subject"
-                    startTime="1694765700"
-                    auditory="320"
-                    type="Лб"
-                    subjectBrief="КЛоГ"
-                    subjectName="Комп'ютерна логіка"
-                />
-                <Card
-                    id="2"
-                    cardType="info"
-                    title="Title"
-                    subhead="Subhead"
-                    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-                />
-            </C.Container>
+            <C.Container></C.Container>
             <Navbar>
                 <Navbar.Item isActive={true}>
                     <Navbar.Icon badgeCount={4}>

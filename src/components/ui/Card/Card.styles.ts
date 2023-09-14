@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { media } from "styles/media";
 
 export const StyledCard = styled.div`
     display: flex;
@@ -14,6 +15,11 @@ export const StyledCard = styled.div`
     background-color: ${({ theme }) => theme.colors.surface};
 
     padding: 16px;
+
+    width: 330px;
+    @media ${media.small} {
+        width: 100%;
+    }
 `;
 
 export const StyledCardGrid = styled.div`

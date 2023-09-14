@@ -3,6 +3,13 @@ import * as S from "./Card.styles";
 import * as C from "styles/components";
 import { CardAvatar } from "./CardAvatar/CardAvatar";
 
+type SubjectType = "Лк" | "Лб" | "Пз";
+
+interface CardDetailsProps {
+    avatarColor: string;
+    subjectType: string;
+}
+
 interface CardProps {
     id: string;
     cardType: "info" | "subject";
@@ -11,7 +18,7 @@ interface CardProps {
 interface SubjectCardProps extends CardProps {
     startTime: string;
     auditory: string;
-    type: "Лк" | "Лб" | "Пз";
+    type: SubjectType;
     subjectBrief: string;
     subjectName: string;
 }
@@ -44,28 +51,34 @@ const SubjectCard: React.FC<SubjectCardProps> = ({
     subjectBrief,
     subjectName,
 }) => {
-    const formattedTime: string = new Date(
-        Number(startTime) * 1000
-    ).toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit" });
+    function formatTime(time: string): string {
+        const res = new Date(Number(time) * 1000).toLocaleTimeString("ru-RU", {
+            hour: "2-digit",
+            minute: "2-digit",
+        });
 
-    let avatarColor: string = "";
-    let fullType: string = "";
-    switch (type) {
-        case "Лк":
-            avatarColor = "#5086A4";
-            fullType = "Лекція";
-            break;
-        case "Лб":
-            avatarColor = "#21005D";
-            fullType = "Лабораторна робота";
-            break;
-        case "Пз":
-            avatarColor = "#625B71";
-            fullType = "Практичне заняття";
-            break;
-        default:
-            break;
+        return res;
     }
+
+    function getCardDetails(brief: SubjectType): CardDetailsProps {
+        switch (brief) {
+            case "Лк":
+                return { avatarColor: "#5086A4", subjectType: "Лекція" };
+            case "Лб":
+                return {
+                    avatarColor: "#21005D",
+                    subjectType: "Лабораторна робота",
+                };
+            case "Пз":
+                return {
+                    avatarColor: "#625B71",
+                    subjectType: "Практичне заняття",
+                };
+        }
+    }
+
+    const formattedTime = formatTime(startTime);
+    const { avatarColor, subjectType } = getCardDetails(type);
     const avatarText: string = subjectBrief.slice(0, 2);
 
     return (
@@ -76,7 +89,7 @@ const SubjectCard: React.FC<SubjectCardProps> = ({
                     <b>
                         {formattedTime} {auditory}
                     </b>{" "}
-                    {fullType}
+                    {subjectType}
                 </C.TitleMedium>
                 <C.TitleBig>{subjectName}</C.TitleBig>
             </S.StyledCardText>
