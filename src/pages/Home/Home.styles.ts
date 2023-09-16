@@ -43,3 +43,11 @@ export const HomeTitle = styled(C.TitleBig)`
         line-height: 24px;
     }
 `;
+
+export const HomeButtonContainer = styled.div`
+    @media ${media.small} {
+        position: absolute;
+        bottom: 20px;
+        right: 0;
+    }
+`;
