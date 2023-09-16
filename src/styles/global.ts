@@ -27,6 +27,7 @@ const GlobalStyles = createGlobalStyle`
         font-size: 14px;
 
         background-color: ${({ theme }) => theme.colors.appBackground};
+        color: ${({ theme }) => theme.colors.text}
     }
 `;
 
