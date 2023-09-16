@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
 
-import * as C from "styles/components";
 import GlobalStyles from "styles/global";
 import { darkTheme, lightTheme } from "styles/theme";
 
@@ -10,7 +9,6 @@ import type { RootState } from "core/store/store";
 import { ImportContacts } from "@mui/icons-material";
 import { Navbar } from "components/Navbar/Navbar";
 
-import { Card } from "components/ui/Card";
 import { Dialog } from "components/ui/Dialog";
 import { List } from "components/ui/List";
 import { Tabs } from "components/ui/Tabs";
@@ -58,9 +56,7 @@ const App: React.FC = () => {
                         <Dialog.Header title="sdsd" />
                         <List.Root>
                             <List.Item>
-                                <List.Header>
-                                    Практичні роботи
-                                </List.Header>
+                                <List.Header>Практичні роботи</List.Header>
                             </List.Item>
                         </List.Root>
                     </Dialog.Content>
