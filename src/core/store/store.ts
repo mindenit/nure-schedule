@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import uiSlice from "./slices/ui.slice";
+import groupsSlice from "./slices/group.slice";
 
 const store = configureStore({
     reducer: {
         ui: uiSlice.reducer,
+        groups: groupsSlice.reducer,
     },
     devTools: process.env.NODE_ENV !== "production",
 });
