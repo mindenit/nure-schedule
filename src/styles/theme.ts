@@ -1,4 +1,4 @@
-import { ITheme } from "core/interfaces/styled";
+import { ITheme } from "core/interfaces/styled.types";
 
 export const lightTheme: ITheme = {
     colors: {
