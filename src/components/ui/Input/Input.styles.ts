@@ -15,6 +15,8 @@ export const StyledInputContainer = styled.div`
     align-items: center;
     justify-content: space-between;
 
+    width: 100%;
+
     background-color: ${({ theme }) => theme.colors.secondaryContainer};
     border-radius: 28px;
     padding: 15px 15px 15px 20px;
