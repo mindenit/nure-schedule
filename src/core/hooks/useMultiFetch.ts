@@ -11,7 +11,7 @@ interface DataFetchingResult {
     auditoriums: IAuditoriumsManyOutput[];
     teachers: ITeachersManyOutput[];
     loading: boolean;
-    error: Error | null;
+    error?: Error;
 }
 
 const useMultiFetch = (
@@ -24,7 +24,7 @@ const useMultiFetch = (
         auditoriums: [],
         teachers: [],
         loading: true,
-        error: null,
+        error: undefined,
     });
 
     useEffect(() => {
@@ -57,7 +57,7 @@ const useMultiFetch = (
                         ? (results.shift() as ITeachersManyOutput[])
                         : data.teachers,
                     loading: false,
-                    error: null,
+                    error: undefined,
                 });
             } catch (error) {
                 setData({

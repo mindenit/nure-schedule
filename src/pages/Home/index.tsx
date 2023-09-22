@@ -71,7 +71,7 @@ const Home: React.FC = () => {
                                 <Tabs.Content value="groups">
                                     <List.Root>
                                         {loading && <div>Завантаження...</div>}
-                                        {error === null ? (
+                                        {error === undefined ? (
                                             groups.map((group) => (
                                                 <List.Item
                                                     key={group.id}
@@ -92,7 +92,7 @@ const Home: React.FC = () => {
                                 <Tabs.Content value="teachers">
                                     <List.Root>
                                         {loading && <div>Завантаження...</div>}
-                                        {error === null ? (
+                                        {error === undefined ? (
                                             teachers.map((teacher) => (
                                                 <List.Item key={teacher.id}>
                                                     <List.Header>
@@ -108,7 +108,7 @@ const Home: React.FC = () => {
                                 <Tabs.Content value="auditoriums">
                                     <List.Root>
                                         {loading && <div>Завантаження...</div>}
-                                        {error === null ? (
+                                        {error === undefined ? (
                                             auditoriums.map((aud) => (
                                                 <List.Item key={aud.id}>
                                                     <List.Header>

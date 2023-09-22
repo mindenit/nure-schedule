@@ -9,11 +9,11 @@ const groupsSlice = createSlice({
     name: "groups",
     initialState: {
         allGroups: [],
-        activeGroup: 0,
+        activeGroupId: 0,
     },
     reducers: {
         setActiveGroup(state, action: PayloadAction<GroupProps>) {
-            state.activeGroup = action.payload.id;
+            state.activeGroupId = action.payload.id;
         },
     },
 });
