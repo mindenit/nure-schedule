@@ -1,4 +1,4 @@
-import { IRouter } from "core/interfaces/router.types";
+import { IRouter } from "core/types/router.types";
 import Home from "./Home";
 
 const pagesData: IRouter[] = [

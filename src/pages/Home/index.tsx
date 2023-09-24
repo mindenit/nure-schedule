@@ -2,18 +2,16 @@ import MainLayout from "pages/layout/MainLayout";
 
 import * as S from "./Home.styles";
 
-import * as C from "styles/components";
 import { Button } from "components/ui/Button";
 
 import AddIcon from "@mui/icons-material/Add";
+import { Calendar } from "components/ui/Calendar/Calendar";
 
 const Home: React.FC = () => {
     return (
         <MainLayout>
             <S.HomeContainer>
-                <S.HomeEmoji />
-                <S.HomeTitle>У вас поки немає розкладів</S.HomeTitle>
-                <C.TitleMedium>Додайте розклади</C.TitleMedium>
+                <Calendar />
                 <S.HomeButtonContainer>
                     <Button>
                         <AddIcon />

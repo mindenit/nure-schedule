@@ -6,20 +6,18 @@ import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDiss
 import { media } from "styles/media";
 
 export const HomeContainer = styled(C.Container)`
-    height: 100%;
-
+/* 
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
-    right: 0;
+    right: 0; */
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-    row-gap: 10px;
+    /* row-gap: 10px; */
 `;
 
 export const HomeEmoji = styled(SentimentVeryDissatisfiedIcon)`

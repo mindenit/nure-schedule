@@ -1,4 +1,4 @@
-import { IMedia } from "core/interfaces/styled.types";
+import { IMedia } from "core/types/styled.types";
 
 export const media: IMedia = {
     extraLarge: "(max-width: 1140px)",

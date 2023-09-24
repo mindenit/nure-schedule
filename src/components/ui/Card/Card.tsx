@@ -2,8 +2,7 @@ import { TitleBig } from "styles/components";
 import * as S from "./Card.styles";
 import * as C from "styles/components";
 import { CardAvatar } from "./CardAvatar/CardAvatar";
-
-type SubjectType = "Лк" | "Лб" | "Пз";
+import { SubjectType } from "core/types/ui.types";
 
 interface CardDetailsProps {
     avatarColor: string;
@@ -11,7 +10,6 @@ interface CardDetailsProps {
 }
 
 interface CardProps {
-    id: string;
     cardType: "info" | "subject";
 }
 
@@ -51,15 +49,6 @@ const SubjectCard: React.FC<SubjectCardProps> = ({
     subjectBrief,
     subjectName,
 }) => {
-    function formatTime(time: string): string {
-        const res = new Date(Number(time) * 1000).toLocaleTimeString("ru-RU", {
-            hour: "2-digit",
-            minute: "2-digit",
-        });
-
-        return res;
-    }
-
     function getCardDetails(brief: SubjectType): CardDetailsProps {
         switch (brief) {
             case "Лк":
@@ -77,7 +66,6 @@ const SubjectCard: React.FC<SubjectCardProps> = ({
         }
     }
 
-    const formattedTime = formatTime(startTime);
     const { avatarColor, subjectType } = getCardDetails(type);
     const avatarText: string = subjectBrief.slice(0, 2);
 
@@ -87,7 +75,7 @@ const SubjectCard: React.FC<SubjectCardProps> = ({
             <S.StyledCardText>
                 <C.TitleMedium>
                     <b>
-                        {formattedTime} {auditory}
+                        {startTime} {auditory}
                     </b>{" "}
                     {subjectType}
                 </C.TitleMedium>
