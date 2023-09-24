@@ -8,6 +8,7 @@ export const MainLayoutContainer = styled.div`
 `;
 
 export const MainLayoutContent = styled.div`
+    display: flex;
     position: relative;
     flex-grow: 1;
 `;

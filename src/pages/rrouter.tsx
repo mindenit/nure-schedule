@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 
-import { IRouter } from "core/interfaces/router.types";
+import { IRouter } from "core/types/router.types";
 
 import pagesData from "./pagesData";
 

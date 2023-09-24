@@ -15,6 +15,7 @@ import { ListView } from "components/ListViews";
 import { Card } from "components/ui/Card";
 
 import AddIcon from "@mui/icons-material/Add";
+import { Calendar } from "components/ui/Calendar/Calendar";
 
 import { RootState } from "core/store/store";
 import useMultiFetch from "core/hooks/useMultiFetch";
@@ -64,6 +65,7 @@ const Home: React.FC = () => {
                         ))}
                     </S.HomeFilledPageContainer>
                 )}
+                <Calendar />
                 <S.HomeButtonContainer>
                     <Dialog.Root>
                         <Dialog.Trigger>
