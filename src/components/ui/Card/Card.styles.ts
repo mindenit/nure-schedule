@@ -31,6 +31,10 @@ export const StyledCardGrid = styled.div`
     gap: 16px;
 `;
 
+export const StyledCardGroupContainer = styled(StyledCardGrid)`
+    width: 100%;
+`;
+
 export const StyledCardText = styled.div`
     display: flex;
     flex-direction: column;

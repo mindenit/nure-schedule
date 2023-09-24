@@ -20,6 +20,18 @@ export const TitleBig = styled.h3`
     letter-spacing: 0.5px;
 `;
 
+export const TitleLarge = styled.h2`
+    color: ${({ theme }) => theme.colors.textContrast};
+
+    font-family: "Montserrat", sans-serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 40px;
+
+    margin-bottom: 10px;
+`;
+
 export const Container = styled.div`
     width: min(100% - 15px, 13000px);
     margin-inline: auto;

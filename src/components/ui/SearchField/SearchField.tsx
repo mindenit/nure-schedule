@@ -1,19 +1,13 @@
-import * as S from "./Input.styles";
+import * as S from "./SearchField.styles";
 
 interface Props {
-    type: "text" | "number" | "email" | "password" | "search";
-    showLabel: boolean;
-    label: string;
     value: string | number;
     name: string;
     placeholder: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input: React.FC<Props> = ({
-    type,
-    showLabel,
-    label,
+const SearchField: React.FC<Props> = ({
     value,
     name,
     placeholder,
@@ -21,22 +15,19 @@ const Input: React.FC<Props> = ({
 }) => {
     return (
         <>
-            {showLabel && (
-                <S.StyledLabel htmlFor={label}>{label}</S.StyledLabel>
-            )}
             <S.StyledInputContainer>
-                <S.StyledInput
-                    type={type}
-                    id={label}
+                <S.StyledSearchField
+                    type="text"
+                    id={name}
                     value={value}
                     name={name}
                     placeholder={placeholder}
                     onChange={onChange}
                 />
-                {type === "search" && <S.SearchIcon />}
+                <S.SearchIcon />
             </S.StyledInputContainer>
         </>
     );
 };
 
-export { Input };
+export { SearchField };

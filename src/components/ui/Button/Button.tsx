@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { transparentize } from "polished";
 
-import getTransition from "core/utils/getTransition";
+import { getTransition } from "core/utils";
 
 interface Props {
     variant?: "filled" | "outlined" | "text";

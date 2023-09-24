@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { IAuditorium, IGroup, ITeacher } from "@nurejs/api";
+import { useSelector } from "react-redux";
 
 import MainLayout from "pages/layout/MainLayout";
 
@@ -7,15 +9,17 @@ import * as C from "styles/components";
 
 import { Button } from "components/ui/Button";
 import { Dialog } from "components/ui/Dialog";
-import { List } from "components/ui/List";
 import { Tabs } from "components/ui/Tabs";
-import { Input } from "components/ui/Input";
+import { SearchField } from "components/ui/SearchField";
+import { ListView } from "components/ListViews";
+import { Card } from "components/ui/Card";
 
 import AddIcon from "@mui/icons-material/Add";
 
+import { RootState } from "core/store/store";
 import useMultiFetch from "core/hooks/useMultiFetch";
-
 import { useActions } from "core/hooks/useActions";
+import { searchItems } from "core/utils";
 
 const Home: React.FC = () => {
     const [value, setValue] = useState("");
@@ -25,18 +29,41 @@ const Home: React.FC = () => {
         true,
         true
     );
-    const { setActiveGroup } = useActions();
+
+    const { allSelectedGroups } = useSelector(
+        (state: RootState) => state.groups
+    );
+    const { setActiveGroup, addGroup, removeGroup } = useActions();
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setValue(event.target.value);
+        const inputValue = event.target.value;
+        setValue(inputValue);
     };
 
     return (
         <MainLayout>
             <S.HomeContainer>
-                <S.HomeEmoji />
-                <S.HomeTitle>У вас поки немає розкладів</S.HomeTitle>
-                <C.TitleMedium>Додайте розклади</C.TitleMedium>
+                {allSelectedGroups.length === 0 ? (
+                    <S.HomeEmptyPageContainer>
+                        <S.HomeEmoji />
+                        <S.HomeTitle>У вас поки немає розкладів</S.HomeTitle>
+                        <C.TitleMedium>Додайте розклади</C.TitleMedium>
+                    </S.HomeEmptyPageContainer>
+                ) : (
+                    <S.HomeFilledPageContainer>
+                        <C.TitleLarge>Оберіть групу:</C.TitleLarge>
+                        {allSelectedGroups.map((el: IGroup) => (
+                            <Card
+                                key={el.id}
+                                id={String(el.id)}
+                                cardType="group"
+                                group={el}
+                                onClick={() => setActiveGroup(el)}
+                                onCloseClick={() => removeGroup(el)}
+                            />
+                        ))}
+                    </S.HomeFilledPageContainer>
+                )}
                 <S.HomeButtonContainer>
                     <Dialog.Root>
                         <Dialog.Trigger>
@@ -47,79 +74,74 @@ const Home: React.FC = () => {
                         </Dialog.Trigger>
                         <Dialog.Content>
                             <Dialog.Header title="Оберіть групу" />
-                            <Input
-                                type="search"
-                                showLabel={false}
-                                label="search"
+                            <SearchField
                                 value={value}
                                 name="search"
                                 placeholder="Пошук..."
                                 onChange={handleChange}
                             />
                             <Tabs.Root defaultValue="groups">
-                                <Tabs.List>
-                                    <Tabs.Trigger value="groups">
-                                        Групи
-                                    </Tabs.Trigger>
-                                    <Tabs.Trigger value="teachers">
-                                        Викладачі
-                                    </Tabs.Trigger>
-                                    <Tabs.Trigger value="auditoriums">
-                                        Авдиторії
-                                    </Tabs.Trigger>
-                                </Tabs.List>
+                                <S.HomeDialogContainer>
+                                    <Tabs.List>
+                                        <Tabs.Trigger value="groups">
+                                            Групи
+                                        </Tabs.Trigger>
+                                        <Tabs.Trigger value="teachers">
+                                            Викладачі
+                                        </Tabs.Trigger>
+                                        <Tabs.Trigger value="auditoriums">
+                                            Авдиторії
+                                        </Tabs.Trigger>
+                                    </Tabs.List>
+                                </S.HomeDialogContainer>
                                 <Tabs.Content value="groups">
-                                    <List.Root>
-                                        {loading && <div>Завантаження...</div>}
-                                        {error === undefined ? (
-                                            groups.map((group) => (
-                                                <List.Item
-                                                    key={group.id}
-                                                    onClick={() =>
-                                                        setActiveGroup(group)
-                                                    }
-                                                >
-                                                    <List.Header>
-                                                        {group.name}
-                                                    </List.Header>
-                                                </List.Item>
-                                            ))
-                                        ) : (
-                                            <div>Помилка: {error.message}</div>
+                                    <ListView
+                                        items={searchItems<IGroup>(
+                                            groups,
+                                            value,
+                                            (el) => el.name
                                         )}
-                                    </List.Root>
+                                        renderItem={(group) => group.name}
+                                        loading={loading}
+                                        error={error}
+                                        onItemClick={(group) => {
+                                            addGroup(group);
+                                        }}
+                                    />
                                 </Tabs.Content>
                                 <Tabs.Content value="teachers">
-                                    <List.Root>
-                                        {loading && <div>Завантаження...</div>}
-                                        {error === undefined ? (
-                                            teachers.map((teacher) => (
-                                                <List.Item key={teacher.id}>
-                                                    <List.Header>
-                                                        {teacher.fullName}
-                                                    </List.Header>
-                                                </List.Item>
-                                            ))
-                                        ) : (
-                                            <div>Помилка: {error.message}</div>
+                                    <ListView
+                                        items={searchItems<ITeacher>(
+                                            teachers,
+                                            value,
+                                            (el) => el.fullName
                                         )}
-                                    </List.Root>
+                                        renderItem={(teacher) =>
+                                            teacher.fullName
+                                        }
+                                        loading={loading}
+                                        error={error}
+                                        onItemClick={() => {
+                                            console.log("Selected teacher");
+                                        }}
+                                    />
                                 </Tabs.Content>
                                 <Tabs.Content value="auditoriums">
-                                    <List.Root>
-                                        {loading && <div>Завантаження...</div>}
-                                        {error === undefined ? (
-                                            auditoriums.map((aud) => (
-                                                <List.Item key={aud.id}>
-                                                    <List.Header>
-                                                        {aud.name}
-                                                    </List.Header>
-                                                </List.Item>
-                                            ))
-                                        ) : (
-                                            <div>Помилка: {error.message}</div>
+                                    <ListView
+                                        items={searchItems<IAuditorium>(
+                                            auditoriums,
+                                            value,
+                                            (el) => el.name
                                         )}
-                                    </List.Root>
+                                        renderItem={(auditorium) =>
+                                            auditorium.name
+                                        }
+                                        loading={loading}
+                                        error={error}
+                                        onItemClick={() => {
+                                            console.log("Selected aud");
+                                        }}
+                                    />
                                 </Tabs.Content>
                             </Tabs.Root>
                         </Dialog.Content>

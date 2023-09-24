@@ -1,15 +1,11 @@
 import { useState, useEffect } from "react";
 import nurekit from "core/services/nurekit.serivce";
-import {
-    IGroupsManyOutput,
-    IAuditoriumsManyOutput,
-    ITeachersManyOutput,
-} from "core/interfaces/nurekit.types";
+import { IAuditorium, IGroup, ITeacher } from "@nurejs/api";
 
 interface DataFetchingResult {
-    groups: IGroupsManyOutput[];
-    auditoriums: IAuditoriumsManyOutput[];
-    teachers: ITeachersManyOutput[];
+    groups: IGroup[];
+    auditoriums: IAuditorium[];
+    teachers: ITeacher[];
     loading: boolean;
     error?: Error;
 }
@@ -48,13 +44,13 @@ const useMultiFetch = (
 
                 setData({
                     groups: fetchGroups
-                        ? (results.shift() as IGroupsManyOutput[])
+                        ? (results.shift() as IGroup[])
                         : data.groups,
                     auditoriums: fetchAuditoriums
-                        ? (results.shift() as IAuditoriumsManyOutput[])
+                        ? (results.shift() as IAuditorium[])
                         : data.auditoriums,
                     teachers: fetchTeachers
-                        ? (results.shift() as ITeachersManyOutput[])
+                        ? (results.shift() as ITeacher[])
                         : data.teachers,
                     loading: false,
                     error: undefined,
@@ -71,14 +67,7 @@ const useMultiFetch = (
         };
 
         fetchData();
-    }, [
-        fetchGroups,
-        fetchAuditoriums,
-        fetchTeachers,
-        data.groups,
-        data.auditoriums,
-        data.teachers,
-    ]);
+    }, []);
 
     return data;
 };
