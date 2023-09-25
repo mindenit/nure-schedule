@@ -6,18 +6,23 @@ import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDiss
 import { media } from "styles/media";
 
 export const HomeContainer = styled(C.Container)`
-/* 
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0; */
+    height: 100%;
+    position: relative;
+`;
 
+export const HomeEmptyPageContainer = styled.div`
+    height: 100%;
+    row-gap: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* row-gap: 10px; */
+`;
+
+export const HomeFilledPageContainer = styled.div`
+    &:first-child {
+        margin-bottom: 25px;
+    }
 `;
 
 export const HomeEmoji = styled(SentimentVeryDissatisfiedIcon)`
@@ -48,4 +53,8 @@ export const HomeButtonContainer = styled.div`
         bottom: 20px;
         right: 0;
     }
+`;
+
+export const HomeDialogContainer = styled.div`
+    padding-bottom: 18px;
 `;

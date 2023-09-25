@@ -1,42 +1,35 @@
-import { TitleBig } from "styles/components";
 import * as S from "./Card.styles";
 import * as C from "styles/components";
+
 import { CardAvatar } from "./CardAvatar/CardAvatar";
 import { SubjectType } from "core/types/ui.types";
 
-interface CardDetailsProps {
-    avatarColor: string;
-    subjectType: string;
-}
+import { Close } from "@mui/icons-material";
 
 interface CardProps {
     cardType: "info" | "subject";
 }
 
-interface SubjectCardProps extends CardProps {
-    startTime: string;
-    auditory: string;
-    type: SubjectType;
-    subjectBrief: string;
-    subjectName: string;
-}
+import {
+    CardProps,
+    SubjectCardProps,
+    InfoCardProps,
+    GroupCardProps,
+} from "core/interfaces/card.types";
 
-interface InfoCardProps extends CardProps {
-    title: string;
-    subhead: string;
-    desc: string;
-}
+import { formatTime, getCardDetails } from "core/utils";
 
-const Card: React.FC<CardProps & (SubjectCardProps | InfoCardProps)> = ({
-    cardType,
-    ...props
-}) => {
+const Card: React.FC<
+    CardProps & (SubjectCardProps | InfoCardProps | GroupCardProps)
+> = ({ cardType, ...props }) => {
     return (
         <S.StyledCard>
-            {cardType === "subject" ? (
+            {cardType === "subject" && (
                 <SubjectCard {...(props as SubjectCardProps)}></SubjectCard>
-            ) : (
-                <InfoCard {...(props as InfoCardProps)} />
+            )}
+            {cardType === "info" && <InfoCard {...(props as InfoCardProps)} />}
+            {cardType === "group" && (
+                <GroupCard {...(props as GroupCardProps)} />
             )}
         </S.StyledCard>
     );
@@ -89,11 +82,24 @@ const InfoCard: React.FC<InfoCardProps> = ({ title, subhead, desc }) => {
     return (
         <>
             <S.InfoCardGroup>
-                <TitleBig>{title}</TitleBig>
+                <C.TitleBig>{title}</C.TitleBig>
                 <S.InfoCardText>{subhead}</S.InfoCardText>
             </S.InfoCardGroup>
             <S.InfoCardText>{desc}</S.InfoCardText>
         </>
+    );
+};
+
+const GroupCard: React.FC<GroupCardProps> = ({
+    group,
+    onCloseClick,
+    onClick,
+}) => {
+    return (
+        <S.StyledCardGroupContainer>
+            <C.TitleBig onClick={onClick}>{group.name}</C.TitleBig>
+            <Close onClick={onCloseClick}></Close>
+        </S.StyledCardGroupContainer>
     );
 };
 
