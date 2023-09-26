@@ -1,14 +1,20 @@
 import { useCalendar } from "@onetools/calendar";
-import { Fragment } from "react";
+import { FC, Fragment } from "react";
 import { Tabs } from "../Tabs";
 import * as S from "./Calendar.styles";
 import { CalendarMonthView } from "./MonthView/MonthView";
 import { CalendarWeekView } from "./WeekView/WeekView";
 import { useEvents } from "core/hooks/useEvents";
 import { CalendarDayView } from "./DayView/DayView";
+import { TFetchEventsType } from "core/types/events.types";
 
-export const Calendar = () => {
-    const { events } = useEvents();
+interface CalendarProps {
+    type: TFetchEventsType;
+    name: string;
+}
+
+export const Calendar: FC<CalendarProps> = ({ type, name }) => {
+    const { events } = useEvents({ type, name });
 
     const calendar = useCalendar({
         locale: "uk-UK",

@@ -69,7 +69,10 @@ const Home: React.FC = () => {
                                 onCloseClick={() => removeGroup(el)}
                             />
                         ))} */}
-                        <Calendar />
+                        <Calendar
+                            type="group"
+                            name={activeGroup.name.toLowerCase()}
+                        />
                     </S.HomeFilledPageContainer>
                 )}
 

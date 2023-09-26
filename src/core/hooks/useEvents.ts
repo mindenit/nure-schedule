@@ -1,40 +1,27 @@
 import { ISchedule } from "@nurejs/api";
-import nurekit from "core/services/nurekit.serivce";
+import { TFetchEventsType } from "core/types/events.types";
+import { fetchEvents } from "core/utils/fetchEvents";
 import { getMonth } from "core/utils/getMonth";
 import { useEffect, useState } from "react";
 
-export const useEvents = () => {
+interface IArgs {
+    type: TFetchEventsType;
+    name: string;
+}
+
+export const useEvents = (args: IArgs) => {
     const [events, setEvents] = useState<ISchedule[]>([]);
+    const { firstDay, lastDay } = getMonth();
 
     useEffect(() => {
-        const fetchEvents = async () => {
-            try {
-                const { firstDay, lastDay } = getMonth();
+        const fetcher = async () => {
+            const events = await fetchEvents(args);
 
-                await nurekit.groups
-                    .getSchedule({
-                        groupName: "пзпі-23-1",
-                        startTime: firstDay,
-                        endTime: lastDay,
-                    })
-                    .then((res) => {
-                        const modifiedEvents = res.map((event) => {
-                            return {
-                                ...event,
-                                startTime: +event.startTime,
-                                endTime: +event.endTime,
-                            };
-                        });
-
-                        setEvents(modifiedEvents);
-                    });
-            } catch (error) {
-                console.log(error);
-            }
+            setEvents(events);
         };
 
-        fetchEvents();
-    });
+        fetcher();
+    }, [events, args, firstDay, lastDay]);
 
     return { events };
 };
