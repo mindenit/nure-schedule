@@ -1,5 +1,5 @@
-import * as S from "./Card.styles";
 import * as C from "styles/components";
+import * as S from "./Card.styles";
 
 import { CardAvatar } from "./CardAvatar/CardAvatar";
 
@@ -7,12 +7,12 @@ import { Close } from "@mui/icons-material";
 
 import {
     CardProps,
-    SubjectCardProps,
-    InfoCardProps,
     GroupCardProps,
+    InfoCardProps,
+    SubjectCardProps,
 } from "core/types/card.types";
 
-import { formatTime, getCardDetails } from "core/utils";
+import { getCardDetails } from "core/utils";
 
 const Card: React.FC<
     CardProps & (SubjectCardProps | InfoCardProps | GroupCardProps)
@@ -37,7 +37,6 @@ const SubjectCard: React.FC<SubjectCardProps> = ({
     subjectBrief,
     subjectName,
 }) => {
-    const formattedTime = formatTime(startTime);
     const { avatarColor, subjectType } = getCardDetails(type);
     const avatarText: string = subjectBrief.slice(0, 2);
 
@@ -47,7 +46,7 @@ const SubjectCard: React.FC<SubjectCardProps> = ({
             <S.StyledCardText>
                 <C.TitleMedium>
                     <b>
-                        {formattedTime} {auditory}
+                        {startTime} {auditory}
                     </b>{" "}
                     {subjectType}
                 </C.TitleMedium>
