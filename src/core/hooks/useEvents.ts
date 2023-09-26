@@ -1,5 +1,5 @@
 import { ISchedule } from "@nurejs/api";
-import nurekit from "core/services/nurekit";
+import nurekit from "core/services/nurekit.serivce";
 import { getMonth } from "core/utils/getMonth";
 import { useEffect, useState } from "react";
 

@@ -12,7 +12,7 @@ import { Dialog } from "components/ui/Dialog";
 import { Tabs } from "components/ui/Tabs";
 import { SearchField } from "components/ui/SearchField";
 import { ListView } from "components/ListViews";
-import { Card } from "components/ui/Card";
+// import { Card } from "components/ui/Card";
 
 import AddIcon from "@mui/icons-material/Add";
 import { Calendar } from "components/ui/Calendar/Calendar";
@@ -21,6 +21,7 @@ import { RootState } from "core/store/store";
 import useMultiFetch from "core/hooks/useMultiFetch";
 import { useActions } from "core/hooks/useActions";
 import { searchItems } from "core/utils";
+import { GroupDropdown } from "components/ui/GroupDropdown";
 
 const Home: React.FC = () => {
     const [value, setValue] = useState("");
@@ -31,10 +32,10 @@ const Home: React.FC = () => {
         true
     );
 
-    const { allSelectedGroups } = useSelector(
+    const { allSelectedGroups, activeGroup } = useSelector(
         (state: RootState) => state.groups
     );
-    const { setActiveGroup, addGroup, removeGroup } = useActions();
+    const { addGroup } = useActions();
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = event.target.value;
@@ -52,8 +53,13 @@ const Home: React.FC = () => {
                     </S.HomeEmptyPageContainer>
                 ) : (
                     <S.HomeFilledPageContainer>
-                        <C.TitleLarge>Оберіть групу:</C.TitleLarge>
-                        {allSelectedGroups.map((el: IGroup) => (
+                        <GroupDropdown
+                            items={allSelectedGroups}
+                            activeItem={activeGroup}
+                            month="Вересень"
+                            year={2023}
+                        ></GroupDropdown>
+                        {/* {allSelectedGroups.map((el: IGroup) => (
                             <Card
                                 key={el.id}
                                 id={String(el.id)}
@@ -62,10 +68,11 @@ const Home: React.FC = () => {
                                 onClick={() => setActiveGroup(el)}
                                 onCloseClick={() => removeGroup(el)}
                             />
-                        ))}
+                        ))} */}
+                        <Calendar />
                     </S.HomeFilledPageContainer>
                 )}
-                <Calendar />
+
                 <S.HomeButtonContainer>
                     <Dialog.Root>
                         <Dialog.Trigger>
