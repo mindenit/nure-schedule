@@ -1,7 +1,6 @@
 import { ISchedule } from "@nurejs/api";
 import { TFetchEventsType } from "core/types/events.types";
 import { fetchEvents } from "core/utils/fetchEvents";
-import { getMonth } from "core/utils/getMonth";
 import { useEffect, useState } from "react";
 
 interface IArgs {
@@ -11,17 +10,19 @@ interface IArgs {
 
 export const useEvents = (args: IArgs) => {
     const [events, setEvents] = useState<ISchedule[]>([]);
-    const { firstDay, lastDay } = getMonth();
+    const [isLoading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetcher = async () => {
             const events = await fetchEvents(args);
 
+            setLoading(true);
             setEvents(events);
+            setLoading(false);
         };
 
         fetcher();
-    }, [events, args, firstDay, lastDay]);
+    }, []);
 
-    return { events };
+    return { events, isLoading };
 };

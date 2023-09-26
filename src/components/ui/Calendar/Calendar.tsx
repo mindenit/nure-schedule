@@ -14,7 +14,7 @@ interface CalendarProps {
 }
 
 export const Calendar: FC<CalendarProps> = ({ type, name }) => {
-    const { events } = useEvents({ type, name });
+    const { events, isLoading } = useEvents({ type, name });
 
     const calendar = useCalendar({
         locale: "uk-UK",
@@ -44,6 +44,10 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
             value: "day",
         },
     ];
+
+    if (isLoading) {
+        return <div>Завантаження...</div>;
+    }
 
     return (
         <Fragment>
