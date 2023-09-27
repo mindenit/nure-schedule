@@ -1,5 +1,14 @@
 import styled from "styled-components";
 
+export const TitleLight = styled.h5`
+    color: ${({ theme }) => theme.colors.text};
+
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 16px;
+`;
+
 export const TitleMedium = styled.h4`
     color: ${({ theme }) => theme.colors.text};
 

@@ -3,16 +3,16 @@ import { IGroup } from "@nurejs/api";
 
 interface IState {
     allSelectedGroups: IGroup[];
-    activeGroupId: number;
+    activeGroup: IGroup | null;
 }
 const initialState: IState = {
     allSelectedGroups: [],
-    activeGroupId: 0,
+    activeGroup: null,
 };
 
 const initializeStateFromLocalStorage = () => {
     try {
-        const serializedState = localStorage.getItem("myAppData");
+        const serializedState = localStorage.getItem("storeData");
         if (serializedState) {
             const savedState = JSON.parse(serializedState);
             return { ...initialState, ...savedState.groups };
@@ -23,26 +23,48 @@ const initializeStateFromLocalStorage = () => {
     return initialState;
 };
 
+const findNextActiveGroup = (groups: IGroup[], removedGroupIndex: number) => {
+    if (groups.length === 0) {
+        return null;
+    }
+    if (removedGroupIndex < groups.length) {
+        return groups[removedGroupIndex];
+    }
+    return groups[removedGroupIndex - 1];
+};
+
 const groupsSlice = createSlice({
     name: "groups",
     initialState: initializeStateFromLocalStorage(),
     reducers: {
         setActiveGroup(state, action: PayloadAction<IGroup>) {
-            state.activeGroupId = action.payload.id;
+            state.activeGroup = action.payload;
         },
         addGroup(state, action: PayloadAction<IGroup>) {
             const exists = state.allSelectedGroups.some(
                 (group: IGroup) => group.id === action.payload.id
             );
 
-            if (!exists) state.allSelectedGroups.push(action.payload);
+            if (!exists) {
+                state.allSelectedGroups.push(action.payload);
+                state.activeGroup = action.payload;
+            }
         },
         removeGroup(state, action: PayloadAction<IGroup>) {
-            state.allSelectedGroups = state.allSelectedGroups.filter(
-                (group: IGroup) => group.id !== action.payload.id
+            const removedGroupId = action.payload.id;
+            const removedGroupIndex = state.allSelectedGroups.findIndex(
+                (group: IGroup) => group.id === removedGroupId
             );
-            if (state.activeGroupId === action.payload.id)
-                state.activeGroupId = 0;
+
+            if (removedGroupIndex !== -1) {
+                state.allSelectedGroups.splice(removedGroupIndex, 1);
+
+                // Обновляем активную группу
+                state.activeGroup = findNextActiveGroup(
+                    state.allSelectedGroups,
+                    removedGroupIndex
+                );
+            }
         },
     },
 });

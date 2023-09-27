@@ -3,11 +3,12 @@ export function searchItems<T>(
     query: string,
     propertyFn: (item: T) => string
 ) {
+    const trimmedQuery = query.trim();
     return items.filter((item) => {
-        if (query === "") {
+        if (trimmedQuery === "") {
             return true;
         }
         const propertyValue = propertyFn(item).toLowerCase();
-        return propertyValue.includes(query.toLowerCase());
+        return propertyValue.includes(trimmedQuery.toLowerCase());
     });
 }

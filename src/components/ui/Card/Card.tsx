@@ -1,23 +1,18 @@
-import * as S from "./Card.styles";
 import * as C from "styles/components";
+import * as S from "./Card.styles";
 
 import { CardAvatar } from "./CardAvatar/CardAvatar";
-import { SubjectType } from "core/types/ui.types";
 
 import { Close } from "@mui/icons-material";
 
-interface CardProps {
-    cardType: "info" | "subject";
-}
-
 import {
     CardProps,
-    SubjectCardProps,
-    InfoCardProps,
     GroupCardProps,
-} from "core/interfaces/card.types";
+    InfoCardProps,
+    SubjectCardProps,
+} from "core/types/card.types";
 
-import { formatTime, getCardDetails } from "core/utils";
+import { getCardDetails } from "core/utils";
 
 const Card: React.FC<
     CardProps & (SubjectCardProps | InfoCardProps | GroupCardProps)
@@ -42,23 +37,6 @@ const SubjectCard: React.FC<SubjectCardProps> = ({
     subjectBrief,
     subjectName,
 }) => {
-    function getCardDetails(brief: SubjectType): CardDetailsProps {
-        switch (brief) {
-            case "Лк":
-                return { avatarColor: "#5086A4", subjectType: "Лекція" };
-            case "Лб":
-                return {
-                    avatarColor: "#21005D",
-                    subjectType: "Лабораторна робота",
-                };
-            case "Пз":
-                return {
-                    avatarColor: "#625B71",
-                    subjectType: "Практичне заняття",
-                };
-        }
-    }
-
     const { avatarColor, subjectType } = getCardDetails(type);
     const avatarText: string = subjectBrief.slice(0, 2);
 

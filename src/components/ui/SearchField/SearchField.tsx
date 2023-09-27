@@ -1,29 +1,14 @@
+import { ComponentPropsWithoutRef } from "react";
 import * as S from "./SearchField.styles";
 
-interface Props {
-    value: string | number;
-    name: string;
-    placeholder: string;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
+interface SearchFieldProps
+    extends Omit<ComponentPropsWithoutRef<"input">, "type"> {}
 
-const SearchField: React.FC<Props> = ({
-    value,
-    name,
-    placeholder,
-    onChange,
-}) => {
+const SearchField: React.FC<SearchFieldProps> = ({ name, ...props }) => {
     return (
         <>
             <S.StyledInputContainer>
-                <S.StyledSearchField
-                    type="text"
-                    id={name}
-                    value={value}
-                    name={name}
-                    placeholder={placeholder}
-                    onChange={onChange}
-                />
+                <S.StyledSearchField type="text" name={name} {...props} />
                 <S.SearchIcon />
             </S.StyledInputContainer>
         </>

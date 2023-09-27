@@ -1,4 +1,4 @@
-import { SubjectType, CardDetailsProps } from "core/interfaces/card.types";
+import { SubjectType, CardDetailsProps } from "core/types/card.types";
 
 export function getCardDetails(brief: SubjectType): CardDetailsProps {
     switch (brief) {

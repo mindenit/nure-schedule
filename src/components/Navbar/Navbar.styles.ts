@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { media } from "styles/media";
 
-export const StyledNavbar= styled.header`
+export const StyledNavbar = styled.header`
     @media ${media.small} {
         display: flex;
         align-items: center;
@@ -26,4 +26,4 @@ export const StyledNavbarContainer = styled.div`
         width: 24px;
         height: 24px;
     }
-`
+`;
