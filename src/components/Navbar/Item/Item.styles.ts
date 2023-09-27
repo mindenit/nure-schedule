@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { media } from "styles/media";
 
-export const LinkStyled = styled.a`
+import { Link } from "react-router-dom";
+
+export const LinkStyled = styled(Link)`
     @media ${media.small} {
         display: flex;
         align-items: center;
@@ -13,6 +15,7 @@ export const LinkStyled = styled.a`
         font-size: 12px;
         line-height: 16px;
         font-weight: 500;
+        text-decoration: none;
         color: ${({ theme }) => theme.colors.text};
         background-color: transparent;
         &:hover,
