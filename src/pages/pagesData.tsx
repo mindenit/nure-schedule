@@ -1,9 +1,50 @@
 import { IRouter } from "core/types/router.types";
+import { RawInfoCardProps } from "core/types/card.types";
+
 import Home from "./Home";
+import Questions from "./Questions";
 
 import { DateRange } from "@mui/icons-material";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
+
+const questions: RawInfoCardProps[] = [
+    {
+        title: "Title",
+        subhead: "Subhead",
+        desc: "Lorem ipsum",
+    },
+    {
+        title: "Title",
+        subhead: "Subhead",
+        desc: "Lorem ipsum",
+    },
+    {
+        title: "Title",
+        subhead: "Subhead",
+        desc: "Lorem ipsum",
+    },
+    {
+        title: "Title",
+        subhead: "Subhead",
+        desc: "Lorem ipsum",
+    },
+    {
+        title: "Title",
+        subhead: "Subhead",
+        desc: "Lorem ipsum",
+    },
+    {
+        title: "Title",
+        subhead: "Subhead",
+        desc: "Lorem ipsum",
+    },
+    {
+        title: "Title",
+        subhead: "Subhead",
+        desc: "Lorem ipsum",
+    },
+];
 
 const pagesData: IRouter[] = [
     {
@@ -38,7 +79,7 @@ const pagesData: IRouter[] = [
     },
     {
         path: "/questions",
-        element: <Home />,
+        element: <Questions cards={questions} />,
         title: "questions",
         showInNavbar: true,
         navbarItem: {

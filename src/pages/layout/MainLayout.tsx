@@ -7,16 +7,17 @@ import { Navbar } from "components/Navbar/Navbar";
 import pagesData from "pages/pagesData";
 
 interface Props {
+    logoText: string | undefined;
     children: React.ReactNode | React.ReactNode[];
 }
 
-const MainLayout: React.FC<Props> = ({ children }) => {
+const MainLayout: React.FC<Props> = ({ logoText, children }) => {
     const navbarPages = pagesData.filter((page) => page.showInNavbar);
 
     return (
         <S.MainLayoutContainer>
             <S.MainLayoutHeader>
-                <Logo text="Розклад" />
+                {logoText !== undefined && <Logo text={logoText} />}
             </S.MainLayoutHeader>
             <S.MainLayoutContent>{children}</S.MainLayoutContent>
             <S.MainLayoutFooter>

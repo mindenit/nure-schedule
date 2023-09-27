@@ -31,3 +31,9 @@ export interface CardDetailsProps {
     avatarColor: string;
     subjectType: string;
 }
+
+export interface RawInfoCardProps {
+    title: string;
+    subhead: string;
+    desc: string;
+}

@@ -19,7 +19,7 @@ const Home: React.FC = () => {
     );
 
     return (
-        <MainLayout>
+        <MainLayout logoText="Розклад">
             <S.HomeContainer>
                 {allSelectedGroups.length === 0 ? (
                     <S.HomeEmptyPageContainer>
