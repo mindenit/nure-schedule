@@ -71,11 +71,12 @@ const fetchEventsByAuditorium = async ({
     firstDay,
     lastDay,
 }: IFetcherArgs) => {
-    return nurekit.teachers
+    const events = await nurekit.teachers
         .getSchedule({
             teacherName: name,
             startTime: firstDay,
             endTime: lastDay,
         })
-        .then((res) => transformEvents(res));
+    
+    return transformEvents(events)
 };
