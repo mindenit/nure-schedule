@@ -7,6 +7,9 @@ import { CalendarWeekView } from "./WeekView/WeekView";
 import { useEvents } from "core/hooks/useEvents";
 import { CalendarDayView } from "./DayView/DayView";
 import { TFetchEventsType } from "core/types/events.types";
+import { RootState } from "core/store/store";
+import { useSelector } from "react-redux";
+import { GroupDropdown } from "../GroupDropdown";
 
 interface CalendarProps {
     type: TFetchEventsType;
@@ -15,6 +18,9 @@ interface CalendarProps {
 
 export const Calendar: FC<CalendarProps> = ({ type, name }) => {
     const { events, isLoading } = useEvents({ type, name });
+    const { allSelectedGroups, activeGroup } = useSelector(
+        (state: RootState) => state.groups
+    );
 
     const calendar = useCalendar({
         locale: "uk-UK",
@@ -55,15 +61,25 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
                 <S.StyledTabsRoot>
                     <Tabs.List variant="compact" asChild>
                         <S.StyledToolbar>
-                            {views.map((view) => (
-                                <Tabs.Trigger
-                                    key={view.value}
-                                    value={view.value}
-                                    onClick={view.onClick}
-                                >
-                                    {view.name}
-                                </Tabs.Trigger>
-                            ))}
+                            <div className="ToolbarItem">
+                                <GroupDropdown
+                                    items={allSelectedGroups}
+                                    activeItem={activeGroup}
+                                    month="Вересень"
+                                    year={2023}
+                                />
+                            </div>
+                            <div className="ToolbarItem">
+                                {views.map((view) => (
+                                    <Tabs.Trigger
+                                        key={view.value}
+                                        value={view.value}
+                                        onClick={view.onClick}
+                                    >
+                                        {view.name}
+                                    </Tabs.Trigger>
+                                ))}
+                            </div>
                         </S.StyledToolbar>
                     </Tabs.List>
                     <Tabs.Content value="month">

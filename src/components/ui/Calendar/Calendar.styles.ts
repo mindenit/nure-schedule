@@ -10,8 +10,15 @@ export const StyledHeadersRoot = styled.section`
 export const StyledToolbar = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
+    box-sizing: border-box;
+    padding: 0 0.25rem;
+
+    .ToolbarItem {
+        display: flex;
+        flex-direction: row;
+    }
 `;
 
 export const StyledTabsRoot = styled.div`

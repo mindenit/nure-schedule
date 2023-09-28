@@ -5,12 +5,9 @@ import MainLayout from "pages/layout/MainLayout";
 import * as C from "styles/components";
 import * as S from "./Home.styles";
 
-// import { Card } from "components/ui/Card";
-
 import { Calendar } from "components/ui/Calendar/Calendar";
 
 import { SelectScheduleDialog } from "components/SelectScheduleDialog/SelectScheduleDialog";
-import { GroupDropdown } from "components/ui/GroupDropdown";
 import { RootState } from "core/store/store";
 
 const Home: React.FC = () => {
@@ -29,22 +26,6 @@ const Home: React.FC = () => {
                     </S.HomeEmptyPageContainer>
                 ) : (
                     <S.HomeFilledPageContainer>
-                        <GroupDropdown
-                            items={allSelectedGroups}
-                            activeItem={activeGroup}
-                            month="Вересень"
-                            year={2023}
-                        ></GroupDropdown>
-                        {/* {allSelectedGroups.map((el: IGroup) => (
-                            <Card
-                                key={el.id}
-                                id={String(el.id)}
-                                cardType="group"
-                                group={el}
-                                onClick={() => setActiveGroup(el)}
-                                onCloseClick={() => removeGroup(el)}
-                            />
-                        ))} */}
                         <Calendar
                             type="group"
                             name={activeGroup.name.toLowerCase()}

@@ -50,8 +50,9 @@ export const HomeTitle = styled(C.TitleBig)`
 export const HomeButtonContainer = styled.div`
     @media ${media.small} {
         position: absolute;
-        bottom: 20px;
+        bottom: 100px;
         right: 0;
+        z-index: 2;
     }
 `;
 

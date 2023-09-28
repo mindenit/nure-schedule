@@ -6,11 +6,14 @@ export const StyledNavbar = styled.header`
         display: flex;
         align-items: center;
         justify-content: flex-start;
+        position: fixed;
+        bottom: 0;
         width: 100%;
         height: 80px;
         background-color: ${({ theme }) => theme.colors.surfaceContainer};
         gap: 8px;
         padding: 0 8px 0 8px;
+        z-index: 4;
     }
 `;
 
