@@ -5,6 +5,7 @@ import * as C from "styles/components";
 import * as S from "./GroupDropdown.styles";
 
 import CloseIcon from "@mui/icons-material/Close";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { useActions } from "core/hooks/useActions";
 
 interface Props {
@@ -44,24 +45,27 @@ const GroupDropdown: React.FC<Props> = ({ items, activeItem, month, year }) => {
 
     return (
         <S.DropDownContainer ref={dropdownRef}>
-            <C.TitleBig onClick={toggleDropdown}>
-                {activeItem !== null ? activeItem.name : "Оберіть групу"}
-            </C.TitleBig>
-            <C.TitleLight>
-                {month} {year}
-            </C.TitleLight>
-            {isOpen && (
-                <S.DropDownList>
-                    {items.map((item) => (
-                        <S.DropDownListItem key={item.id}>
-                            <div onClick={() => handleClick(item)}>
-                                {item.name}
-                            </div>
-                            <CloseIcon onClick={() => removeGroup(item)} />
-                        </S.DropDownListItem>
-                    ))}
-                </S.DropDownList>
-            )}
+            <div>
+                <C.TitleBig onClick={toggleDropdown}>
+                    {activeItem !== null ? activeItem.name : "Оберіть групу"}
+                </C.TitleBig>
+                <C.TitleLight>
+                    {month} {year}
+                </C.TitleLight>
+                {isOpen && (
+                    <S.DropDownList>
+                        {items.map((item) => (
+                            <S.DropDownListItem key={item.id}>
+                                <div onClick={() => handleClick(item)}>
+                                    {item.name}
+                                </div>
+                                <CloseIcon onClick={() => removeGroup(item)} />
+                            </S.DropDownListItem>
+                        ))}
+                    </S.DropDownList>
+                )}
+            </div>
+            <ArrowRightIcon />
         </S.DropDownContainer>
     );
 };

@@ -7,6 +7,7 @@ import Questions from "./Questions";
 import { DateRange } from "@mui/icons-material";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
+import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
 
 const questions: RawInfoCardProps[] = [
     {
@@ -50,7 +51,7 @@ const pagesData: IRouter[] = [
     {
         path: "/",
         element: <Home />,
-        title: "home",
+        title: "Головна",
         showInNavbar: true,
         navbarItem: {
             label: "Головна",
@@ -60,17 +61,17 @@ const pagesData: IRouter[] = [
     {
         path: "/changes",
         element: <Home />,
-        title: "changes",
+        title: "Зміни",
         showInNavbar: true,
         navbarItem: {
             label: "Зміни",
-            icon: <DateRange />,
+            icon: <StickyNote2OutlinedIcon />,
         },
     },
     {
         path: "/filter",
         element: <Home />,
-        title: "filter",
+        title: "Фільтр",
         showInNavbar: true,
         navbarItem: {
             label: "Фільтр",
@@ -80,7 +81,7 @@ const pagesData: IRouter[] = [
     {
         path: "/questions",
         element: <Questions cards={questions} />,
-        title: "questions",
+        title: "Питання",
         showInNavbar: true,
         navbarItem: {
             label: "Питання",
@@ -90,7 +91,7 @@ const pagesData: IRouter[] = [
     {
         path: "/account",
         element: <Home />,
-        title: "account",
+        title: "Аккаунт",
         showInNavbar: false,
     },
 ];

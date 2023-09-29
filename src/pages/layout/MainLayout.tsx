@@ -1,7 +1,9 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
 import * as S from "./MainLayout.styles";
 
 import { Logo } from "components/ui/Logo";
-
 import { Navbar } from "components/Navbar/Navbar";
 
 import pagesData from "pages/pagesData";
@@ -12,7 +14,18 @@ interface Props {
 }
 
 const MainLayout: React.FC<Props> = ({ logoText, children }) => {
+    const location = useLocation();
     const navbarPages = pagesData.filter((page) => page.showInNavbar);
+
+    useEffect(() => {
+        const currentPage = pagesData.find(
+            (page) => page.path === location.pathname
+        );
+
+        if (currentPage && currentPage.title) {
+            document.title = `${currentPage.title} | Nure Schedule`;
+        }
+    }, [location.pathname]);
 
     return (
         <S.MainLayoutContainer>
@@ -23,12 +36,19 @@ const MainLayout: React.FC<Props> = ({ logoText, children }) => {
             <S.MainLayoutFooter>
                 <Navbar.Root>
                     {navbarPages.map((page, index) => (
-                        <Navbar.Item key={index} to={page.path}>
+                        <Navbar.Item
+                            key={index}
+                            to={page.path}
+                            isActive={page.path === location.pathname}
+                        >
                             <Navbar.Icon>{page.navbarItem?.icon}</Navbar.Icon>
                             {page.navbarItem?.label}
                         </Navbar.Item>
                     ))}
-                    <Navbar.Item to={"/"}>
+                    <Navbar.Item
+                        to={"/account"}
+                        isActive={location.pathname === "/account"}
+                    >
                         <Navbar.Avatar src="https://i.pravatar.cc/80" />
                         User
                     </Navbar.Item>
