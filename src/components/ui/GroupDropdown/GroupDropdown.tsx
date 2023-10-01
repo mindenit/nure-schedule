@@ -30,18 +30,19 @@ const GroupDropdown: React.FC<Props> = ({ items, activeItem, month, year }) => {
     const handleGlobalClick = (event: MouseEvent) => {
         if (
             dropdownRef.current &&
-            !dropdownRef.current.contains(event.target as Node) &&
-            isOpen
+            !dropdownRef.current.contains(event.target as Node)
         )
             setIsOpen(false);
     };
 
     useEffect(() => {
-        document.addEventListener("mousedown", handleGlobalClick);
+        if (isOpen) document.addEventListener("mousedown", handleGlobalClick);
+        else document.removeEventListener("mousedown", handleGlobalClick);
+
         return () => {
             document.removeEventListener("mousedown", handleGlobalClick);
         };
-    }, []);
+    }, [isOpen]);
 
     return (
         <S.DropDownContainer ref={dropdownRef}>
