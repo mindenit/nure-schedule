@@ -40,4 +40,18 @@ export const StyledList = styled(TabsPrimitive.List)`
             }
         }
     }
+
+    @media (min-width: 900px) {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        .Trigger {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 116px;
+            height: 48px;
+            font-size: 16px;
+        }
+    }
 `;
