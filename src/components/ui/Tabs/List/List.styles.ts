@@ -3,12 +3,13 @@ import styled from "styled-components";
 import { media } from "styles/media";
 
 export const StyledList = styled(TabsPrimitive.List)`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
     @media ${media.small} {
-        display: flex;
-        flex-direction: row;
         align-items: center;
         justify-content: center;
-        width: 100%;
         &[data-variant="compact"] {
             .Trigger {
                 width: 48px;
@@ -42,9 +43,6 @@ export const StyledList = styled(TabsPrimitive.List)`
     }
 
     @media (min-width: 900px) {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
         .Trigger {
             display: flex;
             align-items: center;

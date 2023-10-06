@@ -5,11 +5,20 @@ import { media } from "styles/media";
 
 export const StyledEventsList = styled.div`
     display: flex;
-    flex-direction: column;
     width: 100%;
     height: 100%;
-    gap: 0.5rem;
     margin: 1rem 0 0 0;
+
+    @media (min-width: 900px) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+
+    @media ${media.small} {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
 `;
 
 export const StyledEmptyList = styled.div`
