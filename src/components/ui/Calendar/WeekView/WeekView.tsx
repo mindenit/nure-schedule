@@ -17,21 +17,21 @@ export const CalendarWeekView: FC<CalendarWeekViewProps> = ({
     return (
         <S.StyledWeekView {...props}>
             <CalendarTimeline />
-            <div>
-                <div style={{ display: "flex", flexWrap: "nowrap" }}>
+            <S.StyledWrapper>
+                <S.StyledContainer>
                     {days.map((day) => (
                         <WeekHeader key={`${day.day} ${day.month}`} day={day} />
                     ))}
-                </div>
-                <div style={{ display: "flex", flexWrap: "nowrap" }}>
+                </S.StyledContainer>
+                <S.StyledContainer>
                     {days.map((day) => (
                         <EventsColumn
                             key={`${day.day} ${day.month}`}
                             day={day}
                         />
                     ))}
-                </div>
-            </div>
+                </S.StyledContainer>
+            </S.StyledWrapper>
         </S.StyledWeekView>
     );
 };
