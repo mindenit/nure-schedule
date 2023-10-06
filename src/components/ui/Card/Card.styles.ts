@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { media } from "styles/media";
 
-export const StyledCard = styled.div`
+export const StyledCard = styled.div<{ isFullWidth: boolean }>`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -16,7 +16,8 @@ export const StyledCard = styled.div`
 
     padding: 16px;
 
-    width: 330px;
+    width: ${({ isFullWidth }) => (isFullWidth === true ? "100%" : "350px")};
+
     @media ${media.small} {
         width: 100%;
     }

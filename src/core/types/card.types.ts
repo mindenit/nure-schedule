@@ -1,10 +1,12 @@
 import { IGroup } from "@nurejs/api";
 
 export type SubjectType = "Лк" | "Лб" | "Пз";
+export type CardType = "info" | "subject" | "group";
 
 export interface CardProps {
     id: string;
-    cardType: "info" | "subject" | "group";
+    cardType: CardType;
+    isFullWidth?: boolean;
 }
 
 export interface SubjectCardProps extends CardProps {

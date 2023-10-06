@@ -16,9 +16,9 @@ import { getCardDetails } from "core/utils";
 
 const Card: React.FC<
     CardProps & (SubjectCardProps | InfoCardProps | GroupCardProps)
-> = ({ cardType, ...props }) => {
+> = ({ cardType, isFullWidth = false, ...props }) => {
     return (
-        <S.StyledCard>
+        <S.StyledCard isFullWidth={isFullWidth}>
             {cardType === "subject" && (
                 <SubjectCard {...(props as SubjectCardProps)}></SubjectCard>
             )}

@@ -17,6 +17,7 @@ const Questions: React.FC<Props> = ({ cards }) => {
                     <Card
                         key={index}
                         cardType="info"
+                        isFullWidth
                         id={card.title}
                         title={card.title}
                         subhead={card.subhead}
