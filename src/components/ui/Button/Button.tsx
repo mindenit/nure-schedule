@@ -74,6 +74,9 @@ const Button = styled.button<Props>`
                     &:focus {
                         border: 1px solid ${theme.colors.primary};
                     }
+                    &:hover {
+                        background: ${theme.colors.surfaceContainer};
+                    }
                     &:disabled {
                         background-color: ${transparentize(
                             0.9,

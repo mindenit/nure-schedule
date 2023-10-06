@@ -1,4 +1,3 @@
-import { ISchedule } from "@nurejs/api";
 import nurekit from "core/services/nurekit.serivce";
 import { TFetchEventsType } from "core/types/events.types";
 import { getMonth } from "./getMonth";
@@ -14,17 +13,7 @@ interface IFetcherArgs {
     lastDay: string;
 }
 
-const transformEvents = (events: ISchedule[]) => {
-    return events.map((event) => {
-        return {
-            ...event,
-            startTime: +event.startTime,
-            endTime: +event.endTime,
-        };
-    });
-};
-
-export const fetchEvents = (args: IArgs) => {
+export const fetchEvents = async (args: IArgs) => {
     const { type, name } = args;
     const { firstDay, lastDay } = getMonth();
 
@@ -43,13 +32,11 @@ const fetchEventsByGroup = async ({
     firstDay,
     lastDay,
 }: IFetcherArgs) => {
-    return nurekit.groups
-        .getSchedule({
-            groupName: name,
-            startTime: firstDay,
-            endTime: lastDay,
-        })
-        .then((res) => transformEvents(res));
+    return nurekit.groups.getSchedule({
+        groupName: name,
+        startTime: firstDay,
+        endTime: lastDay,
+    });
 };
 
 const fetchEventsByTeacher = async ({
@@ -57,13 +44,11 @@ const fetchEventsByTeacher = async ({
     firstDay,
     lastDay,
 }: IFetcherArgs) => {
-    return nurekit.teachers
-        .getSchedule({
-            teacherName: name,
-            startTime: firstDay,
-            endTime: lastDay,
-        })
-        .then((res) => transformEvents(res));
+    return nurekit.teachers.getSchedule({
+        teacherName: name,
+        startTime: firstDay,
+        endTime: lastDay,
+    });
 };
 
 const fetchEventsByAuditorium = async ({
@@ -71,12 +56,9 @@ const fetchEventsByAuditorium = async ({
     firstDay,
     lastDay,
 }: IFetcherArgs) => {
-    const events = await nurekit.teachers
-        .getSchedule({
-            teacherName: name,
-            startTime: firstDay,
-            endTime: lastDay,
-        })
-    
-    return transformEvents(events)
+    return nurekit.teachers.getSchedule({
+        teacherName: name,
+        startTime: firstDay,
+        endTime: lastDay,
+    });
 };

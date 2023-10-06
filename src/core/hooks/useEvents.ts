@@ -11,18 +11,25 @@ interface IArgs {
 export const useEvents = (args: IArgs) => {
     const [events, setEvents] = useState<ISchedule[]>([]);
     const [isLoading, setLoading] = useState(false);
+    const [isError, setError] = useState<unknown | Error>(null);
 
     useEffect(() => {
         const fetcher = async () => {
-            const events = await fetchEvents(args);
-
             setLoading(true);
-            setEvents(events);
-            setLoading(false);
+
+            try {
+                const events = await fetchEvents(args);
+                setLoading(false);
+                setEvents(events);
+                setError(null);
+            } catch (err: unknown) {
+                setError(err);
+                setLoading(false);
+            }
         };
 
         fetcher();
-    }, [args]);
+    }, []);
 
-    return { events, isLoading };
+    return { events, isLoading, isError };
 };
