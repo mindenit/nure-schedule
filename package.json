@@ -15,7 +15,7 @@
         "@emotion/styled": "^11.11.0",
         "@mui/icons-material": "^5.14.8",
         "@mui/styled-engine": "^5.14.8",
-        "@nurejs/api": "^0.2.2",
+        "@nurejs/api": "^0.2.4",
         "@onetools/calendar": "^0.1.15",
         "@radix-ui/react-dialog": "^1.0.4",
         "@radix-ui/react-tabs": "^1.0.4",

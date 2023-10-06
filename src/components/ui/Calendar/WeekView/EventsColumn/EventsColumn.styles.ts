@@ -4,7 +4,7 @@ export const StyledEventsColumn = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    min-width: 75px;
+    min-width: 90px;
     height: fit-content;
     border-left: 1px solid ${({ theme }) => theme.colors.outline};
     &:first-child {

@@ -8,7 +8,7 @@ export const StyledWeekHeader = styled.span`
         align-items: center;
         justify-content: center;
         width: auto;
-        min-width: 75px;
+        min-width: 90px;
         height: fit-content;
         background: transparent;
         flex-shrink: 0;

@@ -22,7 +22,7 @@ export const useEvents = (args: IArgs) => {
         };
 
         fetcher();
-    }, []);
+    }, [args]);
 
     return { events, isLoading };
 };
