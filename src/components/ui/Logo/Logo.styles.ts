@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const StyledLogoContainer = styled.div`
     display: flex;
     align-items: center;
+    gap: 10px;
 `;
 
 export const StyledLogoText = styled.h2`

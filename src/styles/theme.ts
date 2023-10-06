@@ -17,6 +17,7 @@ export const lightTheme: ITheme = {
         windowBackground: "#FFFFFF",
         surface: "#F7FEFF",
         surfaceVariant: "#E0ECEB",
+        desktopHeader: "#F7FEFF",
 
         text: "#49454F",
         textDarker: "#1D1B20",
@@ -50,6 +51,7 @@ export const darkTheme: ITheme = {
         windowBackground: "#141218",
         surface: "#1D1B20",
         surfaceVariant: "#1D192B",
+        desktopHeader: "#000000",
 
         text: "#CAC4D0",
         textDarker: "#FFFFFF",

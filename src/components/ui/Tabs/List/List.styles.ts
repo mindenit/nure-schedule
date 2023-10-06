@@ -14,6 +14,7 @@ export const StyledList = styled(TabsPrimitive.List)`
                 width: 48px;
                 height: 48px;
                 padding: 0 0.5rem;
+                /* padding: 12px 10px; */
                 font-size: 0;
             }
 
@@ -25,6 +26,7 @@ export const StyledList = styled(TabsPrimitive.List)`
                 align-items: center;
                 justify-content: center;
                 width: 120px;
+                /* padding: 12px 10px; */
                 font-size: 16px;
             }
         }
