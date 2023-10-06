@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import * as C from "styles/components";
 
 export const MainLayoutContainer = styled.div`
     display: flex;
@@ -24,4 +25,16 @@ export const MainLayoutHeader = styled.div`
 
     margin-top: 15px;
     margin-bottom: 10px;
+`;
+
+export const MainLayoutDesktopContainer = styled(C.Container)`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+export const MainLayoutDesktopHeader = styled.div`
+    background-color: ${({ theme }) => theme.colors.desktopHeader};
+    padding-top: 25px;
+    padding-bottom: 25px;
 `;

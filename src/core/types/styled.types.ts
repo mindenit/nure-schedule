@@ -15,6 +15,7 @@ export interface ITheme {
         windowBackground: string;
         surface: string;
         surfaceVariant: string;
+        desktopHeader: string;
 
         text: string;
         textDarker: string;
