@@ -11,6 +11,12 @@ export const StyledDayCell = styled.div`
     padding: 0.5rem;
     box-sizing: border-box;
 
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 12px; /* 66.667% */
+    letter-spacing: 0.25px;
+
     &[data-current="false"] {
         span {
             color: ${({ theme }) => theme.colors.textCalendar};

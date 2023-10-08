@@ -10,6 +10,7 @@ import { TFetchEventsType } from "core/types/events.types";
 import { RootState } from "core/store/store";
 import { useSelector } from "react-redux";
 import { GroupDropdown } from "../GroupDropdown";
+import { Loader } from "../Loader";
 
 interface CalendarProps {
     type: TFetchEventsType;
@@ -52,7 +53,7 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
     ];
 
     if (isLoading) {
-        return <div>Завантаження...</div>;
+        return <Loader />;
     }
 
     return (

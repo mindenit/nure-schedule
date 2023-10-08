@@ -4,6 +4,7 @@ import { List } from "components/ui/List";
 import { Button } from "components/ui/Button";
 
 import * as S from "./ListViews.styles";
+import { Loader } from "components/ui/Loader";
 
 interface ListViewProps<T> {
     items: T[];
@@ -36,7 +37,7 @@ function ListView<T>({
 
     return (
         <List.Root>
-            {loading && <div>Завантаження...</div>}
+            {loading && <Loader />}
             {error !== undefined && <div>Сталася помилка: {error.message}</div>}
             {displayed.map((item, index) => (
                 <List.Item key={index} onClick={() => onItemClick(item)}>
