@@ -4,9 +4,13 @@ import { TModifiedSchedule } from "core/types/events.types";
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from "react";
 import * as S from "./Day.styles";
 import * as C from "styles/components";
-import { getSubjectType } from "core/utils/getSubjectType";
+// import { getSubjectType } from "core/utils/getSubjectType";
 import { SubjectType } from "core/types/ui.types";
 import { Card } from "components/ui/Card";
+import { formatMonth } from "core/utils/formatMonth";
+
+import type { RootState } from "core/store/store";
+import { useSelector } from "react-redux";
 
 interface CalendarDayProps extends ComponentPropsWithoutRef<"div"> {
     day: TDayWithEvents<TModifiedSchedule>;
@@ -14,7 +18,9 @@ interface CalendarDayProps extends ComponentPropsWithoutRef<"div"> {
 
 export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
     ({ day, ...props }, ref) => {
-        const headerTitle = `Пари на ${day.day}.${day.month}.${day.year} (${day.weekday})`;
+        // const headerTitle = `Пари на ${day.day}.${day.month}.${day.year} (${day.weekday})`;
+
+        const { activeGroup } = useSelector((state: RootState) => state.groups);
 
         return day.events.length > 0 ? (
             <Dialog.Root>
@@ -33,9 +39,11 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                     </S.StyledDayCell>
                 </Dialog.Trigger>
                 <Dialog.Content>
-                    <Dialog.Header title={headerTitle} />
-                    <C.TitleMedium>Група</C.TitleMedium>
-                    <C.TitleLarge>{day.day}</C.TitleLarge>
+                    <Dialog.Header title="Розклад" />
+                    <C.TitleMedium>Група {activeGroup.name}</C.TitleMedium>
+                    <C.TitleLarge>
+                        {formatMonth(Number(day.day), Number(day.month))}
+                    </C.TitleLarge>
                     {day.events
                         .slice(0)
                         .reverse()
@@ -96,3 +104,16 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
 );
 
 CalendarDay.displayName = "CalendarDay";
+
+// <Card
+//     cardType="subjectText"
+//     id={String(event.id)}
+//     weekday=""
+//     date=""
+//     startTime=""
+//     subjectType="Лекція"
+//     subjectName=""
+//     auditory=""
+//     teacher=""
+//     groups={[]}
+// />

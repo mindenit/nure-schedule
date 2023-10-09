@@ -10,8 +10,6 @@ export const StyledCard = styled.div<{ isFullWidth: boolean }>`
     border: 1px solid ${({ theme }) => theme.colors.outline};
     border-radius: 12px;
 
-    margin-bottom: 15px;
-
     background-color: ${({ theme }) => theme.colors.surface};
 
     padding: 16px;
@@ -56,4 +54,11 @@ export const InfoCardGroup = styled.div`
     display: flex;
     flex-direction: column;
     margin-bottom: 32px;
+`;
+
+export const StyledSubjectTextCardContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
 `;

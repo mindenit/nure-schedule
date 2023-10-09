@@ -10,12 +10,20 @@ import {
     GroupCardProps,
     InfoCardProps,
     SubjectCardProps,
+    SubjectTextCardProps,
 } from "core/types/card.types";
 
 import { getCardDetails } from "core/utils";
+import { IGroup } from "@nurejs/api";
 
 const Card: React.FC<
-    CardProps & (SubjectCardProps | InfoCardProps | GroupCardProps)
+    CardProps &
+        (
+            | SubjectCardProps
+            | SubjectTextCardProps
+            | InfoCardProps
+            | GroupCardProps
+        )
 > = ({ cardType, isFullWidth = false, ...props }) => {
     return (
         <S.StyledCard isFullWidth={isFullWidth}>
@@ -25,6 +33,9 @@ const Card: React.FC<
             {cardType === "info" && <InfoCard {...(props as InfoCardProps)} />}
             {cardType === "group" && (
                 <GroupCard {...(props as GroupCardProps)} />
+            )}
+            {cardType === "subjectText" && (
+                <SubjectCardText {...(props as SubjectTextCardProps)} />
             )}
         </S.StyledCard>
     );
@@ -53,6 +64,34 @@ const SubjectCard: React.FC<SubjectCardProps> = ({
                 <C.TitleBig>{subjectName}</C.TitleBig>
             </S.StyledCardText>
         </S.StyledCardGrid>
+    );
+};
+
+const SubjectCardText: React.FC<SubjectTextCardProps> = ({
+    weekday,
+    date,
+    startTime,
+    subjectType,
+    subjectName,
+    auditory,
+    teacher,
+    groups,
+}) => {
+    return (
+        <S.StyledSubjectTextCardContainer>
+            <C.TitleLight>
+                {weekday}, {date}; {startTime}. {subjectType}
+            </C.TitleLight>
+            <C.TitleBig>{subjectName}</C.TitleBig>
+            <C.TitleMedium>Авдиторія: {auditory}</C.TitleMedium>
+            <C.TitleMedium>Викладач: {teacher}</C.TitleMedium>
+            <C.TitleMedium>
+                Групи:{" "}
+                {groups.map((group: IGroup) => (
+                    <span key={group.id}>{group.name}</span>
+                ))}
+            </C.TitleMedium>
+        </S.StyledSubjectTextCardContainer>
     );
 };
 

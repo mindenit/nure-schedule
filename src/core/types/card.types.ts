@@ -5,7 +5,7 @@ export type SubjectTypeExtended =
     | "Лекція"
     | "Лабораторна робота"
     | "Практичне заняття";
-export type CardType = "info" | "subject" | "group";
+export type CardType = "info" | "subject" | "subjectText" | "group";
 
 export interface CardProps {
     id: string;
@@ -19,6 +19,17 @@ export interface SubjectCardProps extends CardProps {
     type: SubjectType | SubjectTypeExtended;
     subjectBrief: string;
     subjectName: string;
+}
+
+export interface SubjectTextCardProps extends CardProps {
+    weekday: string;
+    date: string;
+    startTime: string;
+    subjectType: SubjectType | SubjectTypeExtended;
+    subjectName: string;
+    auditory: string;
+    teacher: string;
+    groups: IGroup[];
 }
 
 export interface InfoCardProps extends CardProps {

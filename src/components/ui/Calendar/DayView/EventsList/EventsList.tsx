@@ -13,17 +13,21 @@ export const EventsList: FC<EventsListProps> = ({ events, ...props }) => {
     return (
         <S.StyledEventsList {...props}>
             {events.length > 0 ? (
-                events.map((event, index) => (
-                    <Card
-                        key={index}
-                        cardType="subject"
-                        startTime={event.startTime}
-                        type={event.type as SubjectType}
-                        auditory={event.auditorium}
-                        subjectBrief={event.subject.brief}
-                        subjectName={event.subject.title}
-                    />
-                ))
+                events
+                    .slice(0)
+                    .reverse()
+                    .map((event, index) => (
+                        <Card
+                            key={index}
+                            id={String(index)}
+                            cardType="subject"
+                            startTime={event.startTime}
+                            type={event.type as SubjectType}
+                            auditory={event.auditorium}
+                            subjectBrief={event.subject.brief}
+                            subjectName={event.subject.title}
+                        />
+                    ))
             ) : (
                 <S.StyledEmptyList>
                     <S.StyledEmoji />

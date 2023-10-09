@@ -13,13 +13,13 @@ export const StyledDialogContent = styled(DialogPrimitive.Content)`
     gap: 1rem;
     z-index: 10;
     box-sizing: border-box;
-    padding: 1.5rem 2rem;
+    padding: 18px;
 
     @media ${media.small} {
         width: 100%;
-        height: 500px;
+        max-height: 500px;
         bottom: 0;
-        border-radius: 20px 20px 0 0;
+        border-radius: 25px 25px 0 0;
     }
 
     @media (min-width: 900px) {
@@ -27,8 +27,9 @@ export const StyledDialogContent = styled(DialogPrimitive.Content)`
         min-height: 300px;
         max-height: 500px;
         border-radius: 25px;
-        left: 40%;
-        top: 20%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
     }
 
     &::-webkit-scrollbar {
