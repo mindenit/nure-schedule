@@ -42,6 +42,6 @@ export const TitleLarge = styled.h2`
 `;
 
 export const Container = styled.div`
-    width: min(100% - 15px, 13000px);
+    width: min(100% - 15px, 1300px);
     margin-inline: auto;
 `;

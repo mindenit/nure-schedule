@@ -3,6 +3,7 @@ import { RawInfoCardProps } from "core/types/card.types";
 
 import Home from "./Home";
 import Questions from "./Questions";
+import NotFound from "./NotFound";
 
 import { DateRange } from "@mui/icons-material";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
@@ -60,7 +61,7 @@ const pagesData: IRouter[] = [
     },
     {
         path: "/changes",
-        element: <Home />,
+        element: <NotFound />,
         title: "Зміни",
         showInNavbar: true,
         navbarItem: {
@@ -70,7 +71,7 @@ const pagesData: IRouter[] = [
     },
     {
         path: "/filter",
-        element: <Home />,
+        element: <NotFound />,
         title: "Фільтр",
         showInNavbar: true,
         navbarItem: {
@@ -90,7 +91,7 @@ const pagesData: IRouter[] = [
     },
     {
         path: "/account",
-        element: <Home />,
+        element: <NotFound />,
         title: "Аккаунт",
         showInNavbar: false,
     },

@@ -1,6 +1,10 @@
 import { IGroup } from "@nurejs/api";
 
 export type SubjectType = "Лк" | "Лб" | "Пз";
+export type SubjectTypeExtended =
+    | "Лекція"
+    | "Лабораторна робота"
+    | "Практичне заняття";
 export type CardType = "info" | "subject" | "group";
 
 export interface CardProps {
@@ -12,7 +16,7 @@ export interface CardProps {
 export interface SubjectCardProps extends CardProps {
     startTime: string;
     auditory: string;
-    type: SubjectType;
+    type: SubjectType | SubjectTypeExtended;
     subjectBrief: string;
     subjectName: string;
 }
