@@ -1,16 +1,17 @@
-import { useCalendar } from "@onetools/calendar";
+import { useSelector } from "react-redux";
 import { FC, Fragment } from "react";
-import { Tabs } from "../Tabs";
+import { useCalendar } from "@onetools/calendar";
 import * as S from "./Calendar.styles";
 import { CalendarMonthView } from "./MonthView/MonthView";
 import { CalendarWeekView } from "./WeekView/WeekView";
 import { useEvents } from "core/hooks/useEvents";
 import { CalendarDayView } from "./DayView/DayView";
+import { getMonthName } from "core/utils/getMonthName";
 import { TFetchEventsType } from "core/types/events.types";
 import { RootState } from "core/store/store";
-import { useSelector } from "react-redux";
-import { GroupDropdown } from "../GroupDropdown";
-import { Loader } from "../Loader";
+import { GroupDropdown } from "components/ui/GroupDropdown";
+import { Loader } from "components/ui/Loader";
+import { Tabs } from "components/ui/Tabs";
 
 interface CalendarProps {
     type: TFetchEventsType;
@@ -66,7 +67,7 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
                                 <GroupDropdown
                                     items={allSelectedGroups}
                                     activeItem={activeGroup}
-                                    month="Вересень"
+                                    month={getMonthName()}
                                     year={2023}
                                 />
                             </div>

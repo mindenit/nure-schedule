@@ -18,7 +18,7 @@ function getMonthName(monthNumber: number) {
     return months[monthNumber - 1];
 }
 
-export function formatMonth(currentMonth: number, currentDay: number) {
+export function formatMonth(currentDay: number, currentMonth: number) {
     const monthName = getMonthName(currentMonth);
     return `${currentDay} ${monthName}`;
 }
