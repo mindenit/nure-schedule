@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 export const StyledInputContainer = styled.div`
+    display: flex;
+    flex-direction: column;
     position: relative;
-
     .Placeholder {
         display: flex;
         align-items: center;
@@ -24,7 +25,7 @@ export const StyledInputContainer = styled.div`
         padding: 0 0.5rem;
         background-color: transparent;
         transform: translate(0);
-        color: ${({ theme }) => theme.colors.textContrast};
+        color: ${({ theme }) => theme.colors.textCalendar};
         transition:
             transform 0.15s ease-out,
             font-size 0.15s ease-out,
@@ -77,4 +78,13 @@ export const StyledInput = styled.input`
         font-size: 0;
         color: transparent;
     }
+`;
+
+export const StyledErrorMessage = styled.p`
+    display: flex;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 16px;
+    color: ${({ theme }) => theme.colors.bgError};
 `;

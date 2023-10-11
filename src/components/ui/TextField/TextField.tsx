@@ -5,10 +5,11 @@ type TextFieldType = "email" | "text" | "password" | "search";
 
 interface TextFieldProps extends ComponentPropsWithoutRef<"input"> {
     type?: TextFieldType;
+    error?: string | null;
 }
 
 export const TextField = forwardRef<ElementRef<"input">, TextFieldProps>(
-    ({ id, placeholder, ...props }, ref) => {
+    ({ id, placeholder, error, ...props }, ref) => {
         return (
             <S.StyledInputContainer>
                 <S.StyledInput
@@ -20,6 +21,7 @@ export const TextField = forwardRef<ElementRef<"input">, TextFieldProps>(
                 <label id="placeholder" className="Placeholder" htmlFor={id}>
                     <div className="Text">{placeholder}</div>
                 </label>
+                <S.StyledErrorMessage>{error}</S.StyledErrorMessage>
             </S.StyledInputContainer>
         );
     }

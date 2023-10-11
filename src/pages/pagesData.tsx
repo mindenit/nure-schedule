@@ -1,9 +1,9 @@
 import { IRouter } from "core/types/router.types";
-// import { RawInfoCardProps } from "core/types/card.types";
 
 import Home from "./Home";
 import Questions from "./Questions";
 import NotFound from "./NotFound";
+import SignIn from "./SignIn";
 
 import { DateRange } from "@mui/icons-material";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
@@ -55,6 +55,12 @@ const pagesData: IRouter[] = [
         path: "/account",
         element: <NotFound />,
         title: "Аккаунт",
+        showInNavbar: false,
+    },
+    {
+        path: "/signin",
+        element: <SignIn />,
+        title: "Увійти в аккаунт",
         showInNavbar: false,
     },
 ];
