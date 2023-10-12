@@ -21,6 +21,15 @@ export const StyledCard = styled.div<{ isFullWidth: boolean }>`
     }
 `;
 
+export const StyledTextCard = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
+    align-self: stretch;
+    width: 100%;
+`;
+
 export const StyledCardGrid = styled.div`
     display: flex;
     flex-direction: row;

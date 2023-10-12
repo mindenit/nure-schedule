@@ -1,16 +1,23 @@
+import {
+    ComponentPropsWithoutRef,
+    ElementRef,
+    forwardRef,
+    useState,
+} from "react";
+import { useSelector } from "react-redux";
+import { useMediaQuery } from "react-responsive";
 import { TDayWithEvents } from "@onetools/calendar";
 import { Dialog } from "components/ui/Dialog";
+import { MobileDayModal } from "components/ui/MobileDayModal";
 import { TModifiedSchedule } from "core/types/events.types";
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from "react";
 import * as S from "./Day.styles";
 import * as C from "styles/components";
-// import { getSubjectType } from "core/utils/getSubjectType";
+import { media } from "styles/media";
 import { SubjectType } from "core/types/ui.types";
 import { Card } from "components/ui/Card";
 import { formatMonth } from "core/utils/formatMonth";
-
 import type { RootState } from "core/store/store";
-import { useSelector } from "react-redux";
+import { getSubjectType } from "core/utils/getSubjectType";
 
 interface CalendarDayProps extends ComponentPropsWithoutRef<"div"> {
     day: TDayWithEvents<TModifiedSchedule>;
@@ -18,102 +25,287 @@ interface CalendarDayProps extends ComponentPropsWithoutRef<"div"> {
 
 export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
     ({ day, ...props }, ref) => {
-        // const headerTitle = `Пари на ${day.day}.${day.month}.${day.year} (${day.weekday})`;
-
+        const [clickedCardId, setClickedCardId] = useState<number | null>(null);
+        const [showDialog, setShowDialog] = useState<boolean>(false);
         const { activeGroup } = useSelector((state: RootState) => state.groups);
 
+        const handleClick = (id: number) => {
+            if (clickedCardId === 0 || clickedCardId === null)
+                setClickedCardId(id);
+            else setClickedCardId(0);
+        };
+
+        const isMobile = useMediaQuery({
+            query: media.large,
+        });
+
         return day.events.length > 0 ? (
-            <Dialog.Root>
-                <Dialog.Trigger>
-                    <S.StyledDayCell
-                        ref={ref}
-                        data-current={day.isCurrentMonth}
-                        {...props}
-                    >
-                        <S.StyledDayCircle data-current={day.isCurrentDay}>
-                            {day.day}
-                        </S.StyledDayCircle>
-                        <S.StyledSubjectsIndicator>
-                            {day.events.length}
-                        </S.StyledSubjectsIndicator>
-                    </S.StyledDayCell>
-                </Dialog.Trigger>
-                <Dialog.Content>
-                    <Dialog.Header title="Розклад" />
-                    <C.TitleMedium>Група {activeGroup.name}</C.TitleMedium>
-                    <C.TitleLarge>
-                        {formatMonth(Number(day.day), Number(day.month))}
-                    </C.TitleLarge>
-                    {day.events
-                        .slice(0)
-                        .reverse()
-                        .map((event) => (
-                            <Card
-                                cardType="subject"
-                                key={event.id}
-                                id={String(event.id)}
-                                isFullWidth
-                                startTime={event.startTime}
-                                auditory={event.auditorium}
-                                type={event.type as SubjectType}
-                                subjectBrief={event.subject.brief}
-                                subjectName={event.subject.title}
-                            ></Card>
-                        ))}
-                    {/* <S.StyledSubjectsList>
-                        {day.events.map((event) => (
-                            <S.StyledDialogContainer>
-                                <S.StyledSubjectTitle>
-                                    {event.subject.title} ({event.subject.brief}
-                                    )
-                                </S.StyledSubjectTitle>
-                                <S.StyledDialogContainer>
-                                    <p>
-                                        <b>Тип:</b>{" "}
-                                        {getSubjectType(
-                                            event.type as SubjectType
+            <>
+                {isMobile ? (
+                    <>
+                        <S.StyledDayCell
+                            ref={ref}
+                            data-current={day.isCurrentMonth}
+                            {...props}
+                            onClick={() => setShowDialog(true)}
+                        >
+                            <S.StyledDayCircle data-current={day.isCurrentDay}>
+                                {day.day}
+                            </S.StyledDayCircle>
+                            <S.StyledSubjectsIndicator>
+                                {day.events.length}
+                            </S.StyledSubjectsIndicator>
+                        </S.StyledDayCell>
+                        {showDialog && (
+                            <MobileDayModal
+                                groups={activeGroup}
+                                dayAndMonth={formatMonth(
+                                    Number(day.day),
+                                    Number(day.month)
+                                )}
+                                onCloseClick={() => setShowDialog(false)}
+                            >
+                                {day.events
+                                    .slice(0)
+                                    .reverse()
+                                    .map((event) => (
+                                        <Dialog.Root key={event.id}>
+                                            <Dialog.Trigger>
+                                                <C.FullWidthContainer
+                                                    onClick={() =>
+                                                        handleClick(event.id)
+                                                    }
+                                                >
+                                                    <Card
+                                                        cardType="subject"
+                                                        key={event.id}
+                                                        id={String(event.id)}
+                                                        isFullWidth
+                                                        startTime={
+                                                            event.startTime
+                                                        }
+                                                        auditory={
+                                                            event.auditorium
+                                                        }
+                                                        type={
+                                                            event.type as SubjectType
+                                                        }
+                                                        subjectBrief={
+                                                            event.subject.brief
+                                                        }
+                                                        subjectName={
+                                                            event.subject.title
+                                                        }
+                                                    />
+                                                </C.FullWidthContainer>
+                                            </Dialog.Trigger>
+                                            <Dialog.Content>
+                                                <Card
+                                                    cardType="subjectText"
+                                                    id={String(
+                                                        event.id + event.id
+                                                    )}
+                                                    weekday={day.weekday}
+                                                    date={`${day.day}.${day.month}.${day.year}`}
+                                                    startTime={event.startTime}
+                                                    subjectType={getSubjectType(
+                                                        event.type as SubjectType
+                                                    )}
+                                                    subjectName={
+                                                        event.subject.title
+                                                    }
+                                                    auditory={event.auditorium}
+                                                    teacher={event.teachers}
+                                                    groups={event.groups}
+                                                />
+                                            </Dialog.Content>
+                                        </Dialog.Root>
+                                    ))}
+                            </MobileDayModal>
+                        )}
+                    </>
+                ) : (
+                    <Dialog.Root>
+                        <Dialog.Trigger>
+                            <S.StyledDayCell
+                                ref={ref}
+                                data-current={day.isCurrentMonth}
+                                {...props}
+                            >
+                                <S.StyledDayCircle
+                                    data-current={day.isCurrentDay}
+                                >
+                                    {day.day}
+                                </S.StyledDayCircle>
+                                <S.StyledSubjectsIndicator>
+                                    {day.events.length}
+                                </S.StyledSubjectsIndicator>
+                            </S.StyledDayCell>
+                        </Dialog.Trigger>
+                        <Dialog.Content>
+                            <Dialog.Header title="Розклад" />
+                            <C.TitleMedium>
+                                Група {activeGroup.name}
+                            </C.TitleMedium>
+                            <C.TitleLarge>
+                                {formatMonth(
+                                    Number(day.day),
+                                    Number(day.month)
+                                )}
+                            </C.TitleLarge>
+                            {day.events
+                                .slice(0)
+                                .reverse()
+                                .map((event) => (
+                                    <>
+                                        <C.FullWidthContainer
+                                            onClick={() =>
+                                                handleClick(event.id)
+                                            }
+                                        >
+                                            <Card
+                                                cardType="subject"
+                                                key={event.id}
+                                                id={String(event.id)}
+                                                isFullWidth
+                                                startTime={event.startTime}
+                                                auditory={event.auditorium}
+                                                type={event.type as SubjectType}
+                                                subjectBrief={
+                                                    event.subject.brief
+                                                }
+                                                subjectName={
+                                                    event.subject.title
+                                                }
+                                            />
+                                        </C.FullWidthContainer>
+                                        {clickedCardId === event.id && (
+                                            <Card
+                                                cardType="subjectText"
+                                                id={String(event.id + event.id)}
+                                                weekday={day.weekday}
+                                                date={`${day.day}.${day.month}.${day.year}`}
+                                                startTime={event.startTime}
+                                                subjectType={getSubjectType(
+                                                    event.type as SubjectType
+                                                )}
+                                                subjectName={
+                                                    event.subject.title
+                                                }
+                                                auditory={event.auditorium}
+                                                teacher={event.teachers}
+                                                groups={event.groups}
+                                            />
                                         )}
-                                    </p>
-                                    <p>
-                                        <b>Авдиторія:</b> {event.auditorium}
-                                    </p>
-                                    <S.StyledDialogContainer>
-                                        <b>Викладач:</b>
-                                        {event.teachers.map((teacher) => (
-                                            <p>{teacher.fullName}</p>
-                                        ))}
-                                    </S.StyledDialogContainer>
-                                </S.StyledDialogContainer>
-                            </S.StyledDialogContainer>
-                        ))}
-                    </S.StyledSubjectsList> */}
-                </Dialog.Content>
-            </Dialog.Root>
+                                    </>
+                                ))}
+                        </Dialog.Content>
+                    </Dialog.Root>
+                )}
+            </>
         ) : (
-            <S.StyledDayCell
-                ref={ref}
-                data-current={day.isCurrentMonth}
-                {...props}
-            >
-                <S.StyledDayCircle data-current={day.isCurrentDay}>
-                    {day.day}
-                </S.StyledDayCircle>
-            </S.StyledDayCell>
+            <>
+                <S.StyledDayCell
+                    ref={ref}
+                    data-current={day.isCurrentMonth}
+                    {...props}
+                    onClick={() => setShowDialog(true)}
+                >
+                    <S.StyledDayCircle data-current={day.isCurrentDay}>
+                        {day.day}
+                    </S.StyledDayCircle>
+                </S.StyledDayCell>
+                {showDialog && isMobile && (
+                    <MobileDayModal
+                        groups={activeGroup}
+                        dayAndMonth={formatMonth(
+                            Number(day.day),
+                            Number(day.month)
+                        )}
+                        onCloseClick={() => setShowDialog(false)}
+                        isEmpty={true}
+                    ></MobileDayModal>
+                )}
+            </>
         );
     }
 );
 
 CalendarDay.displayName = "CalendarDay";
 
-// <Card
-//     cardType="subjectText"
-//     id={String(event.id)}
-//     weekday=""
-//     date=""
-//     startTime=""
-//     subjectType="Лекція"
-//     subjectName=""
-//     auditory=""
-//     teacher=""
-//     groups={[]}
-// />
+{
+    /* <Card
+cardType="subjectText"
+id={String(event.id + event.id)}
+weekday={day.weekday}
+date=""
+startTime={event.startTime}
+subjectType={getSubjectType(
+    event.type as SubjectType
+)}
+subjectName={event.subject.title}
+auditory={event.auditorium}
+teacher={event.teachers}
+groups={event.groups}
+/> */
+}
+
+{
+    /* <Dialog.Root>
+<Dialog.Trigger>
+    <S.StyledDayCell
+        ref={ref}
+        data-current={day.isCurrentMonth}
+        {...props}
+    >
+        <S.StyledDayCircle data-current={day.isCurrentDay}>
+            {day.day}
+        </S.StyledDayCircle>
+        <S.StyledSubjectsIndicator>
+            {day.events.length}
+        </S.StyledSubjectsIndicator>
+    </S.StyledDayCell>
+</Dialog.Trigger>
+<Dialog.Content>
+    <Dialog.Header title="Розклад" />
+    <C.TitleMedium>Група {activeGroup.name}</C.TitleMedium>
+    <C.TitleLarge>
+        {formatMonth(Number(day.day), Number(day.month))}
+    </C.TitleLarge>
+    {day.events
+        .slice(0)
+        .reverse()
+        .map((event) => (
+            <>
+                <C.FullWidthContainer
+                    onClick={() => handleClick(event.id)}
+                >
+                    <Card
+                        cardType="subject"
+                        key={event.id}
+                        id={String(event.id)}
+                        isFullWidth
+                        startTime={event.startTime}
+                        auditory={event.auditorium}
+                        type={event.type as SubjectType}
+                        subjectBrief={event.subject.brief}
+                        subjectName={event.subject.title}
+                    />
+                </C.FullWidthContainer>
+                {clickedCardId === event.id && (
+                    <MobileDayModal
+                        groups={event.groups}
+                        dayAndMonth={formatMonth(
+                            Number(day.day),
+                            Number(day.month)
+                        )}
+                        onCloseClick={() =>
+                            setClickedCardId(null)
+                        }
+                    ></MobileDayModal>
+                )}
+            </>
+        ))}
+</Dialog.Content>
+</Dialog.Root> */
+}

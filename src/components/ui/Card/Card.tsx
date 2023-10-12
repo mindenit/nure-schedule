@@ -26,18 +26,28 @@ const Card: React.FC<
         )
 > = ({ cardType, isFullWidth = false, ...props }) => {
     return (
-        <S.StyledCard isFullWidth={isFullWidth}>
+        <>
             {cardType === "subject" && (
-                <SubjectCard {...(props as SubjectCardProps)}></SubjectCard>
+                <S.StyledCard isFullWidth={isFullWidth}>
+                    <SubjectCard {...(props as SubjectCardProps)} />
+                </S.StyledCard>
             )}
-            {cardType === "info" && <InfoCard {...(props as InfoCardProps)} />}
+            {cardType === "info" && (
+                <S.StyledCard isFullWidth={isFullWidth}>
+                    <InfoCard {...(props as InfoCardProps)} />
+                </S.StyledCard>
+            )}
             {cardType === "group" && (
-                <GroupCard {...(props as GroupCardProps)} />
+                <S.StyledCard isFullWidth={isFullWidth}>
+                    <GroupCard {...(props as GroupCardProps)} />
+                </S.StyledCard>
             )}
             {cardType === "subjectText" && (
-                <SubjectCardText {...(props as SubjectTextCardProps)} />
+                <S.StyledTextCard>
+                    <SubjectCardText {...(props as SubjectTextCardProps)} />
+                </S.StyledTextCard>
             )}
-        </S.StyledCard>
+        </>
     );
 };
 
@@ -80,13 +90,18 @@ const SubjectCardText: React.FC<SubjectTextCardProps> = ({
     return (
         <S.StyledSubjectTextCardContainer>
             <C.TitleLight>
-                {weekday}, {date}; {startTime}. {subjectType}
+                {weekday} {date} {startTime}. {subjectType}
             </C.TitleLight>
             <C.TitleBig>{subjectName}</C.TitleBig>
             <C.TitleMedium>Авдиторія: {auditory}</C.TitleMedium>
-            <C.TitleMedium>Викладач: {teacher}</C.TitleMedium>
             <C.TitleMedium>
-                Групи:{" "}
+                Викладач(-і):{" "}
+                {teacher.map((t) => (
+                    <span>{t.fullName}</span>
+                ))}
+            </C.TitleMedium>
+            <C.TitleMedium>
+                Група(-и):{" "}
                 {groups.map((group: IGroup) => (
                     <span key={group.id}>{group.name}</span>
                 ))}
