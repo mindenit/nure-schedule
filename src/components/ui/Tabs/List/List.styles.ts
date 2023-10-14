@@ -15,20 +15,18 @@ export const StyledList = styled(TabsPrimitive.List)`
                 width: 48px;
                 height: 48px;
                 padding: 0 0.5rem;
-                /* padding: 12px 10px; */
                 font-size: 0;
             }
 
             .Trigger::first-letter {
-                font-size: 16px !important;
+                font-size: 14px !important;
             }
             .Trigger[data-state="active"] {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                width: 120px;
-                /* padding: 12px 10px; */
-                font-size: 16px;
+                width: 105px;
+                font-size: 14px;
             }
         }
 
@@ -49,9 +47,17 @@ export const StyledList = styled(TabsPrimitive.List)`
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 116px;
-            height: 48px;
-            font-size: 16px;
+            min-width: 120px;
+            max-width: 300px;
+            padding: 10px 12px;
+            font-size: 14px;
+
+            flex: 1;
+            transition: flex 0.3s ease;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     }
 `;

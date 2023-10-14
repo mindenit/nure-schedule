@@ -40,7 +40,7 @@ export const TitleLarge = styled.h2`
 `;
 
 export const Container = styled.div`
-    width: min(100% - 15px, 1300px);
+    width: min(100% - 30px, 1300px);
     margin-inline: auto;
 `;
 export const FullWidthContainer = styled.div`

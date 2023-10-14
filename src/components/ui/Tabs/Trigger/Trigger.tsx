@@ -1,18 +1,27 @@
-import * as TabsPrimitive from '@radix-ui/react-tabs';
+import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { ElementRef, forwardRef } from "react";
 import * as S from "./Trigger.styles";
-import { Check } from '@mui/icons-material';
+import { Check } from "@mui/icons-material";
+
+interface Props extends TabsPrimitive.TabsTriggerProps {
+    variant?: string;
+}
 
 export const TabsTrigger = forwardRef<
-  ElementRef<typeof TabsPrimitive.Trigger>,
-  TabsPrimitive.TabsTriggerProps
->(({ children, ...props }, ref) => {
-  return (
-    <S.StyledTabsTrigger ref={ref} className="Trigger" {...props}>
-      <Check />
-      {children}
-    </S.StyledTabsTrigger>
-  )
-})
+    ElementRef<typeof TabsPrimitive.Trigger>,
+    Props
+>(({ children, variant, ...props }, ref) => {
+    return (
+        <S.StyledTabsTrigger
+            ref={ref}
+            className="Trigger"
+            variant={variant}
+            {...props}
+        >
+            <Check />
+            {children}
+        </S.StyledTabsTrigger>
+    );
+});
 
 TabsTrigger.displayName = "TabsTrigger";

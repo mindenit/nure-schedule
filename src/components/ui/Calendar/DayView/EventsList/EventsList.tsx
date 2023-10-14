@@ -32,7 +32,7 @@ export const EventsList: FC<EventsListProps> = ({ events, day, ...props }) => {
                                             type={event.type as SubjectType}
                                             auditory={event.auditorium}
                                             subjectBrief={event.subject.brief}
-                                            subjectName={event.subject.title}
+                                            subjectName={event.subject.brief}
                                         />
                                     </div>
                                 </Dialog.Trigger>

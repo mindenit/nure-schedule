@@ -45,64 +45,68 @@ export const SelectScheduleDialog = () => {
                     onChange={handleChange}
                     autoFocus
                 />
-                <Tabs.Root defaultValue="groups">
-                    <S.StyledDialogContainer>
-                        <Tabs.List>
-                            <Tabs.Trigger value="groups">Групи</Tabs.Trigger>
-                            <Tabs.Trigger value="teachers">
-                                Викладачі
-                            </Tabs.Trigger>
-                            <Tabs.Trigger value="auditoriums">
-                                Авдиторії
-                            </Tabs.Trigger>
-                        </Tabs.List>
-                    </S.StyledDialogContainer>
-                    <Tabs.Content value="groups">
-                        <ListView
-                            items={searchItems<IGroup>(
-                                groups,
-                                value,
-                                (el) => el.name
-                            )}
-                            renderItem={(group) => group.name}
-                            loading={loading}
-                            error={error}
-                            onItemClick={(group) => {
-                                addGroup(group);
-                            }}
-                        />
-                    </Tabs.Content>
-                    <Tabs.Content value="teachers">
-                        <ListView
-                            items={searchItems<ITeacher>(
-                                teachers,
-                                value,
-                                (el) => el.fullName
-                            )}
-                            renderItem={(teacher) => teacher.fullName}
-                            loading={loading}
-                            error={error}
-                            onItemClick={() => {
-                                console.log("Selected teacher");
-                            }}
-                        />
-                    </Tabs.Content>
-                    <Tabs.Content value="auditoriums">
-                        <ListView
-                            items={searchItems<IAuditorium>(
-                                auditoriums,
-                                value,
-                                (el) => el.name
-                            )}
-                            renderItem={(auditorium) => auditorium.name}
-                            loading={loading}
-                            error={error}
-                            onItemClick={() => {
-                                console.log("Selected aud");
-                            }}
-                        />
-                    </Tabs.Content>
-                </Tabs.Root>
+                <S.StyledDialogBigContainer>
+                    <Tabs.Root defaultValue="groups">
+                        <S.StyledDialogContainer>
+                            <Tabs.List>
+                                <Tabs.Trigger value="groups">
+                                    Групи
+                                </Tabs.Trigger>
+                                <Tabs.Trigger value="teachers">
+                                    Викладачі
+                                </Tabs.Trigger>
+                                <Tabs.Trigger value="auditoriums">
+                                    Авдиторії
+                                </Tabs.Trigger>
+                            </Tabs.List>
+                        </S.StyledDialogContainer>
+                        <Tabs.Content value="groups">
+                            <ListView
+                                items={searchItems<IGroup>(
+                                    groups,
+                                    value,
+                                    (el) => el.name
+                                )}
+                                renderItem={(group) => group.name}
+                                loading={loading}
+                                error={error}
+                                onItemClick={(group) => {
+                                    addGroup(group);
+                                }}
+                            />
+                        </Tabs.Content>
+                        <Tabs.Content value="teachers">
+                            <ListView
+                                items={searchItems<ITeacher>(
+                                    teachers,
+                                    value,
+                                    (el) => el.fullName
+                                )}
+                                renderItem={(teacher) => teacher.fullName}
+                                loading={loading}
+                                error={error}
+                                onItemClick={() => {
+                                    console.log("Selected teacher");
+                                }}
+                            />
+                        </Tabs.Content>
+                        <Tabs.Content value="auditoriums">
+                            <ListView
+                                items={searchItems<IAuditorium>(
+                                    auditoriums,
+                                    value,
+                                    (el) => el.name
+                                )}
+                                renderItem={(auditorium) => auditorium.name}
+                                loading={loading}
+                                error={error}
+                                onItemClick={() => {
+                                    console.log("Selected aud");
+                                }}
+                            />
+                        </Tabs.Content>
+                    </Tabs.Root>
+                </S.StyledDialogBigContainer>
             </Dialog.Content>
         </Dialog.Root>
     );

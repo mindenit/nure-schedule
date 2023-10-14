@@ -69,7 +69,7 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                                     .slice(0)
                                     .reverse()
                                     .map((event) => (
-                                        <Dialog.Root key={event.id}>
+                                        <Dialog.Root>
                                             <Dialog.Trigger>
                                                 <C.FullWidthContainer
                                                     onClick={() =>
@@ -94,7 +94,7 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                                                             event.subject.brief
                                                         }
                                                         subjectName={
-                                                            event.subject.title
+                                                            event.subject.brief
                                                         }
                                                     />
                                                 </C.FullWidthContainer>
@@ -175,7 +175,7 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                                                     event.subject.brief
                                                 }
                                                 subjectName={
-                                                    event.subject.title
+                                                    event.subject.brief
                                                 }
                                             />
                                         </C.FullWidthContainer>

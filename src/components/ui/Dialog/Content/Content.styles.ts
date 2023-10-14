@@ -24,7 +24,7 @@ export const StyledDialogContent = styled(DialogPrimitive.Content)`
 
     @media (min-width: 900px) {
         width: 400px;
-        min-height: 300px;
+        min-height: 150px;
         max-height: 500px;
         border-radius: 25px;
         left: 50%;
