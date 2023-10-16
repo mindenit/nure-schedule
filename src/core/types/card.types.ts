@@ -1,4 +1,5 @@
 import { IGroup } from "@nurejs/api";
+import { ComponentPropsWithoutRef } from "react";
 
 export type SubjectType = "Лк" | "Лб" | "Пз";
 export type SubjectTypeExtended =
@@ -7,7 +8,7 @@ export type SubjectTypeExtended =
     | "Практичне заняття";
 export type CardType = "info" | "subject" | "subjectText" | "group";
 
-export interface CardProps {
+export interface CardProps extends ComponentPropsWithoutRef<"div"> {
     id: string;
     cardType: CardType;
     isFullWidth?: boolean;

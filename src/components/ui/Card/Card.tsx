@@ -26,7 +26,7 @@ const Card: React.FC<
         )
 > = ({ cardType, isFullWidth = false, ...props }) => {
     return (
-        <S.StyledCard isFullWidth={isFullWidth}>
+        <S.StyledCard isFullWidth={isFullWidth} {...props}>
             {cardType === "subject" && (
                 <SubjectCard {...(props as SubjectCardProps)}></SubjectCard>
             )}
@@ -100,9 +100,9 @@ const InfoCard: React.FC<InfoCardProps> = ({ title, subhead, desc }) => {
         <>
             <S.InfoCardGroup>
                 <C.TitleBig>{title}</C.TitleBig>
-                <S.InfoCardText>{subhead}</S.InfoCardText>
+                {subhead && <S.InfoCardText>{subhead}</S.InfoCardText>}
             </S.InfoCardGroup>
-            <S.InfoCardText>{desc}</S.InfoCardText>
+            {desc && <S.InfoCardText>{desc}</S.InfoCardText>}
         </>
     );
 };

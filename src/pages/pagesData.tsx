@@ -9,6 +9,7 @@ import { DateRange } from "@mui/icons-material";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
 import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
+import { FiltersPage } from "./Filters/FiltersPage";
 
 const pagesData: IRouter[] = [
     {
@@ -33,7 +34,7 @@ const pagesData: IRouter[] = [
     },
     {
         path: "/filter",
-        element: <NotFound />,
+        element: <FiltersPage />,
         title: "Фільтр",
         showInNavbar: true,
         navbarItem: {

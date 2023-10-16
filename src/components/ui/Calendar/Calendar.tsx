@@ -12,6 +12,7 @@ import { RootState } from "core/store/store";
 import { GroupDropdown } from "components/ui/GroupDropdown";
 import { Loader } from "components/ui/Loader";
 import { Tabs } from "components/ui/Tabs";
+import { useFilters } from "core/hooks/useFilters";
 
 interface CalendarProps {
     type: TFetchEventsType;
@@ -24,11 +25,13 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
         (state: RootState) => state.groups
     );
 
+    const { applyFilters } = useFilters();
+
     const calendar = useCalendar({
         locale: "uk-UK",
         timezone: "Europe/Kiev",
         defaultView: "month",
-        events: events,
+        events: applyFilters(events),
         formatter: {
             months: "2-digit",
             hours: "numeric",
