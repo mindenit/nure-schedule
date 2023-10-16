@@ -46,7 +46,7 @@ export const HomeTitle = styled.h2`
     font-size: 40px;
     line-height: 45px;
 
-    @media ${media.small} {
+    @media ${media.medium} {
         color: ${({ theme }) => theme.colors.textContrast};
         font-size: 20px;
         font-weight: 700;
@@ -63,16 +63,16 @@ export const HomeSubtitle = styled.h3`
     line-height: 20px;
     letter-spacing: 0.25px;
 
-    @media ${media.small} {
+    @media ${media.medium} {
         color: ${({ theme }) => theme.colors.text};
     }
 `;
 
 export const HomeButtonContainer = styled.div`
-    @media ${media.small} {
+    @media ${media.medium} {
         position: fixed;
         bottom: 100px;
-        right: 0;
+        right: 15px;
         z-index: 2;
     }
 `;

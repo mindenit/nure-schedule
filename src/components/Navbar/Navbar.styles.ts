@@ -8,7 +8,7 @@ export const StyledNavbar = styled.header`
     width: 400px;
     gap: 8px;
     z-index: 4;
-    @media ${media.small} {
+    @media ${media.medium} {
         background-color: ${({ theme }) => theme.colors.surfaceContainer};
         padding: 12px 8px 12px 8px;
         width: 100%;
