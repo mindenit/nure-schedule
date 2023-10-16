@@ -5,7 +5,7 @@ import { handleFieldError } from "core/utils/handleFieldError";
 import { IValidationError } from "core/interfaces/validation.interfaces";
 import { getFormData } from "core/utils/getFormData";
 
-export const useSigninForm = () => {
+export const useSignupForm = () => {
     const { handle, get } = useSearchParams();
     const [emailValue, setEmailValue] = useState(get("email") ?? "");
     const [passwordValue, setPasswordValue] = useState(get("password") ?? "");

@@ -10,6 +10,7 @@ import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
 import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
 import { FiltersPage } from "./Filters/FiltersPage";
+import { SignupPage } from "./SignupPage";
 
 const pagesData: IRouter[] = [
     {
@@ -62,6 +63,12 @@ const pagesData: IRouter[] = [
         path: "/signin",
         element: <SignIn />,
         title: "Увійти в аккаунт",
+        showInNavbar: false,
+    },
+    {
+        path: "/signup",
+        element: <SignupPage />,
+        title: "Зареєструватися",
         showInNavbar: false,
     },
 ];
