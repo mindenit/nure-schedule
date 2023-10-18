@@ -49,7 +49,8 @@ export const StyledList = styled(TabsPrimitive.List)`
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 116px;
+            min-width: 116px;
+            width: 100%;
             height: 48px;
             font-size: 16px;
         }
