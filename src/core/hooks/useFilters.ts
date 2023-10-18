@@ -1,14 +1,14 @@
 import { ISchedule } from "@nurejs/api";
-import { pipe } from "core/utils/pipe";
 import { useAuditoriumsFilter } from "./useAuditoriumsFilter";
-import { useSubjectsFilter } from "./useSubjectsFilter";
+import { useTeachersFilter } from "./useTeachersFilter";
+import { pipe } from "core/utils/pipe";
 
 export const useFilters = () => {
     const { applyAuditoriumsFilter } = useAuditoriumsFilter();
-    const { applySubjectsFilter } = useSubjectsFilter();
+    const { applyTeachersFilter } = useTeachersFilter();
 
     const applyFilters = (events: ISchedule[]) => {
-        return pipe(events, applyAuditoriumsFilter(), applySubjectsFilter());
+        return pipe(events, applyAuditoriumsFilter(), applyTeachersFilter());
     };
 
     return { applyFilters };

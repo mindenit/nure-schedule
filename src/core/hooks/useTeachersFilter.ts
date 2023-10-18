@@ -21,9 +21,11 @@ export const useTeachersFilter = () => {
     };
 
     const applyTeachersFilter = () => (events: ISchedule[]) => {
+        const exclusionSet = new Set(teachersFilter.map((item) => item.id));
+
         return events.filter((event) => {
             return event.teachers.some((teacher) => {
-                return !teachersFilter.includes(teacher);
+                return !exclusionSet.has(teacher.id);
             });
         });
     };

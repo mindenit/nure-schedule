@@ -49,9 +49,6 @@ export const FiltersPage: FC = () => {
                             />
                             <Tabs.Root defaultValue="teachers">
                                 <Tabs.List variant="default">
-                                    <Tabs.Trigger value="subjects">
-                                        Предмети
-                                    </Tabs.Trigger>
                                     <Tabs.Trigger value="teachers">
                                         Викладачі
                                     </Tabs.Trigger>
@@ -59,7 +56,6 @@ export const FiltersPage: FC = () => {
                                         Авдиторії
                                     </Tabs.Trigger>
                                 </Tabs.List>
-                                <Tabs.Content value="subjects" />
                                 <Tabs.Content value="teachers">
                                     <ListView
                                         items={searchItems(
