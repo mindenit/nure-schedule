@@ -52,7 +52,7 @@ export interface CardDetailsProps {
 }
 
 export interface RawInfoCardProps {
-    title: string;
-    subhead: string;
-    desc: string;
+    title?: string;
+    subhead?: string;
+    desc?: string;
 }

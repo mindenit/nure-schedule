@@ -10,6 +10,8 @@ import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
 import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
 
+// import { RawInfoCardProps } from "core/types/card.types";
+
 const pagesData: IRouter[] = [
     {
         path: "/",

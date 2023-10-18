@@ -59,10 +59,11 @@ export const InfoCardText = styled.h5`
     letter-spacing: 0.25px;
 `;
 
-export const InfoCardGroup = styled.div`
+export const InfoCardGroup = styled.div<{ desc: string }>`
     display: flex;
     flex-direction: column;
-    margin-bottom: 32px;
+
+    margin-bottom: ${({ desc }) => (desc ? "32px" : "0")};
 `;
 
 export const StyledSubjectTextCardContainer = styled.div`

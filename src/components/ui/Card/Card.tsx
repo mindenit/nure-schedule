@@ -25,30 +25,34 @@ const Card: React.FC<
             | GroupCardProps
         )
 > = ({ cardType, isFullWidth = false, ...props }) => {
-    return (
-        <>
-            {cardType === "subject" && (
-                <S.StyledCard isFullWidth={isFullWidth}>
-                    <SubjectCard {...(props as SubjectCardProps)} />
-                </S.StyledCard>
-            )}
-            {cardType === "info" && (
-                <S.StyledCard isFullWidth={isFullWidth}>
-                    <InfoCard {...(props as InfoCardProps)} />
-                </S.StyledCard>
-            )}
-            {cardType === "group" && (
-                <S.StyledCard isFullWidth={isFullWidth}>
-                    <GroupCard {...(props as GroupCardProps)} />
-                </S.StyledCard>
-            )}
-            {cardType === "subjectText" && (
-                <S.StyledTextCard>
-                    <SubjectCardText {...(props as SubjectTextCardProps)} />
-                </S.StyledTextCard>
-            )}
-        </>
-    );
+    if (cardType === "subject") {
+        return (
+            <S.StyledCard isFullWidth={isFullWidth}>
+                <SubjectCard {...(props as SubjectCardProps)} />
+            </S.StyledCard>
+        );
+    }
+    if (cardType === "info") {
+        return (
+            <S.StyledCard isFullWidth={isFullWidth}>
+                <InfoCard {...(props as InfoCardProps)} />
+            </S.StyledCard>
+        );
+    }
+    if (cardType === "group") {
+        return (
+            <S.StyledCard isFullWidth={isFullWidth}>
+                <GroupCard {...(props as GroupCardProps)} />
+            </S.StyledCard>
+        );
+    }
+    if (cardType === "subjectText") {
+        return (
+            <S.StyledTextCard>
+                <SubjectCardText {...(props as SubjectTextCardProps)} />
+            </S.StyledTextCard>
+        );
+    }
 };
 
 const SubjectCard: React.FC<SubjectCardProps> = ({
@@ -113,11 +117,11 @@ const SubjectCardText: React.FC<SubjectTextCardProps> = ({
 const InfoCard: React.FC<InfoCardProps> = ({ title, subhead, desc }) => {
     return (
         <>
-            <S.InfoCardGroup>
-                <C.TitleBig>{title}</C.TitleBig>
-                <S.InfoCardText>{subhead}</S.InfoCardText>
+            <S.InfoCardGroup desc={desc as string}>
+                {title && <C.TitleBig>{title}</C.TitleBig>}
+                {subhead && <S.InfoCardText>{subhead}</S.InfoCardText>}
             </S.InfoCardGroup>
-            <S.InfoCardText>{desc}</S.InfoCardText>
+            {desc && <S.InfoCardText>{desc}</S.InfoCardText>}
         </>
     );
 };

@@ -36,7 +36,7 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
         };
 
         const isMobile = useMediaQuery({
-            query: media.large,
+            query: media.medium,
         });
 
         return day.events.length > 0 ? (
@@ -100,6 +100,9 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                                                 </C.FullWidthContainer>
                                             </Dialog.Trigger>
                                             <Dialog.Content>
+                                                <Dialog.Header
+                                                    title={`${day.day}.${day.month}.${day.year}`}
+                                                />
                                                 <Card
                                                     cardType="subjectText"
                                                     id={String(
