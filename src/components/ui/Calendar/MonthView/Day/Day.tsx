@@ -42,7 +42,7 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                     <Dialog.Header title="Розклад" />
                     <C.TitleMedium>Група {activeGroup.name}</C.TitleMedium>
                     <C.TitleLarge>
-                        {formatMonth(Number(day.day), Number(day.month))}
+                        {formatMonth(day.day, day.month, day.year)}
                     </C.TitleLarge>
                     {day.events
                         .slice(0)
