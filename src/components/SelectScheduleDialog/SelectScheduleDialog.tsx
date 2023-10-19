@@ -49,21 +49,17 @@ export const SelectScheduleDialog = () => {
                     onChange={handleChange}
                     autoFocus
                 />
-                <S.StyledDialogBigContainer>
-                    <Tabs.Root defaultValue="groups">
-                        <S.StyledDialogContainer>
-                            <Tabs.List>
-                                <Tabs.Trigger value="groups">
-                                    Групи
-                                </Tabs.Trigger>
-                                <Tabs.Trigger value="teachers">
-                                    Викладачі
-                                </Tabs.Trigger>
-                                <Tabs.Trigger value="auditoriums">
-                                    Авдиторії
-                                </Tabs.Trigger>
-                            </Tabs.List>
-                        </S.StyledDialogContainer>
+                <Tabs.Root defaultValue="groups" asChild>
+                    <S.StyledTabsContent>
+                        <Tabs.List>
+                            <Tabs.Trigger value="groups">Групи</Tabs.Trigger>
+                            <Tabs.Trigger value="teachers">
+                                Викладачі
+                            </Tabs.Trigger>
+                            <Tabs.Trigger value="auditoriums">
+                                Авдиторії
+                            </Tabs.Trigger>
+                        </Tabs.List>
                         <Tabs.Content value="groups">
                             <ListView
                                 items={searchItems<IGroup>(
@@ -109,8 +105,8 @@ export const SelectScheduleDialog = () => {
                                 }}
                             />
                         </Tabs.Content>
-                    </Tabs.Root>
-                </S.StyledDialogBigContainer>
+                    </S.StyledTabsContent>
+                </Tabs.Root>
             </Dialog.Content>
         </Dialog.Root>
     );

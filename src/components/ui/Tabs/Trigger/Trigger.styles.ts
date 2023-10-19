@@ -1,5 +1,6 @@
 import * as TabsPrimitive from "@radix-ui/react-tabs";
 import styled from "styled-components";
+import { transparentize } from "polished";
 
 export const StyledTabsTrigger = styled(TabsPrimitive.Trigger)`
     background-color: ${({ theme }) => theme.colors.appBackground};
@@ -9,6 +10,11 @@ export const StyledTabsTrigger = styled(TabsPrimitive.Trigger)`
     svg {
         display: none;
         overflow: hidden;
+    }
+    &:focus,
+    &:hover {
+        background-color: ${({ theme }) =>
+            transparentize(0.4, theme.colors.navbarChip)};
     }
     &:first-child {
         border-radius: 24px 0 0 24px;

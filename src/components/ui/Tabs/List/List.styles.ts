@@ -61,4 +61,16 @@ export const StyledList = styled(TabsPrimitive.List)`
             }
         }
     }
+
+    @media (min-width: 900px) {
+        .Trigger {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 116px;
+            width: 100%;
+            height: 48px;
+            font-size: 16px;
+        }
+    }
 `;

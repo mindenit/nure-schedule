@@ -12,6 +12,8 @@ import { RootState } from "core/store/store";
 import { GroupDropdown } from "components/ui/GroupDropdown";
 import { Loader } from "components/ui/Loader";
 import { Tabs } from "components/ui/Tabs";
+import { useFilters } from "core/hooks/useFilters";
+import { LOCALE } from "core/constants";
 import { useMediaQuery } from "react-responsive";
 import { media } from "styles/media";
 import { SelectScheduleDialog } from "components/SelectScheduleDialog/SelectScheduleDialog";
@@ -45,15 +47,17 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
         fetcher();
     }, [name]);
 
+    const { applyFilters } = useFilters();
+
     const isMobile = useMediaQuery({
         query: media.medium,
     });
 
     const calendar = useCalendar({
-        locale: "uk-UK",
+        locale: LOCALE,
         timezone: "Europe/Kiev",
         defaultView: "month",
-        events: events,
+        events: applyFilters(events),
         formatter: {
             months: "2-digit",
             hours: "numeric",

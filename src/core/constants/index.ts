@@ -12,3 +12,5 @@ export const TIMELINE = [
     "16:40",
     "18:15",
 ];
+
+export const LOCALE = "uk-UK";
