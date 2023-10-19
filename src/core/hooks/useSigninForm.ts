@@ -1,11 +1,14 @@
-import { useState, ChangeEvent } from "react";
-import { useSearchParams } from "./useSearchParams";
-import { email, flatten, minLength, object, parse, string } from "valibot";
-import { handleFieldError } from "core/utils/handleFieldError";
 import { IValidationError } from "core/interfaces/validation.interfaces";
+import { authSchema } from "core/schemas/auth.schema";
 import { getFormData } from "core/utils/getFormData";
+import { handleFieldError } from "core/utils/handleFieldError";
+import { ChangeEvent, useState } from "react";
+import { flatten, parse } from "valibot";
+import { useSearchParams } from "./useSearchParams";
+import { useSignin } from "./useSignin";
 
 export const useSigninForm = () => {
+    const { signin, isLoading, error } = useSignin();
     const { handle, get } = useSearchParams();
     const [emailValue, setEmailValue] = useState(get("email") ?? "");
     const [passwordValue, setPasswordValue] = useState(get("password") ?? "");
@@ -14,12 +17,6 @@ export const useSigninForm = () => {
     const isDisabled = [emailValue, passwordValue].some(
         (value) => value === ""
     );
-    const schema = object({
-        email: string([email()]),
-        password: string([
-            minLength(6, "Пароль має містити що найменше 6 символів"),
-        ]),
-    });
 
     const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -37,13 +34,13 @@ export const useSigninForm = () => {
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const data = getFormData(e);
 
         try {
-            const parsedData = parse(schema, data);
-            console.log(parsedData);
+            const parsedData = parse(authSchema, data);
+            await signin(parsedData);
         } catch (error) {
             handleFieldError({
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -65,5 +62,7 @@ export const useSigninForm = () => {
         handleSubmit,
         isDisabled,
         validatonError,
+        isLoading,
+        formError: error,
     };
 };

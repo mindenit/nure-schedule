@@ -12,6 +12,7 @@ export const SignupForm = () => {
         handleSubmit,
         validatonError,
         isDisabled,
+        isLoading,
     } = useSignupForm();
 
     return (
@@ -38,8 +39,8 @@ export const SignupForm = () => {
                     validatonError !== null ? validatonError["password"] : ""
                 }
             />
-            <Button variant="filled" disabled={isDisabled}>
-                Зареєструватися
+            <Button variant="filled" disabled={isDisabled || isLoading}>
+                {isLoading ? "Реєстратиція..." : "Зареєструватися"}
             </Button>
         </S.StyledForm>
     );
