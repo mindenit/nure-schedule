@@ -1,35 +1,19 @@
-import { ISchedule } from "@nurejs/api";
-import { TFetchEventsType } from "core/types/events.types";
-import { fetchEvents } from "core/utils/fetchEvents";
-import { useEffect, useState } from "react";
+import { RootState } from "core/store/store";
+import { IEventsArgs } from "core/types/events.types";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchEventsActions } from "core/store/slices/fetch/events/fetchEvents.slice";
 
-interface IArgs {
-    type: TFetchEventsType;
-    name: string;
-}
+export const useEvents = (args: IEventsArgs) => {
+    const { events, loading, error } = useSelector(
+        (state: RootState) => state.fetchEvents
+    );
 
-export const useEvents = (args: IArgs) => {
-    const [events, setEvents] = useState<ISchedule[]>([]);
-    const [isLoading, setLoading] = useState(false);
-    const [isError, setError] = useState<unknown | Error>(null);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        const fetcher = async () => {
-            setLoading(true);
+        dispatch(fetchEventsActions.fetchEventsAction(args));
+    }, [args.name]);
 
-            try {
-                const events = await fetchEvents(args);
-                setLoading(false);
-                setEvents(events);
-                setError(null);
-            } catch (err: unknown) {
-                setError(err);
-                setLoading(false);
-            }
-        };
-
-        fetcher();
-    }, []);
-
-    return { events, isLoading, isError };
+    return { events, loading, error };
 };

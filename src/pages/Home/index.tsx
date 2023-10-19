@@ -18,7 +18,6 @@ const Home: React.FC = () => {
     const { allSelectedGroups, activeGroup } = useSelector(
         (state: RootState) => state.groups
     );
-
     return (
         <MainLayout logoText="Розклад">
             <S.HomeContainer>

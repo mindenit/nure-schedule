@@ -5,10 +5,16 @@ export const localStorageMiddleware: Middleware =
     (store) => (next) => (action) => {
         const result = next(action);
         const state = store.getState() as RootState;
+
         try {
-            localStorage.setItem("storeData", JSON.stringify(state));
+            const selectedData = {
+                ui: state.ui,
+                group: state.groups,
+            };
+            localStorage.setItem("storeData", JSON.stringify(selectedData));
         } catch (error) {
             console.error("Error saving state to localStorage:", error);
         }
+
         return result;
     };
