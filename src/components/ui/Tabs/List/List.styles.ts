@@ -7,28 +7,45 @@ export const StyledList = styled(TabsPrimitive.List)`
     flex-direction: row;
     width: 100%;
 
+    @media not ${media.small} {
+        .Trigger {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+            max-width: 300px;
+            padding: 10px 12px;
+            font-size: 14px;
+
+            flex: 1;
+            transition: flex 0.3s ease;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
     @media ${media.small} {
-        align-items: center;
-        justify-content: center;
         &[data-variant="compact"] {
             .Trigger {
+                align-items: center;
+                justify-content: center;
                 width: 48px;
                 height: 48px;
                 padding: 0 0.5rem;
-                /* padding: 12px 10px; */
                 font-size: 0;
             }
 
             .Trigger::first-letter {
-                font-size: 16px !important;
+                font-size: 14px !important;
             }
             .Trigger[data-state="active"] {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                width: 120px;
-                /* padding: 12px 10px; */
-                font-size: 16px;
+                width: 105px;
+                font-size: 14px;
             }
         }
 
@@ -37,9 +54,10 @@ export const StyledList = styled(TabsPrimitive.List)`
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                width: 116px;
-                height: 48px;
-                font-size: 16px;
+                flex-grow: 1;
+                font-size: 14px;
+                padding-top: 10px;
+                padding-bottom: 10px;
             }
         }
     }

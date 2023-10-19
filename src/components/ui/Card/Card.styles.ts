@@ -21,6 +21,15 @@ export const StyledCard = styled.div<{ isFullWidth: boolean }>`
     }
 `;
 
+export const StyledTextCard = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
+    align-self: stretch;
+    width: 100%;
+`;
+
 export const StyledCardGrid = styled.div`
     display: flex;
     flex-direction: row;
@@ -50,10 +59,11 @@ export const InfoCardText = styled.h5`
     letter-spacing: 0.25px;
 `;
 
-export const InfoCardGroup = styled.div`
+export const InfoCardGroup = styled.div<{ desc: string }>`
     display: flex;
     flex-direction: column;
-    margin-bottom: 32px;
+
+    margin-bottom: ${({ desc }) => (desc ? "32px" : "0")};
 `;
 
 export const StyledSubjectTextCardContainer = styled.div`

@@ -13,23 +13,25 @@ interface Props {
 const Questions: React.FC<Props> = ({ cards }) => {
     return (
         <MainLayout logoText="Питання">
-            <S.QuestionsPageContainer>
-                {cards ? (
-                    cards.map((card, index) => (
-                        <Card
-                            key={index}
-                            cardType="info"
-                            isFullWidth
-                            id={card.title}
-                            title={card.title}
-                            subhead={card.subhead}
-                            desc={card.desc}
-                        />
-                    ))
-                ) : (
-                    <C.TitleLarge>Активних питань немає</C.TitleLarge>
-                )}
-            </S.QuestionsPageContainer>
+            <C.Container>
+                <S.QuestionsPageContainer>
+                    {cards ? (
+                        cards.map((card, index) => (
+                            <Card
+                                key={index}
+                                cardType="info"
+                                isFullWidth
+                                id={String(index)}
+                                title={card.title}
+                                subhead={card.subhead}
+                                desc={card.desc}
+                            />
+                        ))
+                    ) : (
+                        <C.TitleLarge>Активних питань немає</C.TitleLarge>
+                    )}
+                </S.QuestionsPageContainer>
+            </C.Container>
         </MainLayout>
     );
 };

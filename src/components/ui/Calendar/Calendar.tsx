@@ -14,6 +14,9 @@ import { Loader } from "components/ui/Loader";
 import { Tabs } from "components/ui/Tabs";
 import { useFilters } from "core/hooks/useFilters";
 import { LOCALE } from "core/constants";
+import { useMediaQuery } from "react-responsive";
+import { media } from "styles/media";
+import { SelectScheduleDialog } from "components/SelectScheduleDialog/SelectScheduleDialog";
 
 interface CalendarProps {
     type: TFetchEventsType;
@@ -27,6 +30,9 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
     );
 
     const { applyFilters } = useFilters();
+    const isMobile = useMediaQuery({
+        query: media.medium,
+    });
 
     const calendar = useCalendar({
         locale: LOCALE,
@@ -67,25 +73,54 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
                 <S.StyledTabsRoot>
                     <Tabs.List variant="compact" asChild>
                         <S.StyledToolbar>
-                            <div className="ToolbarItem">
-                                <GroupDropdown
-                                    items={allSelectedGroups}
-                                    activeItem={activeGroup}
-                                    month={getMonthName()}
-                                    year={2023}
-                                />
-                            </div>
-                            <div className="ToolbarItem">
-                                {views.map((view) => (
-                                    <Tabs.Trigger
-                                        key={view.value}
-                                        value={view.value}
-                                        onClick={view.onClick}
-                                    >
-                                        {view.name}
-                                    </Tabs.Trigger>
-                                ))}
-                            </div>
+                            {isMobile ? (
+                                <>
+                                    <div className="ToolbarItem">
+                                        <GroupDropdown
+                                            items={allSelectedGroups}
+                                            activeItem={activeGroup}
+                                            month={getMonthName()}
+                                            year={2023}
+                                        />
+                                    </div>
+                                    <div className="ToolbarItem">
+                                        {views.map((view) => (
+                                            <Tabs.Trigger
+                                                key={view.value}
+                                                value={view.value}
+                                                onClick={view.onClick}
+                                            >
+                                                {view.name}
+                                            </Tabs.Trigger>
+                                        ))}
+                                    </div>
+                                </>
+                            ) : (
+                                <>
+                                    <S.StyledDesktopToolbar>
+                                        <div className="ToolbarItem">
+                                            <GroupDropdown
+                                                items={allSelectedGroups}
+                                                activeItem={activeGroup}
+                                                month={getMonthName()}
+                                                year={2023}
+                                            />
+                                        </div>
+                                        <div className="ToolbarItem">
+                                            {views.map((view) => (
+                                                <Tabs.Trigger
+                                                    key={view.value}
+                                                    value={view.value}
+                                                    onClick={view.onClick}
+                                                >
+                                                    {view.name}
+                                                </Tabs.Trigger>
+                                            ))}
+                                        </div>
+                                    </S.StyledDesktopToolbar>
+                                    <SelectScheduleDialog />
+                                </>
+                            )}
                         </S.StyledToolbar>
                     </Tabs.List>
                     <Tabs.Content value="month">

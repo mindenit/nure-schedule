@@ -1,5 +1,5 @@
-import { IGroup } from "@nurejs/api";
 import { ComponentPropsWithoutRef } from "react";
+import { IGroup, ITeacher } from "@nurejs/api";
 
 export type SubjectType = "Лк" | "Лб" | "Пз";
 export type SubjectTypeExtended =
@@ -12,12 +12,13 @@ export interface CardProps extends ComponentPropsWithoutRef<"div"> {
     id: string;
     cardType: CardType;
     isFullWidth?: boolean;
+    onClick?: () => void;
 }
 
 export interface SubjectCardProps extends CardProps {
     startTime: string;
     auditory: string;
-    type: SubjectType | SubjectTypeExtended;
+    type: SubjectType;
     subjectBrief: string;
     subjectName: string;
 }
@@ -29,7 +30,7 @@ export interface SubjectTextCardProps extends CardProps {
     subjectType: SubjectType | SubjectTypeExtended;
     subjectName: string;
     auditory: string;
-    teacher: string;
+    teacher: ITeacher[];
     groups: IGroup[];
 }
 
@@ -51,7 +52,7 @@ export interface CardDetailsProps {
 }
 
 export interface RawInfoCardProps {
-    title: string;
-    subhead: string;
-    desc: string;
+    title?: string;
+    subhead?: string;
+    desc?: string;
 }

@@ -18,7 +18,7 @@ interface Props {
 const MainLayout: React.FC<Props> = ({ logoText, children }) => {
     const location = useLocation();
     const isMobile = useMediaQuery({
-        query: media.large,
+        query: media.medium,
     });
     const navbarPages = pagesData.filter((page) => page.showInNavbar);
 

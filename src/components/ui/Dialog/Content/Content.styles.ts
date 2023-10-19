@@ -15,16 +15,16 @@ export const StyledDialogContent = styled(DialogPrimitive.Content)`
     box-sizing: border-box;
     padding: 18px;
 
-    @media ${media.small} {
+    @media ${media.medium} {
         width: 100%;
         max-height: 500px;
         bottom: 0;
         border-radius: 25px 25px 0 0;
     }
 
-    @media (min-width: 900px) {
+    @media not ${media.medium} {
         width: 400px;
-        min-height: 300px;
+        min-height: 150px;
         max-height: 500px;
         border-radius: 25px;
         left: 50%;

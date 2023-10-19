@@ -12,6 +12,8 @@ import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
 import { FiltersPage } from "./Filters/FiltersPage";
 import { SignupPage } from "./SignupPage";
 
+// import { RawInfoCardProps } from "core/types/card.types";
+
 const pagesData: IRouter[] = [
     {
         path: "/",

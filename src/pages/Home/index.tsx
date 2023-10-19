@@ -13,7 +13,7 @@ import { RootState } from "core/store/store";
 
 const Home: React.FC = () => {
     const isMobile = useMediaQuery({
-        query: media.large,
+        query: media.medium,
     });
     const { allSelectedGroups, activeGroup } = useSelector(
         (state: RootState) => state.groups

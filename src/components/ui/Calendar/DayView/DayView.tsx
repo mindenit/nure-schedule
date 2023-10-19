@@ -14,7 +14,7 @@ export const CalendarDayView: FC<DayViewProps> = ({ day, ...props }) => {
     return (
         <S.StyledDayView {...props}>
             <h1>{heading}</h1>
-            <EventsList events={day.events} />
+            <EventsList events={day.events} day={day} />
         </S.StyledDayView>
     );
 };

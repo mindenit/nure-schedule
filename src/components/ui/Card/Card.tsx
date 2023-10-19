@@ -25,20 +25,34 @@ const Card: React.FC<
             | GroupCardProps
         )
 > = ({ cardType, isFullWidth = false, ...props }) => {
-    return (
-        <S.StyledCard isFullWidth={isFullWidth} {...props}>
-            {cardType === "subject" && (
-                <SubjectCard {...(props as SubjectCardProps)}></SubjectCard>
-            )}
-            {cardType === "info" && <InfoCard {...(props as InfoCardProps)} />}
-            {cardType === "group" && (
+    if (cardType === "subject") {
+        return (
+            <S.StyledCard isFullWidth={isFullWidth}>
+                <SubjectCard {...(props as SubjectCardProps)} />
+            </S.StyledCard>
+        );
+    }
+    if (cardType === "info") {
+        return (
+            <S.StyledCard isFullWidth={isFullWidth}>
+                <InfoCard {...(props as InfoCardProps)} />
+            </S.StyledCard>
+        );
+    }
+    if (cardType === "group") {
+        return (
+            <S.StyledCard isFullWidth={isFullWidth}>
                 <GroupCard {...(props as GroupCardProps)} />
-            )}
-            {cardType === "subjectText" && (
+            </S.StyledCard>
+        );
+    }
+    if (cardType === "subjectText") {
+        return (
+            <S.StyledTextCard>
                 <SubjectCardText {...(props as SubjectTextCardProps)} />
-            )}
-        </S.StyledCard>
-    );
+            </S.StyledTextCard>
+        );
+    }
 };
 
 const SubjectCard: React.FC<SubjectCardProps> = ({
@@ -80,13 +94,18 @@ const SubjectCardText: React.FC<SubjectTextCardProps> = ({
     return (
         <S.StyledSubjectTextCardContainer>
             <C.TitleLight>
-                {weekday}, {date}; {startTime}. {subjectType}
+                {weekday} {date} {startTime}. {subjectType}
             </C.TitleLight>
             <C.TitleBig>{subjectName}</C.TitleBig>
             <C.TitleMedium>Авдиторія: {auditory}</C.TitleMedium>
-            <C.TitleMedium>Викладач: {teacher}</C.TitleMedium>
             <C.TitleMedium>
-                Групи:{" "}
+                Викладач(-і):{" "}
+                {teacher.map((t) => (
+                    <span>{t.fullName}</span>
+                ))}
+            </C.TitleMedium>
+            <C.TitleMedium>
+                Група(-и):{" "}
                 {groups.map((group: IGroup) => (
                     <span key={group.id}>{group.name}</span>
                 ))}
@@ -98,8 +117,8 @@ const SubjectCardText: React.FC<SubjectTextCardProps> = ({
 const InfoCard: React.FC<InfoCardProps> = ({ title, subhead, desc }) => {
     return (
         <>
-            <S.InfoCardGroup>
-                <C.TitleBig>{title}</C.TitleBig>
+            <S.InfoCardGroup desc={desc as string}>
+                {title && <C.TitleBig>{title}</C.TitleBig>}
                 {subhead && <S.InfoCardText>{subhead}</S.InfoCardText>}
             </S.InfoCardGroup>
             {desc && <S.InfoCardText>{desc}</S.InfoCardText>}
