@@ -10,6 +10,8 @@ import { searchItems } from "core/utils";
 import { IAuditorium, IGroup, ITeacher } from "@nurejs/api";
 import * as S from "./SelectScheduleDialog.styles";
 import useMultiFetch from "core/hooks/useMultiFetch";
+import { useSelector } from "react-redux";
+import { RootState } from "core/store/store";
 
 export const SelectScheduleDialog = () => {
     const [value, setValue] = useState("");
@@ -19,10 +21,12 @@ export const SelectScheduleDialog = () => {
         setValue(inputValue);
     };
 
-    const { groups, auditoriums, teachers, loading, error } = useMultiFetch(
-        true,
-        true,
-        true
+    const { loading, error } = useMultiFetch(true, true, true);
+
+    const { groups } = useSelector((state: RootState) => state.fetchGroups);
+    const { teachers } = useSelector((state: RootState) => state.fetchTeachers);
+    const { auditoriums } = useSelector(
+        (state: RootState) => state.fetchAuditoriums
     );
 
     const { addGroup } = useActions();

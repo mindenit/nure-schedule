@@ -1,17 +1,22 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
+import createSagaMiddleware from "redux-saga";
 
-import uiSlice from "./slices/ui.slice";
-import groupsSlice from "./slices/group.slice";
+import rootReducers from "./rootReducer";
 import { localStorageMiddleware } from "./middleware/localStorage.middleware";
 
+import { rootSaga } from "core/store/sagas/sagas";
+
+const sagaMiddleware = createSagaMiddleware();
+const middleware = [localStorageMiddleware, sagaMiddleware];
+
 const store = configureStore({
-    reducer: {
-        ui: uiSlice.reducer,
-        groups: groupsSlice.reducer,
-    },
-    middleware: [...getDefaultMiddleware(), localStorageMiddleware],
+    reducer: rootReducers,
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware().concat(middleware),
     devTools: process.env.NODE_ENV !== "production",
 });
+
+sagaMiddleware.run(rootSaga);
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;

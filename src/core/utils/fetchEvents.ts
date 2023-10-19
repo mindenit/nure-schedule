@@ -1,11 +1,6 @@
 import nurekit from "core/services/nurekit.serivce";
-import { TFetchEventsType } from "core/types/events.types";
+import { IEventsArgs } from "core/types/events.types";
 import { getMonth } from "./getMonth";
-
-interface IArgs {
-    type: TFetchEventsType;
-    name: string;
-}
 
 interface IFetcherArgs {
     name: string;
@@ -13,7 +8,7 @@ interface IFetcherArgs {
     lastDay: string;
 }
 
-export const fetchEvents = async (args: IArgs) => {
+export const fetchEvents = async (args: IEventsArgs) => {
     const { type, name } = args;
     const { firstDay, lastDay } = getMonth();
 

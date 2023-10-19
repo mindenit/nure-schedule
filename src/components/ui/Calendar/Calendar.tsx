@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { FC, Fragment } from "react";
+import { FC, Fragment, useEffect, useState } from "react";
 import { useCalendar } from "@onetools/calendar";
 import * as S from "./Calendar.styles";
 import { CalendarMonthView } from "./MonthView/MonthView";
@@ -17,6 +17,7 @@ import { LOCALE } from "core/constants";
 import { useMediaQuery } from "react-responsive";
 import { media } from "styles/media";
 import { SelectScheduleDialog } from "components/SelectScheduleDialog/SelectScheduleDialog";
+import { IFetchScheduleProps } from "core/types/fetch.types";
 
 interface CalendarProps {
     type: TFetchEventsType;
@@ -24,12 +25,30 @@ interface CalendarProps {
 }
 
 export const Calendar: FC<CalendarProps> = ({ type, name }) => {
-    const { events, isLoading } = useEvents({ type, name });
+    const [events1, setEvents1] = useState<IFetchScheduleProps>({
+        events: [],
+        loading: true,
+        error: null,
+    });
+    const { events, loading } = useEvents({ type, name });
     const { allSelectedGroups, activeGroup } = useSelector(
         (state: RootState) => state.groups
     );
 
+    useEffect(() => {
+        const fetcher = async () => {
+            const data = await useEvents({ type, name });
+            setEvents1({
+                events: data.events,
+                loading: data.loading,
+                error: data.error,
+            });
+        };
+        fetcher();
+    }, [name]);
+
     const { applyFilters } = useFilters();
+
     const isMobile = useMediaQuery({
         query: media.medium,
     });
@@ -63,9 +82,7 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
         },
     ];
 
-    if (isLoading) {
-        return <Loader />;
-    }
+    if (loading) return <Loader />;
 
     return (
         <Fragment>

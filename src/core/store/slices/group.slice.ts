@@ -24,12 +24,8 @@ const initializeStateFromLocalStorage = () => {
 };
 
 const findNextActiveGroup = (groups: IGroup[], removedGroupIndex: number) => {
-    if (groups.length === 0) {
-        return null;
-    }
-    if (removedGroupIndex < groups.length) {
-        return groups[removedGroupIndex];
-    }
+    if (groups.length === 0) return null;
+    if (removedGroupIndex < groups.length) return groups[removedGroupIndex];
     return groups[removedGroupIndex - 1];
 };
 
@@ -44,7 +40,6 @@ const groupsSlice = createSlice({
             const exists = state.allSelectedGroups.some(
                 (group: IGroup) => group.id === action.payload.id
             );
-
             if (!exists) {
                 state.allSelectedGroups.push(action.payload);
                 state.activeGroup = action.payload;
@@ -58,8 +53,6 @@ const groupsSlice = createSlice({
 
             if (removedGroupIndex !== -1) {
                 state.allSelectedGroups.splice(removedGroupIndex, 1);
-
-                // Обновляем активную группу
                 state.activeGroup = findNextActiveGroup(
                     state.allSelectedGroups,
                     removedGroupIndex
