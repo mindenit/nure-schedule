@@ -3,14 +3,10 @@ import { ElementRef, forwardRef } from "react";
 import * as S from "./Trigger.styles";
 import { Check } from "@mui/icons-material";
 
-interface Props extends TabsPrimitive.TabsTriggerProps {
-    variant?: string;
-}
-
 export const TabsTrigger = forwardRef<
     ElementRef<typeof TabsPrimitive.Trigger>,
-    Props
->(({ children, variant, ...props }, ref) => {
+    TabsPrimitive.TabsTriggerProps,
+>(({ children, ...props }, ref) => {
     return (
         <S.StyledTabsTrigger
             ref={ref}

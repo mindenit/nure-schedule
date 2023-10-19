@@ -1,24 +1,8 @@
-// dateUtils.js
+import { LOCALE } from "core/constants";
 
-function getMonthName(monthNumber: number) {
-    const months = [
-        "січня",
-        "лютого",
-        "березня",
-        "квітня",
-        "травня",
-        "червня",
-        "липня",
-        "серпня",
-        "вересня",
-        "жовтня",
-        "листопада",
-        "грудня",
-    ];
-    return months[monthNumber - 1];
-}
+export function formatMonth(day: string, month: string, year: string) {
+    const date = new Date(+day, +month, +year);
+    const localizedMonth = date.toLocaleString(LOCALE, { month: "long" });
 
-export function formatMonth(currentDay: number, currentMonth: number) {
-    const monthName = getMonthName(currentMonth);
-    return `${currentDay} ${monthName}`;
+    return `${day} ${localizedMonth}`;
 }
