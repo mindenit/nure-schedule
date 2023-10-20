@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { media } from "styles/media";
 
 export const StyledFiltersPage = styled.section`
     display: flex;
@@ -18,6 +19,11 @@ export const StyledHeader = styled.header`
     width: 100%;
     height: fit-content;
     box-sizing: border-box;
+
+    @media ${media.small} {
+        padding: 0 1rem;
+        box-sizing: border-box;
+    }
 `;
 
 export const StyledBody = styled.div`
@@ -25,9 +31,13 @@ export const StyledBody = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    width: 1000px;
+    width: 100%;
     height: fit-content;
     gap: 1rem;
+
+    @media (min-width: 900px) {
+        width: 700px;
+    }
 `;
 
 export const StyledWrapper = styled.div`

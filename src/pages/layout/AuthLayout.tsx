@@ -2,9 +2,11 @@ import { Logo } from "components/ui/Logo";
 import { FC, PropsWithChildren } from "react";
 import * as S from "./AuthLayout.styles";
 
-const AuthLayout: FC<PropsWithChildren> = ({ children }) => {
-    const logoText = "Розклад";
+interface LayoutProps extends PropsWithChildren {
+    logoText: string;
+}
 
+const AuthLayout: FC<LayoutProps> = ({ children, logoText }) => {
     return (
         <S.AuthLayout>
             <S.AuthLayoutContainer>

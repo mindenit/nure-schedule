@@ -4,7 +4,7 @@ import { FC } from "react";
 
 const SignIn: FC = () => {
     return (
-        <AuthLayout>
+        <AuthLayout logoText="Вхід">
             <SigninForm />
         </AuthLayout>
     );

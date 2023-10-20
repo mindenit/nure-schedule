@@ -19,6 +19,16 @@ export const TitleMedium = styled.h4`
     letter-spacing: 0.15px;
 `;
 
+export const Link = styled.a`
+    color: ${({ theme }) => theme.colors.primaryText};
+
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0.15px;
+`;
+
 export const TitleBig = styled.h3`
     color: ${({ theme }) => theme.colors.textContrast};
 

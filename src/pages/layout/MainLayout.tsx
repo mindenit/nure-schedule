@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 
 import { media } from "styles/media";
@@ -9,6 +9,10 @@ import { Logo } from "components/ui/Logo";
 import { Navbar } from "components/Navbar/Navbar";
 
 import pagesData from "pages/pagesData";
+import { LOCAL_KEYS } from "core/constants";
+import { Button } from "components/ui/Button";
+import { Login, Logout } from "@mui/icons-material";
+import { useLogout } from "core/hooks/useSignout";
 
 interface Props {
     logoText?: string | undefined;
@@ -16,6 +20,7 @@ interface Props {
 }
 
 const MainLayout: React.FC<Props> = ({ logoText, children }) => {
+    const { logout, isLoading } = useLogout();
     const location = useLocation();
     const isMobile = useMediaQuery({
         query: media.medium,
@@ -59,7 +64,7 @@ const MainLayout: React.FC<Props> = ({ logoText, children }) => {
                                 isActive={location.pathname === "/account"}
                             >
                                 <Navbar.Avatar src="https://i.pravatar.cc/80" />
-                                User
+                                Аккаунт
                             </Navbar.Item>
                         </Navbar.Root>
                     </S.MainLayoutFooter>
@@ -69,29 +74,42 @@ const MainLayout: React.FC<Props> = ({ logoText, children }) => {
                     <S.MainLayoutDesktopHeader>
                         <S.MainLayoutDesktopContainer>
                             {logoText !== undefined && <Logo text={logoText} />}
-                            <Navbar.Root>
-                                {navbarPages.map((page, index) => (
-                                    <Navbar.Item
-                                        key={index}
-                                        to={page.path}
-                                        isActive={
-                                            page.path === location.pathname
-                                        }
+                            <S.StyledNavbarContainer>
+                                <Navbar.Root>
+                                    {navbarPages.map((page, index) => (
+                                        <Navbar.Item
+                                            key={index}
+                                            to={page.path}
+                                            isActive={
+                                                page.path === location.pathname
+                                            }
+                                        >
+                                            <Navbar.Icon>
+                                                {page.navbarItem?.icon}
+                                            </Navbar.Icon>
+                                            {page.navbarItem?.label}
+                                        </Navbar.Item>
+                                    ))}
+                                </Navbar.Root>
+                                {!localStorage.getItem(
+                                    LOCAL_KEYS.CURRENT_USER
+                                ) ? (
+                                    <Link to="/signin">
+                                        <Button>
+                                            <Login />
+                                            Увійти в аккаунт
+                                        </Button>
+                                    </Link>
+                                ) : (
+                                    <Button
+                                        onClick={logout}
+                                        disabled={isLoading}
                                     >
-                                        <Navbar.Icon>
-                                            {page.navbarItem?.icon}
-                                        </Navbar.Icon>
-                                        {page.navbarItem?.label}
-                                    </Navbar.Item>
-                                ))}
-                                <Navbar.Item
-                                    to={"/account"}
-                                    isActive={location.pathname === "/account"}
-                                >
-                                    <Navbar.Avatar src="https://i.pravatar.cc/80" />
-                                    User
-                                </Navbar.Item>
-                            </Navbar.Root>
+                                        <Logout />
+                                        Вийти
+                                    </Button>
+                                )}
+                            </S.StyledNavbarContainer>
                         </S.MainLayoutDesktopContainer>
                     </S.MainLayoutDesktopHeader>
                     <S.MainLayoutContent>{children}</S.MainLayoutContent>

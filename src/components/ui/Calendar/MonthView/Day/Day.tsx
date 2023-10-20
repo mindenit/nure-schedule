@@ -60,8 +60,9 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                             <MobileDayModal
                                 groups={activeGroup}
                                 dayAndMonth={formatMonth(
-                                    Number(day.day),
-                                    Number(day.month)
+                                    day.day,
+                                    day.month,
+                                    day.year
                                 )}
                                 onCloseClick={() => setShowDialog(false)}
                             >
@@ -151,10 +152,7 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                                 Група {activeGroup.name}
                             </C.TitleMedium>
                             <C.TitleLarge>
-                                {formatMonth(
-                                    Number(day.day),
-                                    Number(day.month)
-                                )}
+                                {formatMonth(day.day, day.month, day.year)}
                             </C.TitleLarge>
                             {day.events
                                 .slice(0)
@@ -221,10 +219,7 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                 {showDialog && isMobile && (
                     <MobileDayModal
                         groups={activeGroup}
-                        dayAndMonth={formatMonth(
-                            Number(day.day),
-                            Number(day.month)
-                        )}
+                        dayAndMonth={formatMonth(day.day, day.month, day.year)}
                         onCloseClick={() => setShowDialog(false)}
                         isEmpty={true}
                     ></MobileDayModal>

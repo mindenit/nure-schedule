@@ -39,3 +39,12 @@ export const MainLayoutDesktopContainer = styled(C.Container)`
     align-items: center;
     justify-content: space-between;
 `;
+
+export const StyledNavbarContainer = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: fit-content;
+    height: auto;
+    gap: 1rem;
+`;

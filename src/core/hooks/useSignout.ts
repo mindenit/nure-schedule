@@ -1,32 +1,29 @@
 import { LOCAL_KEYS } from "core/constants";
-import { IUser } from "core/interfaces/user.interface";
 import axiosClient from "core/services/axios.service";
-import { TAuthInput } from "core/types/auth.types";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const useSignup = () => {
+export const useLogout = () => {
     const navigate = useNavigate();
     const [isLoading, setLoading] = useState(false);
     const [error, setError] = useState<unknown>(null);
 
-    const signup = async (data: TAuthInput) => {
+    const logout = async () => {
         setLoading(true);
+
         try {
-            const res = await axiosClient.post<IUser>("/register", data);
+            await axiosClient.post("logout");
 
-            localStorage.setItem(
-                LOCAL_KEYS.CURRENT_USER,
-                JSON.stringify(res.data)
-            );
-
+            localStorage.removeItem(LOCAL_KEYS.AUTH_TOKENS);
+            localStorage.removeItem(LOCAL_KEYS.CURRENT_USER);
             setLoading(false);
             navigate("/");
         } catch (error) {
+            console.log(error);
             setLoading(false);
             setError(error);
         }
     };
 
-    return { signup, isLoading, error };
+    return { logout, isLoading, error };
 };

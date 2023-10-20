@@ -2,6 +2,8 @@ import { TextField } from "components/ui/TextField/TextField";
 import * as S from "./Signup.styles";
 import { Button } from "components/ui/Button";
 import { useSignupForm } from "core/hooks/useSignupForm";
+import * as C from "../../styles/components";
+import { Link } from "react-router-dom";
 
 export const SignupForm = () => {
     const {
@@ -26,6 +28,7 @@ export const SignupForm = () => {
                 value={emailValue}
                 onChange={handleEmailChange}
                 error={validatonError !== null ? validatonError["email"] : ""}
+                autoFocus
             />
             <TextField
                 id="password"
@@ -42,6 +45,12 @@ export const SignupForm = () => {
             <Button variant="filled" disabled={isDisabled || isLoading}>
                 {isLoading ? "Реєстратиція..." : "Зареєструватися"}
             </Button>
+            <S.StyledTextContainer>
+                <C.TitleMedium>
+                    Не має аккаунту? <Link to="/signin">Увійти</Link>
+                </C.TitleMedium>
+                <Link to="/">Продовжити як гість</Link>
+            </S.StyledTextContainer>
         </S.StyledForm>
     );
 };

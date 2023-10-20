@@ -4,7 +4,7 @@ import { FC } from "react";
 
 export const SignupPage: FC = () => {
     return (
-        <AuthLayout>
+        <AuthLayout logoText="Реєстрація">
             <SignupForm />
         </AuthLayout>
     );

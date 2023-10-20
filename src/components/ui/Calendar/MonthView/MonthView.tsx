@@ -23,8 +23,11 @@ export const CalendarMonthView: FC<CalendarMonthViewProps> = ({
                 ))}
             </S.StyledHeadersRoot>
             <S.StyledDaysRoot {...props}>
-                {days.map((day, index) => (
-                    <CalendarDay key={index} day={day} />
+                {days.map((day) => (
+                    <CalendarDay
+                        key={`${day.day} ${day.month} ${day.year}`}
+                        day={day}
+                    />
                 ))}
             </S.StyledDaysRoot>
         </S.StyledMonthView>

@@ -2,6 +2,8 @@ import { Button } from "components/ui/Button";
 import { TextField } from "components/ui/TextField/TextField";
 import { useSigninForm } from "core/hooks/useSigninForm";
 import * as S from "./SigninForm.styles";
+import * as C from "../../styles/components";
+import { Link } from "react-router-dom";
 
 export const SigninForm = () => {
     const {
@@ -26,6 +28,7 @@ export const SigninForm = () => {
                 value={emailValue}
                 onChange={handleEmailChange}
                 error={validatonError !== null ? validatonError["email"] : ""}
+                autoFocus
             />
             <TextField
                 id="password"
@@ -42,6 +45,12 @@ export const SigninForm = () => {
             <Button variant="filled" disabled={isDisabled || isLoading}>
                 {isLoading ? "Вхід..." : "Увійти"}
             </Button>
+            <S.StyledTextContainer>
+                <C.TitleMedium>
+                    Вже є аккаунт? <Link to="/signup">Зареєструватися</Link>
+                </C.TitleMedium>
+                <Link to="/">Продовжити як гість</Link>
+            </S.StyledTextContainer>
         </S.StyledForm>
     );
 };

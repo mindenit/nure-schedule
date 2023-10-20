@@ -2,15 +2,16 @@ import { IRouter } from "core/types/router.types";
 
 import Home from "./Home";
 import Questions from "./Questions";
-import NotFound from "./NotFound";
 import SignIn from "./SignIn";
 
 import { DateRange } from "@mui/icons-material";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
 import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
+import { ChangesPage } from "./ChangesPage";
 import { FiltersPage } from "./Filters/FiltersPage";
 import { SignupPage } from "./SignupPage";
+import { AccountPage } from "./AccountPage";
 
 // import { RawInfoCardProps } from "core/types/card.types";
 
@@ -27,7 +28,7 @@ const pagesData: IRouter[] = [
     },
     {
         path: "/changes",
-        element: <NotFound />,
+        element: <ChangesPage />,
         title: "Зміни",
         showInNavbar: true,
         navbarItem: {
@@ -57,7 +58,7 @@ const pagesData: IRouter[] = [
     },
     {
         path: "/account",
-        element: <NotFound />,
+        element: <AccountPage />,
         title: "Аккаунт",
         showInNavbar: false,
     },
