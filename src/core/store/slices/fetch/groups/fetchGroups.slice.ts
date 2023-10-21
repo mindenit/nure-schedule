@@ -31,6 +31,7 @@ const fetchGroupSlice = createSlice({
         fetchGroupsError: (state: IState, action: PayloadAction<Error>) => {
             state.loading = false;
             state.error = action.payload;
+            state.groups = [];
         },
     },
 });

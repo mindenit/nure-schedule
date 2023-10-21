@@ -8,6 +8,7 @@ const initialState: IFetchScheduleProps = {
     events: [],
     loading: true,
     error: null,
+    payload: {},
 };
 
 const fetchEventsSlice = createSlice({
@@ -16,12 +17,11 @@ const fetchEventsSlice = createSlice({
     reducers: {
         fetchEventsAction: (
             state: IFetchScheduleProps,
-            // eslint-disable-next-line no-use-before-define
-            // @ts-ignore
             action: PayloadAction<IEventsArgs>
         ) => {
             state.loading = true;
             state.error = null;
+            state.payload = action.payload;
         },
         fetchEventsSuccess: (
             state: IFetchScheduleProps,
@@ -36,6 +36,7 @@ const fetchEventsSlice = createSlice({
         ) => {
             state.loading = false;
             state.error = action.payload;
+            state.events = [];
         },
     },
 });

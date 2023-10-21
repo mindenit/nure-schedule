@@ -14,9 +14,16 @@ interface Props {
     month: string;
     year: number | string;
     onItemRemove?: () => void;
+    onChange?: (item: IGroup) => void;
 }
 
-const GroupDropdown: React.FC<Props> = ({ items, activeItem, month, year }) => {
+const GroupDropdown: React.FC<Props> = ({
+    items,
+    activeItem,
+    month,
+    year,
+    onChange,
+}) => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const { setActiveGroup, removeGroup } = useActions();
@@ -26,6 +33,7 @@ const GroupDropdown: React.FC<Props> = ({ items, activeItem, month, year }) => {
     const handleClick = (item: IGroup) => {
         setActiveGroup(item);
         setIsOpen(false);
+        if (onChange) onChange(item);
     };
     const handleGlobalClick = (event: MouseEvent) => {
         if (

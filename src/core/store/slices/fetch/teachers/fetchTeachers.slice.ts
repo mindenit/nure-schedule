@@ -31,6 +31,7 @@ const fetchTeachersSlice = createSlice({
         fetchTeachersError: (state: IState, action: PayloadAction<Error>) => {
             state.loading = false;
             state.error = action.payload;
+            state.teachers = [];
         },
     },
 });

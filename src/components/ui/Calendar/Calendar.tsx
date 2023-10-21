@@ -1,10 +1,9 @@
-import { useSelector } from "react-redux";
-import { FC, Fragment } from "react";
+import { FC, Fragment, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useCalendar } from "@onetools/calendar";
 import * as S from "./Calendar.styles";
 import { CalendarMonthView } from "./MonthView/MonthView";
 import { CalendarWeekView } from "./WeekView/WeekView";
-import { useEvents } from "core/hooks/useEvents";
 import { CalendarDayView } from "./DayView/DayView";
 import { getMonthName } from "core/utils/getMonthName";
 import { TFetchEventsType } from "core/types/events.types";
@@ -18,16 +17,26 @@ import { useMediaQuery } from "react-responsive";
 import { media } from "styles/media";
 import { SelectScheduleDialog } from "components/SelectScheduleDialog/SelectScheduleDialog";
 
+import { fetchEventsActions } from "core/store/slices/fetch/events/fetchEvents.slice";
+
+import * as C from "styles/components";
+
 interface CalendarProps {
     type: TFetchEventsType;
     name: string;
 }
 
 export const Calendar: FC<CalendarProps> = ({ type, name }) => {
-    const { events, loading } = useEvents({ type, name });
     const { allSelectedGroups, activeGroup } = useSelector(
         (state: RootState) => state.groups
     );
+    const { events, loading, error } = useSelector(
+        (state: RootState) => state.fetchEvents
+    );
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchEventsActions.fetchEventsAction({ type, name }));
+    }, []);
 
     const { applyFilters } = useFilters();
 
@@ -45,6 +54,15 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
             hours: "numeric",
         },
     });
+
+    // ця функція повинна оновлювати івенти при зміні активного елементу в дропдауні
+    // якось в мене воно раз запрацювало, спробуй вставити функцію у різних версіях
+    // в views та в onChange. останнє поле не обов'язкове
+
+    // function updateEvents() {
+    //     dispatch(fetchEventsActions.fetchEventsAction({ type, name }));
+    //     calendar.getMonth;
+    // }
 
     const views = [
         {
@@ -103,6 +121,7 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
                                                 activeItem={activeGroup}
                                                 month={getMonthName()}
                                                 year={2023}
+                                                // onChange={updateEvents}
                                             />
                                         </div>
                                         <div className="ToolbarItem">
@@ -122,18 +141,27 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
                             )}
                         </S.StyledToolbar>
                     </Tabs.List>
-                    <Tabs.Content value="month">
-                        <CalendarMonthView
-                            days={calendar.days}
-                            headers={calendar.headers}
-                        />
-                    </Tabs.Content>
-                    <Tabs.Content value="week">
-                        <CalendarWeekView days={calendar.days} />
-                    </Tabs.Content>
-                    <Tabs.Content value="day">
-                        <CalendarDayView day={calendar.days[0]} />
-                    </Tabs.Content>
+                    {error !== null ? (
+                        <C.CenteredElement>
+                            <C.TitleLarge>Сталася помилка</C.TitleLarge>
+                            <C.TitleMedium>{error.message}</C.TitleMedium>
+                        </C.CenteredElement>
+                    ) : (
+                        <>
+                            <Tabs.Content value="month">
+                                <CalendarMonthView
+                                    days={calendar.days}
+                                    headers={calendar.headers}
+                                />
+                            </Tabs.Content>
+                            <Tabs.Content value="week">
+                                <CalendarWeekView days={calendar.days} />
+                            </Tabs.Content>
+                            <Tabs.Content value="day">
+                                <CalendarDayView day={calendar.days[0]} />
+                            </Tabs.Content>
+                        </>
+                    )}
                 </S.StyledTabsRoot>
             </Tabs.Root>
         </Fragment>

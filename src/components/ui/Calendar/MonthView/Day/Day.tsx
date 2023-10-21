@@ -59,11 +59,7 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                         {showDialog && (
                             <MobileDayModal
                                 groups={activeGroup}
-                                dayAndMonth={formatMonth(
-                                    day.day,
-                                    day.month,
-                                    day.year
-                                )}
+                                dayAndMonth={formatMonth(day.day, day.month)}
                                 onCloseClick={() => setShowDialog(false)}
                             >
                                 {day.events

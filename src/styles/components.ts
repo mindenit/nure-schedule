@@ -53,6 +53,16 @@ export const Container = styled.div`
     width: min(100% - 30px, 1300px);
     margin-inline: auto;
 `;
+
 export const FullWidthContainer = styled.div`
     width: 100%;
+`;
+
+export const CenteredElement = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 500px;
 `;

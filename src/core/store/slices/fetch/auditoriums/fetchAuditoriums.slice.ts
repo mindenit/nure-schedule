@@ -34,6 +34,7 @@ const fetchAuditoriumsSlice = createSlice({
         ) => {
             state.loading = false;
             state.error = action.payload;
+            state.auditoriums = [];
         },
     },
 });

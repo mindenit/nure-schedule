@@ -11,7 +11,7 @@ export const StyledDialogContent = styled(DialogPrimitive.Content)`
     background-color: ${({ theme }) => theme.colors.modalBg};
     overflow-y: scroll;
     gap: 1rem;
-    z-index: 10;
+    z-index: 15;
     box-sizing: border-box;
     padding: 18px;
 
@@ -41,4 +41,5 @@ export const StyledDialogOverlay = styled(DialogPrimitive.Overlay)`
     position: fixed;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.5);
+    z-index: 14;
 `;
