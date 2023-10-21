@@ -38,12 +38,10 @@ export const StyledEmoji = styled(Mood)`
 `;
 
 export const StyledTitle = styled(C.TitleBig)`
-    @media ${media.small} {
-        font-size: 40px;
-        line-height: 45px;
-    }
+    font-size: 40px;
+    line-height: 45px;
 
-    @media ${media.large} {
+    @media ${media.small} {
         font-size: 20px;
         line-height: 24px;
     }
