@@ -13,7 +13,6 @@
     },
     "dependencies": {
         "@emotion/styled": "^11.11.0",
-        "@esbuild/win32-x64": "^0.19.5",
         "@mui/icons-material": "^5.14.8",
         "@mui/styled-engine": "^5.14.8",
         "@nurejs/api": "^0.2.4",

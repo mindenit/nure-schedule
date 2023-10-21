@@ -13,6 +13,8 @@ export function handleFieldError({ error, names, callback }: IArgs) {
     for (const name of names) {
         if (name in error.nested) {
             Object.assign(errorObj, {
+                // eslint-disable-next-line no-use-before-define
+                // @ts-ignore
                 [name]: error.nested[name].join(" "),
             });
 
