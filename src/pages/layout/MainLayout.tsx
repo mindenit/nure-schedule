@@ -12,7 +12,7 @@ import pagesData from "pages/pagesData";
 import { LOCAL_KEYS } from "core/constants";
 import { Button } from "components/ui/Button";
 import { Login, Logout } from "@mui/icons-material";
-import { useLogout } from "core/hooks/useSignout";
+import { useLogout } from "core/hooks/useLogout";
 
 interface Props {
     logoText?: string | undefined;
@@ -92,7 +92,7 @@ const MainLayout: React.FC<Props> = ({ logoText, children }) => {
                                     ))}
                                 </Navbar.Root>
                                 {!localStorage.getItem(
-                                    LOCAL_KEYS.CURRENT_USER
+                                    LOCAL_KEYS.AUTH_TOKENS
                                 ) ? (
                                     <Link to="/signin">
                                         <Button>

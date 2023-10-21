@@ -15,9 +15,16 @@ export const useSignup = () => {
         try {
             const res = await axiosClient.post<IUser>("/register", data);
 
+            const { access_token, refresh_token } = res.data;
+
             localStorage.setItem(
                 LOCAL_KEYS.CURRENT_USER,
                 JSON.stringify(res.data)
+            );
+
+            localStorage.setItem(
+                LOCAL_KEYS.AUTH_TOKENS,
+                JSON.stringify({ access_token, refresh_token })
             );
 
             setLoading(false);

@@ -1,23 +1,22 @@
-import { useSelector } from "react-redux";
-import { FC, Fragment, useEffect, useState } from "react";
 import { useCalendar } from "@onetools/calendar";
-import * as S from "./Calendar.styles";
-import { CalendarMonthView } from "./MonthView/MonthView";
-import { CalendarWeekView } from "./WeekView/WeekView";
-import { useEvents } from "core/hooks/useEvents";
-import { CalendarDayView } from "./DayView/DayView";
-import { getMonthName } from "core/utils/getMonthName";
-import { TFetchEventsType } from "core/types/events.types";
-import { RootState } from "core/store/store";
+import { SelectScheduleDialog } from "components/SelectScheduleDialog/SelectScheduleDialog";
 import { GroupDropdown } from "components/ui/GroupDropdown";
 import { Loader } from "components/ui/Loader";
 import { Tabs } from "components/ui/Tabs";
-import { useFilters } from "core/hooks/useFilters";
 import { LOCALE } from "core/constants";
+import { useEvents } from "core/hooks/useEvents";
+import { useFilters } from "core/hooks/useFilters";
+import { RootState } from "core/store/store";
+import { TFetchEventsType } from "core/types/events.types";
+import { getMonthName } from "core/utils/getMonthName";
+import { FC, Fragment } from "react";
+import { useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { media } from "styles/media";
-import { SelectScheduleDialog } from "components/SelectScheduleDialog/SelectScheduleDialog";
-import { IFetchScheduleProps } from "core/types/fetch.types";
+import * as S from "./Calendar.styles";
+import { CalendarDayView } from "./DayView/DayView";
+import { CalendarMonthView } from "./MonthView/MonthView";
+import { CalendarWeekView } from "./WeekView/WeekView";
 
 interface CalendarProps {
     type: TFetchEventsType;
@@ -25,27 +24,10 @@ interface CalendarProps {
 }
 
 export const Calendar: FC<CalendarProps> = ({ type, name }) => {
-    const [events1, setEvents1] = useState<IFetchScheduleProps>({
-        events: [],
-        loading: true,
-        error: null,
-    });
     const { events, loading } = useEvents({ type, name });
     const { allSelectedGroups, activeGroup } = useSelector(
         (state: RootState) => state.groups
     );
-
-    useEffect(() => {
-        const fetcher = async () => {
-            const data = await useEvents({ type, name });
-            setEvents1({
-                events: data.events,
-                loading: data.loading,
-                error: data.error,
-            });
-        };
-        fetcher();
-    }, [name]);
 
     const { applyFilters } = useFilters();
 

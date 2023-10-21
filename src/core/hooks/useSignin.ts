@@ -15,7 +15,10 @@ export const useSignin = () => {
         try {
             const res = await axiosClient.post<IAuthTokens>("/login", data);
 
-            localStorage.setItem(LOCAL_KEYS.AUTH_TOKENS, JSON.stringify(res.data));
+            localStorage.setItem(
+                LOCAL_KEYS.AUTH_TOKENS,
+                JSON.stringify(res.data)
+            );
 
             setLoading(false);
             navigate("/");

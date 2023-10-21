@@ -1,10 +1,9 @@
 import { ISchedule, ITeacher } from "@nurejs/api";
+import { LOCAL_KEYS } from "core/constants";
 import { useState } from "react";
 
-const KEY = "teachers_filter";
-
 export const useTeachersFilter = () => {
-    const localFilter = localStorage.getItem(KEY);
+    const localFilter = localStorage.getItem(LOCAL_KEYS.TEACHERS_FILTER);
     const defaultFilter = localFilter ? JSON.parse(localFilter) : [];
     const [teachersFilter, setTeachersFilter] =
         useState<ITeacher[]>(defaultFilter);
@@ -14,7 +13,10 @@ export const useTeachersFilter = () => {
             const updatedFilter = [...teachersFilter, item];
 
             setTeachersFilter(updatedFilter);
-            localStorage.setItem(KEY, JSON.stringify(updatedFilter));
+            localStorage.setItem(
+                LOCAL_KEYS.TEACHERS_FILTER,
+                JSON.stringify(updatedFilter)
+            );
         } else {
             removeTeacherFilter(item);
         }
@@ -32,7 +34,7 @@ export const useTeachersFilter = () => {
 
     const resetTeachersFilter = () => {
         setTeachersFilter([]);
-        localStorage.removeItem(KEY);
+        localStorage.removeItem(LOCAL_KEYS.TEACHERS_FILTER);
     };
 
     const removeTeacherFilter = (item: ITeacher) => {
@@ -41,7 +43,10 @@ export const useTeachersFilter = () => {
         });
 
         setTeachersFilter(updatedFilter);
-        localStorage.setItem(KEY, JSON.stringify(updatedFilter));
+        localStorage.setItem(
+            LOCAL_KEYS.TEACHERS_FILTER,
+            JSON.stringify(updatedFilter)
+        );
     };
 
     return {

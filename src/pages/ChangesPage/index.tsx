@@ -9,7 +9,7 @@ export const ChangesPage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!localStorage.getItem(LOCAL_KEYS.CURRENT_USER)) {
+        if (!localStorage.getItem(LOCAL_KEYS.AUTH_TOKENS)) {
             navigate("/signin");
         }
     }, [navigate]);

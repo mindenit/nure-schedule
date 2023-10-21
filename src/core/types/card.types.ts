@@ -12,7 +12,6 @@ export interface CardProps extends ComponentPropsWithoutRef<"div"> {
     id: string;
     cardType: CardType;
     isFullWidth?: boolean;
-    onClick?: () => void;
 }
 
 export interface SubjectCardProps extends CardProps {

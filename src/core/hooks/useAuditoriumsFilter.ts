@@ -1,10 +1,9 @@
 import { IAuditorium, ISchedule } from "@nurejs/api";
+import { LOCAL_KEYS } from "core/constants";
 import { useState } from "react";
 
-const KEY = "auditoriums_filter";
-
 export const useAuditoriumsFilter = () => {
-    const localFilter = localStorage.getItem(KEY);
+    const localFilter = localStorage.getItem(LOCAL_KEYS.AUDITORIUMS_FILTER);
     const defaultFilter = localFilter ? JSON.parse(localFilter) : [];
     const [auditoriumsFilter, setAuditoriumsFilter] =
         useState<IAuditorium[]>(defaultFilter);
@@ -16,7 +15,10 @@ export const useAuditoriumsFilter = () => {
             const updatedFilter = [...auditoriumsFilter, item];
 
             setAuditoriumsFilter(updatedFilter);
-            localStorage.setItem(KEY, JSON.stringify(updatedFilter));
+            localStorage.setItem(
+                LOCAL_KEYS.AUDITORIUMS_FILTER,
+                JSON.stringify(updatedFilter)
+            );
         } else {
             removeAuditoriumsFilter(item);
         }
@@ -36,12 +38,15 @@ export const useAuditoriumsFilter = () => {
         });
 
         setAuditoriumsFilter(updatedFilter);
-        localStorage.setItem(KEY, JSON.stringify(updatedFilter));
+        localStorage.setItem(
+            LOCAL_KEYS.AUDITORIUMS_FILTER,
+            JSON.stringify(updatedFilter)
+        );
     };
 
     const resetAuditoriumsFilter = () => {
         setAuditoriumsFilter([]);
-        localStorage.removeItem(KEY);
+        localStorage.removeItem(LOCAL_KEYS.AUDITORIUMS_FILTER);
     };
 
     return {

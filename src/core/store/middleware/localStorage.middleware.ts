@@ -10,6 +10,7 @@ export const localStorageMiddleware: Middleware =
             const selectedData = {
                 ui: state.ui,
                 group: state.groups,
+                teacher: state.teachers,
             };
             localStorage.setItem("storeData", JSON.stringify(selectedData));
         } catch (error) {
