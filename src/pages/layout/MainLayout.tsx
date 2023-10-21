@@ -1,18 +1,21 @@
 import { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+import { Link, useLocation } from "react-router-dom";
 
 import { media } from "styles/media";
 import * as S from "./MainLayout.styles";
 
-import { Logo } from "components/ui/Logo";
 import { Navbar } from "components/Navbar/Navbar";
+import { Logo } from "components/ui/Logo";
 
-import pagesData from "pages/pagesData";
-import { LOCAL_KEYS } from "core/constants";
+import { DarkMode, LightMode, Login, Logout } from "@mui/icons-material";
 import { Button } from "components/ui/Button";
-import { Login, Logout } from "@mui/icons-material";
-import { useLogout } from "core/hooks/useSignout";
+import { LOCAL_KEYS } from "core/constants";
+import { useActions } from "core/hooks/useActions";
+import { useLogout } from "core/hooks/useLogout";
+import { RootState } from "core/store/store";
+import pagesData from "pages/pagesData";
+import { useSelector } from "react-redux";
 
 interface Props {
     logoText?: string | undefined;
@@ -36,6 +39,8 @@ const MainLayout: React.FC<Props> = ({ logoText, children }) => {
             document.title = `${currentPage.title} | Nure Schedule`;
         }
     }, [location.pathname]);
+    const { toggleTheme } = useActions();
+    const { theme } = useSelector((state: RootState) => state.ui);
 
     return (
         <S.MainLayoutContainer>
@@ -43,6 +48,9 @@ const MainLayout: React.FC<Props> = ({ logoText, children }) => {
                 <>
                     <S.MainLayoutHeader>
                         {logoText !== undefined && <Logo text={logoText} />}
+                        <Button variant="text" onClick={() => toggleTheme()}>
+                            {theme === "dark" ? <DarkMode /> : <LightMode />}
+                        </Button>
                     </S.MainLayoutHeader>
                     <S.MainLayoutContent>{children}</S.MainLayoutContent>
                     <S.MainLayoutFooter>
@@ -91,8 +99,18 @@ const MainLayout: React.FC<Props> = ({ logoText, children }) => {
                                         </Navbar.Item>
                                     ))}
                                 </Navbar.Root>
+                                <Button
+                                    variant="text"
+                                    onClick={() => toggleTheme()}
+                                >
+                                    {theme === "dark" ? (
+                                        <DarkMode />
+                                    ) : (
+                                        <LightMode />
+                                    )}
+                                </Button>
                                 {!localStorage.getItem(
-                                    LOCAL_KEYS.CURRENT_USER
+                                    LOCAL_KEYS.AUTH_TOKENS
                                 ) ? (
                                     <Link to="/signin">
                                         <Button>

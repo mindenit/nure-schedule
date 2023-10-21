@@ -27,28 +27,28 @@ const Card: React.FC<
 > = ({ cardType, isFullWidth = false, ...props }) => {
     if (cardType === "subject") {
         return (
-            <S.StyledCard isFullWidth={isFullWidth}>
+            <S.StyledCard isFullWidth={isFullWidth} {...props}>
                 <SubjectCard {...(props as SubjectCardProps)} />
             </S.StyledCard>
         );
     }
     if (cardType === "info") {
         return (
-            <S.StyledCard isFullWidth={isFullWidth}>
+            <S.StyledCard isFullWidth={isFullWidth} {...props}>
                 <InfoCard {...(props as InfoCardProps)} />
             </S.StyledCard>
         );
     }
     if (cardType === "group") {
         return (
-            <S.StyledCard isFullWidth={isFullWidth}>
+            <S.StyledCard isFullWidth={isFullWidth} {...props}>
                 <GroupCard {...(props as GroupCardProps)} />
             </S.StyledCard>
         );
     }
     if (cardType === "subjectText") {
         return (
-            <S.StyledTextCard>
+            <S.StyledTextCard {...props}>
                 <SubjectCardText {...(props as SubjectTextCardProps)} />
             </S.StyledTextCard>
         );

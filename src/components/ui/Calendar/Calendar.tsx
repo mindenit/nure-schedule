@@ -1,21 +1,22 @@
-import { FC, Fragment, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useCalendar } from "@onetools/calendar";
-import * as S from "./Calendar.styles";
-import { CalendarMonthView } from "./MonthView/MonthView";
-import { CalendarWeekView } from "./WeekView/WeekView";
-import { CalendarDayView } from "./DayView/DayView";
-import { getMonthName } from "core/utils/getMonthName";
-import { TFetchEventsType } from "core/types/events.types";
-import { RootState } from "core/store/store";
 import { GroupDropdown } from "components/ui/GroupDropdown";
 import { Loader } from "components/ui/Loader";
 import { Tabs } from "components/ui/Tabs";
-import { useFilters } from "core/hooks/useFilters";
 import { LOCALE } from "core/constants";
+import { useFilters } from "core/hooks/useFilters";
+import { RootState } from "core/store/store";
+import { TFetchEventsType } from "core/types/events.types";
+import { getMonthName } from "core/utils/getMonthName";
+import { FC, Fragment, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { media } from "styles/media";
+import * as S from "./Calendar.styles";
+import { CalendarDayView } from "./DayView/DayView";
+import { CalendarMonthView } from "./MonthView/MonthView";
+import { CalendarWeekView } from "./WeekView/WeekView";
 import { SelectScheduleDialog } from "components/SelectScheduleDialog/SelectScheduleDialog";
+import { useCalendar } from "@onetools/calendar";
+import { IGroup } from "@nurejs/api";
 
 import { fetchEventsActions } from "core/store/slices/fetch/events/fetchEvents.slice";
 
@@ -95,7 +96,7 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
                                     <div className="ToolbarItem">
                                         <GroupDropdown
                                             items={allSelectedGroups}
-                                            activeItem={activeGroup}
+                                            activeItem={activeGroup as IGroup}
                                             month={getMonthName()}
                                             year={2023}
                                         />
@@ -118,7 +119,9 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
                                         <div className="ToolbarItem">
                                             <GroupDropdown
                                                 items={allSelectedGroups}
-                                                activeItem={activeGroup}
+                                                activeItem={
+                                                    activeGroup as IGroup
+                                                }
                                                 month={getMonthName()}
                                                 year={2023}
                                                 // onChange={updateEvents}

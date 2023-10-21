@@ -21,10 +21,12 @@ export const MainLayoutFooter = styled.div`
 export const MainLayoutHeader = styled.div`
     display: flex;
     align-items: center;
+    justify-content: space-between;
     justify-content: center;
 
     margin-top: 15px;
     margin-bottom: 10px;
+    padding: 0 1rem;
 `;
 
 export const MainLayoutDesktopHeader = styled.div`

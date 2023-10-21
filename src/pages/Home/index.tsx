@@ -18,6 +18,7 @@ const Home: React.FC = () => {
     const { allSelectedGroups, activeGroup } = useSelector(
         (state: RootState) => state.groups
     );
+
     return (
         <MainLayout logoText="Розклад">
             <S.HomeContainer>
@@ -32,7 +33,10 @@ const Home: React.FC = () => {
                     </S.HomeEmptyPageContainer>
                 ) : (
                     <S.HomeFilledPageContainer>
-                        <Calendar type="group" name={activeGroup.name} />
+                        <Calendar
+                            type="group"
+                            name={activeGroup?.name.toLowerCase() as string}
+                        />
                     </S.HomeFilledPageContainer>
                 )}
 

@@ -34,10 +34,6 @@ export const StyledBody = styled.div`
     width: 100%;
     height: fit-content;
     gap: 1rem;
-
-    @media (min-width: 900px) {
-        width: 700px;
-    }
 `;
 
 export const StyledWrapper = styled.div`
@@ -45,6 +41,7 @@ export const StyledWrapper = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+    width: 100%;
     gap: 1rem;
 `;
 

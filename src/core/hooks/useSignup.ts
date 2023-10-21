@@ -1,7 +1,7 @@
-import { LOCAL_KEYS } from "core/constants";
 import { IUser } from "core/interfaces/user.interface";
 import axiosClient from "core/services/axios.service";
 import { TAuthInput } from "core/types/auth.types";
+import { transformAuthError } from "core/utils/transformAuthError";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -13,18 +13,15 @@ export const useSignup = () => {
     const signup = async (data: TAuthInput) => {
         setLoading(true);
         try {
-            const res = await axiosClient.post<IUser>("/register", data);
-
-            localStorage.setItem(
-                LOCAL_KEYS.CURRENT_USER,
-                JSON.stringify(res.data)
-            );
+            await axiosClient.post<IUser>("/register", data);
 
             setLoading(false);
-            navigate("/");
-        } catch (error) {
+            navigate("/signin");
+        } catch (error: unknown) {
             setLoading(false);
-            setError(error);
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            setError(transformAuthError(error.response.data.message));
         }
     };
 

@@ -1,17 +1,15 @@
 import { IValidationError } from "core/interfaces/validation.interfaces";
+import { authSchema } from "core/schemas/auth.schema";
 import { getFormData } from "core/utils/getFormData";
 import { handleFieldError } from "core/utils/handleFieldError";
 import { ChangeEvent, useState } from "react";
 import { flatten, parse } from "valibot";
-import { useSearchParams } from "./useSearchParams";
-import { authSchema } from "core/schemas/auth.schema";
 import { useSignup } from "./useSignup";
 
 export const useSignupForm = () => {
     const { signup, isLoading, error } = useSignup();
-    const { handle, get } = useSearchParams();
-    const [emailValue, setEmailValue] = useState(get("email") ?? "");
-    const [passwordValue, setPasswordValue] = useState(get("password") ?? "");
+    const [emailValue, setEmailValue] = useState("");
+    const [passwordValue, setPasswordValue] = useState("");
     const [validatonError, setValidationError] =
         useState<IValidationError | null>(null);
     const isDisabled = [emailValue, passwordValue].some(
@@ -22,14 +20,12 @@ export const useSignupForm = () => {
         const value = e.target.value;
 
         setEmailValue(value);
-        handle("email", value);
     };
 
     const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
 
         setPasswordValue(value);
-        handle("password", value);
     };
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

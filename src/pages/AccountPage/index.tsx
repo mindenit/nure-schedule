@@ -7,7 +7,7 @@ import { Button } from "components/ui/Button";
 import { Logout } from "@mui/icons-material";
 import { useMediaQuery } from "react-responsive";
 import { media } from "styles/media";
-import { useLogout } from "core/hooks/useSignout";
+import { useLogout } from "core/hooks/useLogout";
 
 export const AccountPage: FC = () => {
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ export const AccountPage: FC = () => {
     const { logout, isLoading } = useLogout();
 
     useEffect(() => {
-        if (!localStorage.getItem(LOCAL_KEYS.CURRENT_USER)) {
+        if (!localStorage.getItem(LOCAL_KEYS.AUTH_TOKENS)) {
             navigate("/signin");
         }
 

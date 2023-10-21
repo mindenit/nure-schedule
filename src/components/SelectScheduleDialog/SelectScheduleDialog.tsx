@@ -29,7 +29,7 @@ export const SelectScheduleDialog = () => {
         (state: RootState) => state.fetchAuditoriums
     );
 
-    const { addGroup } = useActions();
+    const { addGroup, addTeacher } = useActions();
 
     return (
         <Dialog.Root>
@@ -85,8 +85,8 @@ export const SelectScheduleDialog = () => {
                                 renderItem={(teacher) => teacher.fullName}
                                 loading={loading}
                                 error={error}
-                                onItemClick={() => {
-                                    console.log("Selected teacher");
+                                onItemClick={(teacher) => {
+                                    addTeacher(teacher);
                                 }}
                             />
                         </Tabs.Content>
