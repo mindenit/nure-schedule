@@ -4,11 +4,12 @@ import axiosClient from "core/services/axios.service";
 import { TAuthInput } from "core/types/auth.types";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { transformAuthError } from "core/utils/transformAuthError";
 
 export const useSignin = () => {
     const navigate = useNavigate();
     const [isLoading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
+    const [error, setError] = useState<unknown>(null);
 
     const signin = async (data: TAuthInput) => {
         setLoading(true);
@@ -22,9 +23,12 @@ export const useSignin = () => {
 
             setLoading(false);
             navigate("/");
-        } catch (e) {
+        } catch (error) {
             setLoading(false);
-            setError(error);
+            console.log(error);
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            setError(transformAuthError(error.response.data.message));
         }
     };
 

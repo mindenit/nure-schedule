@@ -15,6 +15,7 @@ export const SignupForm = () => {
         validatonError,
         isDisabled,
         isLoading,
+        formError,
     } = useSignupForm();
 
     return (
@@ -42,6 +43,7 @@ export const SignupForm = () => {
                     validatonError !== null ? validatonError["password"] : ""
                 }
             />
+            {formError !== null && <p>{String(formError)}</p>}
             <Button variant="filled" disabled={isDisabled || isLoading}>
                 {isLoading ? "Реєстратиція..." : "Зареєструватися"}
             </Button>

@@ -15,6 +15,7 @@ export const SigninForm = () => {
         isDisabled,
         validatonError,
         isLoading,
+        formError,
     } = useSigninForm();
 
     return (
@@ -42,6 +43,7 @@ export const SigninForm = () => {
                     validatonError !== null ? validatonError["password"] : ""
                 }
             />
+            {formError !== null && <p>{String(formError)}</p>}
             <Button variant="filled" disabled={isDisabled || isLoading}>
                 {isLoading ? "Вхід..." : "Увійти"}
             </Button>
