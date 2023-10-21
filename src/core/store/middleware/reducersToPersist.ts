@@ -1,1 +1,1 @@
-export const reducersToPersist = ["ui", "groups"];
+export const reducersToPersist = ["groups"];

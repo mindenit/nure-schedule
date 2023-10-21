@@ -11,6 +11,8 @@ export interface ITheme {
         modalBg: string;
         modalCloseElement: string;
 
+        activeCard: string;
+
         appBackground: string;
         windowBackground: string;
         surface: string;

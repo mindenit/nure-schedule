@@ -82,6 +82,7 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                                                         key={event.id}
                                                         id={String(event.id)}
                                                         isFullWidth
+                                                        isCursorPointer
                                                         startTime={
                                                             event.startTime
                                                         }

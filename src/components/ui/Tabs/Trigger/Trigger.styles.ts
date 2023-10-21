@@ -7,6 +7,7 @@ export const StyledTabsTrigger = styled(TabsPrimitive.Trigger)`
     color: ${({ theme }) => theme.colors.textContrast};
     border: 1px solid ${({ theme }) => theme.colors.outline};
     gap: 0.5rem;
+    cursor: pointer;
     svg {
         display: none;
         overflow: hidden;

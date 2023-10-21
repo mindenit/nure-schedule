@@ -14,8 +14,10 @@ export const StyledDayCell = styled.div`
     font-family: "Montserrat", sans-serif;
     font-size: 18px;
     font-weight: 800;
-    line-height: 12px; /* 66.667% */
+    line-height: 12px;
     letter-spacing: 0.25px;
+
+    cursor: pointer;
 
     &[data-current="false"] {
         span {
@@ -66,7 +68,7 @@ export const StyledDayCircle = styled.span`
     height: 24px;
     border-radius: 12px;
     font-size: 14px;
-    color: ${({ theme }) => theme.colors.outline};
+    color: ${({ theme }) => theme.colors.textContrast};
     &[data-current="true"] {
         background-color: ${({ theme }) => theme.colors.primary};
         color: ${({ theme }) => theme.colors.appBackground};
