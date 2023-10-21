@@ -10,15 +10,18 @@ import { useTeachersFilter } from "core/hooks/useTeachersFilter";
 import { searchItems } from "core/utils";
 import { FC, useState } from "react";
 import * as S from "./SelectFilterDialog.styles";
+import { useSelector } from "react-redux";
+import { RootState } from "core/store/store";
 
 export const SelectFilterDialog: FC = () => {
     const [query, setQuery] = useState("");
     const { addAuditoriumsFilter } = useAuditoriumsFilter();
     const { addTeachersFilter } = useTeachersFilter();
-    const { teachers, auditoriums, loading, error } = useMultiFetch(
-        true,
-        true,
-        true
+    const { loading, error } = useMultiFetch(true, true, true);
+
+    const { teachers } = useSelector((state: RootState) => state.fetchTeachers);
+    const { auditoriums } = useSelector(
+        (state: RootState) => state.fetchAuditoriums
     );
 
     return (

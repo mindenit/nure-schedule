@@ -10,19 +10,6 @@ const initialState: IState = {
     activeGroup: null,
 };
 
-const initializeStateFromLocalStorage = () => {
-    try {
-        const serializedState = localStorage.getItem("storeData");
-        if (serializedState) {
-            const savedState = JSON.parse(serializedState);
-            return { ...initialState, ...savedState.groups };
-        }
-    } catch (error) {
-        console.error("Error loading state from localStorage:", error);
-    }
-    return initialState;
-};
-
 const findNextActiveGroup = (groups: IGroup[], removedGroupIndex: number) => {
     if (groups.length === 0) return null;
     if (removedGroupIndex < groups.length) return groups[removedGroupIndex];
@@ -31,7 +18,7 @@ const findNextActiveGroup = (groups: IGroup[], removedGroupIndex: number) => {
 
 const groupsSlice = createSlice({
     name: "groups",
-    initialState: initializeStateFromLocalStorage(),
+    initialState,
     reducers: {
         setActiveGroup(state, action: PayloadAction<IGroup>) {
             state.activeGroup = action.payload;

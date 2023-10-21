@@ -32,10 +32,7 @@ const Home: React.FC = () => {
                     </S.HomeEmptyPageContainer>
                 ) : (
                     <S.HomeFilledPageContainer>
-                        <Calendar
-                            type="group"
-                            name={activeGroup.name.toLowerCase()}
-                        />
+                        <Calendar type="group" name={activeGroup.name} />
                     </S.HomeFilledPageContainer>
                 )}
 
