@@ -7,15 +7,27 @@ export const useLogout = () => {
     const navigate = useNavigate();
     const [isLoading, setLoading] = useState(false);
     const [error, setError] = useState<unknown>(null);
+    const token = localStorage.getItem(LOCAL_KEYS.AUTH_TOKENS);
 
     const logout = async () => {
         setLoading(true);
 
         try {
-            await axiosClient.post("logout");
+            console.log(token?.slice(0, -1).slice(0, 0));
+
+            await axiosClient.post(
+                "logout",
+                {},
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem(
+                            LOCAL_KEYS.AUTH_TOKENS
+                        )}`,
+                    },
+                }
+            );
 
             localStorage.removeItem(LOCAL_KEYS.AUTH_TOKENS);
-            localStorage.removeItem(LOCAL_KEYS.CURRENT_USER);
             setLoading(false);
             navigate("/");
         } catch (error) {

@@ -17,7 +17,6 @@ export const LOCALE = "uk-UK";
 
 export const LOCAL_KEYS = {
     AUTH_TOKENS: "auth_tokens",
-    CURRENT_USER: "current_user",
     TEACHERS_FILTER: "teachers_filter",
     AUDITORIUMS_FILTER: "auditoriums_filter",
 } as const;

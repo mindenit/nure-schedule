@@ -1,5 +1,3 @@
-import { useCalendar } from "@onetools/calendar";
-import { SelectScheduleDialog } from "components/SelectScheduleDialog/SelectScheduleDialog";
 import { GroupDropdown } from "components/ui/GroupDropdown";
 import { Loader } from "components/ui/Loader";
 import { Tabs } from "components/ui/Tabs";
@@ -17,6 +15,9 @@ import * as S from "./Calendar.styles";
 import { CalendarDayView } from "./DayView/DayView";
 import { CalendarMonthView } from "./MonthView/MonthView";
 import { CalendarWeekView } from "./WeekView/WeekView";
+import { SelectScheduleDialog } from "components/SelectScheduleDialog/SelectScheduleDialog";
+import { useCalendar } from "@onetools/calendar";
+import { IGroup } from "@nurejs/api";
 
 interface CalendarProps {
     type: TFetchEventsType;
@@ -77,7 +78,7 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
                                     <div className="ToolbarItem">
                                         <GroupDropdown
                                             items={allSelectedGroups}
-                                            activeItem={activeGroup}
+                                            activeItem={activeGroup as IGroup}
                                             month={getMonthName()}
                                             year={2023}
                                         />
@@ -100,7 +101,9 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
                                         <div className="ToolbarItem">
                                             <GroupDropdown
                                                 items={allSelectedGroups}
-                                                activeItem={activeGroup}
+                                                activeItem={
+                                                    activeGroup as IGroup
+                                                }
                                                 month={getMonthName()}
                                                 year={2023}
                                             />

@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { media } from "styles/media";
 
-export const StyledCard = styled.div<{ isFullWidth: boolean }>`
+interface Props {
+    isFullWidth: boolean;
+}
+
+export const StyledCard = styled.div<Props>`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -15,6 +19,13 @@ export const StyledCard = styled.div<{ isFullWidth: boolean }>`
     padding: 16px;
 
     width: ${({ isFullWidth }) => (isFullWidth === true ? "100%" : "350px")};
+
+    cursor: pointer;
+
+    &:focus,
+    &:active {
+        background-color: ${({ theme }) => theme.colors.activeCard};
+    }
 
     @media ${media.small} {
         width: 100%;

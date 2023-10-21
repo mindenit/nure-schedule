@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from "react";
+import { ElementRef, forwardRef } from "react";
 import { LinkProps } from "react-router-dom";
 import * as S from "./Item.styles";
 

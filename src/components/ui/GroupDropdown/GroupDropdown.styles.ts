@@ -6,6 +6,8 @@ export const DropDownContainer = styled.div`
     align-items: center;
 
     position: relative;
+
+    cursor: pointer;
 `;
 
 export const DropDownTextContainer = styled.div`

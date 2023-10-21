@@ -15,48 +15,58 @@ export const FiltersPage: FC = () => {
     return (
         <MainLayout logoText="Фільтр">
             <S.StyledFiltersPage>
-                <S.StyledHeader>
-                    <C.TitleLarge>Фільтри</C.TitleLarge>
-                    <SelectFilterDialog />
-                </S.StyledHeader>
-                <S.StyledBody>
-                    {teachersFilter.length > 0 && (
-                        <S.StyledWrapper>
-                            <C.TitleLarge>Викладачі</C.TitleLarge>
-                            <S.StyledCardsContainer>
-                                {teachersFilter.map((item) => (
-                                    <Card
-                                        id={item.id.toString()}
-                                        key={item.id}
-                                        cardType="info"
-                                        title={item.fullName}
-                                        onClick={() =>
-                                            removeTeacherFilter(item)
-                                        }
-                                    />
-                                ))}
-                            </S.StyledCardsContainer>
-                        </S.StyledWrapper>
-                    )}
-                    {auditoriumsFilter.length > 0 && (
-                        <S.StyledWrapper>
-                            <C.TitleLarge>Авдиторії</C.TitleLarge>
-                            <S.StyledCardsContainer>
-                                {auditoriumsFilter.map((item) => (
-                                    <Card
-                                        id={item.id.toString()}
-                                        key={item.id}
-                                        cardType="info"
-                                        title={item.name}
-                                        onClick={() =>
-                                            removeAuditoriumsFilter(item)
-                                        }
-                                    />
-                                ))}
-                            </S.StyledCardsContainer>
-                        </S.StyledWrapper>
-                    )}
-                </S.StyledBody>
+                <C.Container>
+                    <S.StyledHeader>
+                        <C.TitleLarge>Фільтри</C.TitleLarge>
+                        <SelectFilterDialog />
+                    </S.StyledHeader>
+                </C.Container>
+                <C.Container>
+                    <S.StyledBody>
+                        {teachersFilter.length > 0 && (
+                            <S.StyledWrapper>
+                                <C.TitleLarge>Викладачі</C.TitleLarge>
+                                <S.StyledCardsContainer>
+                                    {teachersFilter.map((item) => (
+                                        <div
+                                            key={item.id}
+                                            onClick={() =>
+                                                removeTeacherFilter(item)
+                                            }
+                                        >
+                                            <Card
+                                                id={item.id.toString()}
+                                                cardType="info"
+                                                title={item.fullName}
+                                            />
+                                        </div>
+                                    ))}
+                                </S.StyledCardsContainer>
+                            </S.StyledWrapper>
+                        )}
+                        {auditoriumsFilter.length > 0 && (
+                            <S.StyledWrapper>
+                                <C.TitleLarge>Авдиторії</C.TitleLarge>
+                                <S.StyledCardsContainer>
+                                    {auditoriumsFilter.map((item) => (
+                                        <div
+                                            key={item.id}
+                                            onClick={() =>
+                                                removeAuditoriumsFilter(item)
+                                            }
+                                        >
+                                            <Card
+                                                id={item.id.toString()}
+                                                cardType="info"
+                                                title={item.name}
+                                            />
+                                        </div>
+                                    ))}
+                                </S.StyledCardsContainer>
+                            </S.StyledWrapper>
+                        )}
+                    </S.StyledBody>
+                </C.Container>
             </S.StyledFiltersPage>
         </MainLayout>
     );

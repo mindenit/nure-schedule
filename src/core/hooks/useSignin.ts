@@ -17,7 +17,7 @@ export const useSignin = () => {
 
             localStorage.setItem(
                 LOCAL_KEYS.AUTH_TOKENS,
-                JSON.stringify(res.data)
+                res.data.access_token as string
             );
 
             setLoading(false);

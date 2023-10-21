@@ -16,6 +16,8 @@ const fetchEventsSlice = createSlice({
     reducers: {
         fetchEventsAction: (
             state: IFetchScheduleProps,
+            // eslint-disable-next-line no-use-before-define
+            // @ts-ignore
             action: PayloadAction<IEventsArgs>
         ) => {
             state.loading = true;

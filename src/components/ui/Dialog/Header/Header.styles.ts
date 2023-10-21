@@ -30,6 +30,8 @@ export const StyledCloseButton = styled.button`
     outline: none;
     color: ${({ theme }) => theme.colors.text};
 
+    cursor: pointer;
+
     svg {
         width: 18px;
         height: 18px;

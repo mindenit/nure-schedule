@@ -11,6 +11,8 @@ export const StyledEvents = styled.div`
     box-sizing: border-box;
     border-radius: 0.5rem;
 
+    cursor: pointer;
+
     &[data-variant="lection"] {
         background-color: #5086a4;
     }
@@ -32,5 +34,5 @@ export const StyledDialogContainer = styled.div`
 
 export const StyledEventText = styled.p`
     font-size: 14px;
-    color: ${({ theme }) => theme.colors.textContrast};
+    color: white;
 `;

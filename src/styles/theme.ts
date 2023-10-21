@@ -13,6 +13,8 @@ export const lightTheme: ITheme = {
         modalBg: "#FFFFFF",
         modalCloseElement: "#000000",
 
+        activeCard: "#EFF6F7",
+
         appBackground: "#F7FEFF",
         windowBackground: "#FFFFFF",
         surface: "#F7FEFF",
@@ -46,6 +48,8 @@ export const darkTheme: ITheme = {
         navbarChip: "#445458",
         modalBg: "#000000",
         modalCloseElement: "#FFFFFF",
+
+        activeCard: "#191919",
 
         appBackground: "#141218",
         windowBackground: "#141218",

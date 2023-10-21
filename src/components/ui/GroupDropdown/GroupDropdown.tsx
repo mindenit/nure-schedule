@@ -45,9 +45,9 @@ const GroupDropdown: React.FC<Props> = ({ items, activeItem, month, year }) => {
     }, [isOpen]);
 
     return (
-        <S.DropDownContainer ref={dropdownRef}>
+        <S.DropDownContainer ref={dropdownRef} onClick={toggleDropdown}>
             <div>
-                <C.TitleBig onClick={toggleDropdown}>
+                <C.TitleBig>
                     {activeItem !== null ? activeItem.name : "Оберіть групу"}
                 </C.TitleBig>
                 <C.TitleLight>
