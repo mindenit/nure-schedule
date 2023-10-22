@@ -15,12 +15,12 @@ import { CalendarDayView } from "./DayView/DayView";
 import { CalendarMonthView } from "./MonthView/MonthView";
 import { CalendarWeekView } from "./WeekView/WeekView";
 import { SelectScheduleDialog } from "components/SelectScheduleDialog/SelectScheduleDialog";
-import { useCalendar } from "@onetools/calendar";
 import { IGroup } from "@nurejs/api";
 
 import { fetchEventsActions } from "core/store/slices/fetch/events/fetchEvents.slice";
 
 import * as C from "styles/components";
+import { useCalendar } from "libs/calendar/useCalendar";
 
 interface CalendarProps {
     type: TFetchEventsType;
@@ -55,15 +55,6 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
             hours: "numeric",
         },
     });
-
-    // ця функція повинна оновлювати івенти при зміні активного елементу в дропдауні
-    // якось в мене воно раз запрацювало, спробуй вставити функцію у різних версіях
-    // в views та в onChange. останнє поле не обов'язкове
-
-    // function updateEvents() {
-    //     dispatch(fetchEventsActions.fetchEventsAction({ type, name }));
-    //     calendar.getMonth;
-    // }
 
     const views = [
         {

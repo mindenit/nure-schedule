@@ -1,6 +1,6 @@
 import { TDayWithEvents } from "@onetools/calendar";
 import { TModifiedSchedule } from "core/types/events.types";
-import { ComponentPropsWithoutRef, FC } from "react";
+import { ComponentPropsWithoutRef, FC, memo } from "react";
 import * as S from "./DayView.style";
 import { EventsList } from "./EventsList/EventsList";
 
@@ -8,7 +8,7 @@ interface DayViewProps extends ComponentPropsWithoutRef<"section"> {
     day: TDayWithEvents<TModifiedSchedule>;
 }
 
-export const CalendarDayView: FC<DayViewProps> = ({ day, ...props }) => {
+const Component: FC<DayViewProps> = ({ day, ...props }) => {
     const heading = `${day.day}.${day.month}, ${day.weekday}`;
 
     return (
@@ -18,3 +18,5 @@ export const CalendarDayView: FC<DayViewProps> = ({ day, ...props }) => {
         </S.StyledDayView>
     );
 };
+
+export const CalendarDayView = memo(Component);

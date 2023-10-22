@@ -1,6 +1,6 @@
 import { ISchedule } from "@nurejs/api";
 import { TDayWithEvents } from "@onetools/calendar";
-import { ComponentPropsWithoutRef, FC } from "react";
+import { ComponentPropsWithoutRef, FC, memo } from "react";
 import { WeekHeader } from "./Header/Header";
 import { EventsColumn } from "./EventsColumn/EventsColumn";
 import { CalendarTimeline } from "./Timeline/Timeline";
@@ -10,10 +10,7 @@ interface CalendarWeekViewProps extends ComponentPropsWithoutRef<"section"> {
     days: TDayWithEvents<ISchedule>[];
 }
 
-export const CalendarWeekView: FC<CalendarWeekViewProps> = ({
-    days,
-    ...props
-}) => {
+export const Component: FC<CalendarWeekViewProps> = ({ days, ...props }) => {
     return (
         <S.StyledWeekView {...props}>
             <CalendarTimeline />
@@ -35,3 +32,5 @@ export const CalendarWeekView: FC<CalendarWeekViewProps> = ({
         </S.StyledWeekView>
     );
 };
+
+export const CalendarWeekView = memo(Component);
