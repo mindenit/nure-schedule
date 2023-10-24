@@ -1,23 +1,24 @@
 import { useState, useEffect, useRef } from "react";
-import { IGroup } from "@nurejs/api";
+// import { IAuditorium, IGroup, ITeacher } from "@nurejs/api";
 
 import * as C from "styles/components";
-import * as S from "./GroupDropdown.styles";
+import * as S from "./Dropdown.styles";
 
 import CloseIcon from "@mui/icons-material/Close";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { useActions } from "core/hooks/useActions";
+import { ICommonData } from "core/types/data.types";
 
 interface Props {
-    items: IGroup[];
-    activeItem: IGroup;
+    items: ICommonData[];
+    activeItem: ICommonData | null;
     month: string;
     year: number | string;
     onItemRemove?: () => void;
-    onChange?: (item: IGroup) => void;
+    onChange?: (item: ICommonData) => void;
 }
 
-const GroupDropdown: React.FC<Props> = ({
+const Dropdown: React.FC<Props> = ({
     items,
     activeItem,
     month,
@@ -26,12 +27,12 @@ const GroupDropdown: React.FC<Props> = ({
 }) => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
-    const { setActiveGroup, removeGroup } = useActions();
+    const { setActiveItem, removeItem } = useActions();
 
     const toggleDropdown = () => setIsOpen(!isOpen);
 
-    const handleClick = (item: IGroup) => {
-        setActiveGroup(item);
+    const handleClick = (item: ICommonData) => {
+        setActiveItem(item);
         setIsOpen(false);
         if (onChange) onChange(item);
     };
@@ -56,7 +57,7 @@ const GroupDropdown: React.FC<Props> = ({
         <S.DropDownContainer ref={dropdownRef} onClick={toggleDropdown}>
             <div>
                 <C.TitleBig>
-                    {activeItem !== null ? activeItem.name : "Оберіть групу"}
+                    {activeItem !== null ? activeItem.name : "Оберіть елемент"}
                 </C.TitleBig>
                 <C.TitleLight>
                     {month} {year}
@@ -68,7 +69,7 @@ const GroupDropdown: React.FC<Props> = ({
                                 <div onClick={() => handleClick(item)}>
                                     {item.name}
                                 </div>
-                                <CloseIcon onClick={() => removeGroup(item)} />
+                                <CloseIcon onClick={() => removeItem(item)} />
                             </S.DropDownListItem>
                         ))}
                     </S.DropDownList>
@@ -79,4 +80,4 @@ const GroupDropdown: React.FC<Props> = ({
     );
 };
 
-export { GroupDropdown };
+export { Dropdown };

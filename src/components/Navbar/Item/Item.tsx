@@ -2,10 +2,6 @@ import { ElementRef, forwardRef } from "react";
 import { LinkProps } from "react-router-dom";
 import * as S from "./Item.styles";
 
-// interface NavbarItemProps extends ComponentPropsWithoutRef<"a"> {
-//     isActive?: boolean;
-// }
-
 interface NavbarItemProps extends LinkProps {
     isActive?: boolean;
 }

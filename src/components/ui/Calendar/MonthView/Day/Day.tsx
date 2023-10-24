@@ -18,6 +18,7 @@ import { Card } from "components/ui/Card";
 import { formatMonth } from "core/utils/formatMonth";
 import type { RootState } from "core/store/store";
 import { getSubjectType } from "core/utils/getSubjectType";
+import { ICommonData, adaptTeacher } from "core/types/data.types";
 
 interface CalendarDayProps extends ComponentPropsWithoutRef<"div"> {
     day: TDayWithEvents<TModifiedSchedule>;
@@ -27,7 +28,7 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
     ({ day, ...props }, ref) => {
         const [clickedCardId, setClickedCardId] = useState<number | null>(null);
         const [showDialog, setShowDialog] = useState<boolean>(false);
-        const { activeGroup } = useSelector((state: RootState) => state.groups);
+        const { activeItem } = useSelector((state: RootState) => state.data);
 
         const handleClick = (id: number) => {
             if (clickedCardId === 0 || clickedCardId === null)
@@ -58,7 +59,7 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                         </S.StyledDayCell>
                         {showDialog && (
                             <MobileDayModal
-                                groups={activeGroup}
+                                groups={activeItem as ICommonData}
                                 dayAndMonth={formatMonth(day.day, day.month)}
                                 onCloseClick={() => setShowDialog(false)}
                             >
@@ -78,7 +79,6 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                                                         key={event.id}
                                                         id={String(event.id)}
                                                         isFullWidth
-                                                        isCursorPointer
                                                         startTime={
                                                             event.startTime
                                                         }
@@ -116,7 +116,9 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                                                         event.subject.title
                                                     }
                                                     auditory={event.auditorium}
-                                                    teacher={event.teachers}
+                                                    teacher={event.teachers.map(
+                                                        adaptTeacher
+                                                    )}
                                                     groups={event.groups}
                                                 />
                                             </Dialog.Content>
@@ -146,10 +148,10 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                         <Dialog.Content>
                             <Dialog.Header title="Розклад" />
                             <C.TitleMedium>
-                                Група {activeGroup.name}
+                                Група {activeItem!.name}
                             </C.TitleMedium>
                             <C.TitleLarge>
-                                {formatMonth(day.day, day.month, day.year)}
+                                {formatMonth(day.day, day.month)}
                             </C.TitleLarge>
                             {day.events
                                 .slice(0)
@@ -191,7 +193,9 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                                                     event.subject.title
                                                 }
                                                 auditory={event.auditorium}
-                                                teacher={event.teachers}
+                                                teacher={event.teachers.map(
+                                                    adaptTeacher
+                                                )}
                                                 groups={event.groups}
                                             />
                                         )}
@@ -215,8 +219,8 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                 </S.StyledDayCell>
                 {showDialog && isMobile && (
                     <MobileDayModal
-                        groups={activeGroup}
-                        dayAndMonth={formatMonth(day.day, day.month, day.year)}
+                        groups={activeItem as ICommonData}
+                        dayAndMonth={formatMonth(day.day, day.month)}
                         onCloseClick={() => setShowDialog(false)}
                         isEmpty={true}
                     ></MobileDayModal>

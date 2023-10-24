@@ -17,13 +17,8 @@ export const AccountPage: FC = () => {
     const { logout, isLoading } = useLogout();
 
     useEffect(() => {
-        if (!localStorage.getItem(LOCAL_KEYS.AUTH_TOKENS)) {
-            navigate("/signin");
-        }
-
-        if (isDesktop) {
-            navigate("/");
-        }
+        if (!localStorage.getItem(LOCAL_KEYS.AUTH_TOKENS)) navigate("/signin");
+        if (isDesktop) navigate("/");
     }, [navigate, isDesktop]);
 
     return (

@@ -71,8 +71,10 @@ const MainLayout: React.FC<Props> = ({ logoText, children }) => {
                                 to={"/account"}
                                 isActive={location.pathname === "/account"}
                             >
-                                <Navbar.Avatar src="https://i.pravatar.cc/80" />
-                                Аккаунт
+                                <Navbar.Avatar src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010" />
+                                {localStorage.getItem(LOCAL_KEYS.AUTH_TOKENS)
+                                    ? "Аккаунт"
+                                    : "Гість"}
                             </Navbar.Item>
                         </Navbar.Root>
                     </S.MainLayoutFooter>

@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef } from "react";
-import { IGroup, ITeacher } from "@nurejs/api";
+import { IGroup } from "@nurejs/api";
+import { ICommonData } from "./data.types";
 
 export type SubjectType = "Лк" | "Лб" | "Пз";
 export type SubjectTypeExtended =
@@ -29,7 +30,7 @@ export interface SubjectTextCardProps extends CardProps {
     subjectType: SubjectType | SubjectTypeExtended;
     subjectName: string;
     auditory: string;
-    teacher: ITeacher[];
+    teacher: ICommonData[];
     groups: IGroup[];
 }
 

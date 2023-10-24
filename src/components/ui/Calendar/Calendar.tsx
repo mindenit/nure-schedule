@@ -1,10 +1,9 @@
-import { GroupDropdown } from "components/ui/GroupDropdown";
+import { Dropdown } from "components/ui/Dropdown";
 import { Loader } from "components/ui/Loader";
 import { Tabs } from "components/ui/Tabs";
 import { LOCALE } from "core/constants";
 import { useFilters } from "core/hooks/useFilters";
 import { RootState } from "core/store/store";
-import { TFetchEventsType } from "core/types/events.types";
 import { getMonthName } from "core/utils/getMonthName";
 import { FC, Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,28 +15,29 @@ import { CalendarMonthView } from "./MonthView/MonthView";
 import { CalendarWeekView } from "./WeekView/WeekView";
 import { SelectScheduleDialog } from "components/SelectScheduleDialog/SelectScheduleDialog";
 import { useCalendar } from "@onetools/calendar";
-import { IGroup } from "@nurejs/api";
 
 import { fetchEventsActions } from "core/store/slices/fetch/events/fetchEvents.slice";
 
 import * as C from "styles/components";
 
 interface CalendarProps {
-    type: TFetchEventsType;
+    type: "auditorium" | "group" | "teacher" | undefined;
     name: string;
 }
 
 export const Calendar: FC<CalendarProps> = ({ type, name }) => {
-    const { allSelectedGroups, activeGroup } = useSelector(
-        (state: RootState) => state.groups
+    const { activeItem, allSelectedItems } = useSelector(
+        (state: RootState) => state.data
     );
-    const { events, loading, error } = useSelector(
+    const { allEvents, loading, error } = useSelector(
         (state: RootState) => state.fetchEvents
     );
+
     const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(fetchEventsActions.fetchEventsAction({ type, name }));
-    }, []);
+    }, [type, name]);
 
     const { applyFilters } = useFilters();
 
@@ -49,21 +49,12 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
         locale: LOCALE,
         timezone: "Europe/Kiev",
         defaultView: "month",
-        events: applyFilters(events),
+        events: applyFilters(allEvents),
         formatter: {
             months: "2-digit",
             hours: "numeric",
         },
     });
-
-    // ця функція повинна оновлювати івенти при зміні активного елементу в дропдауні
-    // якось в мене воно раз запрацювало, спробуй вставити функцію у різних версіях
-    // в views та в onChange. останнє поле не обов'язкове
-
-    // function updateEvents() {
-    //     dispatch(fetchEventsActions.fetchEventsAction({ type, name }));
-    //     calendar.getMonth;
-    // }
 
     const views = [
         {
@@ -94,9 +85,9 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
                             {isMobile ? (
                                 <>
                                     <div className="ToolbarItem">
-                                        <GroupDropdown
-                                            items={allSelectedGroups}
-                                            activeItem={activeGroup as IGroup}
+                                        <Dropdown
+                                            items={allSelectedItems}
+                                            activeItem={activeItem}
                                             month={getMonthName()}
                                             year={2023}
                                         />
@@ -117,14 +108,11 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
                                 <>
                                     <S.StyledDesktopToolbar>
                                         <div className="ToolbarItem">
-                                            <GroupDropdown
-                                                items={allSelectedGroups}
-                                                activeItem={
-                                                    activeGroup as IGroup
-                                                }
+                                            <Dropdown
+                                                items={allSelectedItems}
+                                                activeItem={activeItem}
                                                 month={getMonthName()}
                                                 year={2023}
-                                                // onChange={updateEvents}
                                             />
                                         </div>
                                         <div className="ToolbarItem">

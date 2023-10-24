@@ -7,11 +7,12 @@ import { Tabs } from "components/ui/Tabs";
 import { useAuditoriumsFilter } from "core/hooks/useAuditoriumsFilter";
 import useMultiFetch from "core/hooks/useMultiFetch";
 import { useTeachersFilter } from "core/hooks/useTeachersFilter";
-import { searchItems } from "core/utils";
+import { searchItems } from "core/utils/searchItems";
 import { FC, useState } from "react";
 import * as S from "./SelectFilterDialog.styles";
 import { useSelector } from "react-redux";
 import { RootState } from "core/store/store";
+import { ICommonData } from "core/types/data.types";
 
 export const SelectFilterDialog: FC = () => {
     const [query, setQuery] = useState("");
@@ -36,7 +37,8 @@ export const SelectFilterDialog: FC = () => {
                 <Dialog.Header title="Фільтри" />
                 <SearchField
                     inputMode="text"
-                    placeholder="Пошук"
+                    name="search"
+                    placeholder="Пошук..."
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                 />
@@ -52,10 +54,10 @@ export const SelectFilterDialog: FC = () => {
                         </Tabs.List>
                         <Tabs.Content value="teachers">
                             <ListView
-                                items={searchItems(
+                                items={searchItems<ICommonData>(
                                     teachers,
                                     query,
-                                    (el) => el.shortName
+                                    (el) => el.fullName as string
                                 )}
                                 renderItem={(teacher) => teacher.fullName}
                                 loading={loading}

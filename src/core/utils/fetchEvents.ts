@@ -51,8 +51,8 @@ const fetchEventsByAuditorium = async ({
     firstDay,
     lastDay,
 }: IFetcherArgs) => {
-    return nurekit.teachers.getSchedule({
-        teacherName: name,
+    return nurekit.auditoriums.getSchedule({
+        auditoriumName: name,
         startTime: firstDay,
         endTime: lastDay,
     });

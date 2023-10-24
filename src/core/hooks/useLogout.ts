@@ -32,6 +32,7 @@ export const useLogout = () => {
             navigate("/");
         } catch (error) {
             console.log(error);
+            localStorage.removeItem(LOCAL_KEYS.AUTH_TOKENS);
             setLoading(false);
             setError(error);
         }

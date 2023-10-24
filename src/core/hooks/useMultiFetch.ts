@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
-import { IAuditorium, IGroup, ITeacher } from "@nurejs/api";
+// import { IAuditorium, IGroup, ITeacher } from "@nurejs/api";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGroupsActions } from "core/store/slices/fetch/groups/fetchGroups.slice";
 import { fetchTeachersActions } from "core/store/slices/fetch/teachers/fetchTeachers.slice";
 import { fetchAuditoriumsActions } from "./../store/slices/fetch/auditoriums/fetchAuditoriums.slice";
 import { RootState } from "core/store/store";
+import { ICommonData } from "core/types/data.types";
 
 interface DataFetchingResult {
-    groups: IGroup[];
-    auditoriums: IAuditorium[];
-    teachers: ITeacher[];
+    groups: ICommonData[];
+    auditoriums: ICommonData[];
+    teachers: ICommonData[];
     loading: boolean;
     error?: Error;
 }
@@ -26,8 +27,8 @@ const useMultiFetch = (
     );
     const [data, setData] = useState<DataFetchingResult>({
         groups: groups,
-        auditoriums: auditoriums,
-        teachers: teachers,
+        auditoriums: teachers,
+        teachers: auditoriums,
         loading: true,
         error: undefined,
     });
@@ -48,7 +49,7 @@ const useMultiFetch = (
 
             if (reqAuditoriums) {
                 if (auditoriums.length === 0)
-                    dispatch(fetchAuditoriumsActions.fetchAuditoriumssAction());
+                    dispatch(fetchAuditoriumsActions.fetchAuditoriumsAction());
             }
             setData({
                 groups: groups,

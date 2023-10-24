@@ -3,14 +3,14 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import fetchAuditoriumsActions from "./fetchAuditoriums.slice";
 
 import nurekit from "core/services/nurekit.serivce";
-import { IAuditorium } from "@nurejs/api";
+import { IAuditoriumExtended } from "core/types/data.types";
 
 function* fetchAuditoriumsSaga() {
     try {
-        const res: IAuditorium[] = yield call(nurekit.auditoriums.findMany);
-        yield put(
-            fetchAuditoriumsActions.actions.fetchAuditoriumssSuccess(res)
+        const res: IAuditoriumExtended[] = yield call(
+            nurekit.auditoriums.findMany
         );
+        yield put(fetchAuditoriumsActions.actions.fetchAuditoriumsSuccess(res));
     } catch (error: unknown) {
         yield put(
             fetchAuditoriumsActions.actions.fetchAuditoriumsError(
@@ -22,7 +22,7 @@ function* fetchAuditoriumsSaga() {
 
 export function* watchFetchAuditoriums() {
     yield takeLatest(
-        fetchAuditoriumsActions.actions.fetchAuditoriumssAction.type,
+        fetchAuditoriumsActions.actions.fetchAuditoriumsAction.type,
         fetchAuditoriumsSaga
     );
 }
