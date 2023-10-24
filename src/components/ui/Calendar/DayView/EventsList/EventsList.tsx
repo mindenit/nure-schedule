@@ -6,6 +6,7 @@ import { ComponentPropsWithoutRef, FC } from "react";
 import * as S from "./EventsList.style";
 import { Dialog } from "components/ui/Dialog";
 import { getSubjectType } from "core/utils/getSubjectType";
+import { adaptTeacher } from "core/types/data.types";
 
 interface EventsListProps extends ComponentPropsWithoutRef<"div"> {
     events: TEvent<TModifiedSchedule>[];
@@ -49,7 +50,9 @@ export const EventsList: FC<EventsListProps> = ({ events, day, ...props }) => {
                                         )}
                                         subjectName={event.subject.title}
                                         auditory={event.auditorium}
-                                        teacher={event.teachers}
+                                        teacher={event.teachers.map(
+                                            adaptTeacher
+                                        )}
                                         groups={event.groups}
                                     />
                                 </Dialog.Content>

@@ -54,6 +54,7 @@ export const SelectFilterDialog: FC = () => {
                         </Tabs.List>
                         <Tabs.Content value="teachers">
                             <ListView
+                                //@ts-ignore
                                 items={searchItems<ICommonData>(
                                     teachers,
                                     query,
