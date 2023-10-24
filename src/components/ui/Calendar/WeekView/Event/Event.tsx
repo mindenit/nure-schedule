@@ -5,6 +5,7 @@ import * as S from "./Event.styles";
 import { Card } from "components/ui/Card";
 import { Dialog } from "components/ui/Dialog";
 import { getSubjectType } from "core/utils/getSubjectType";
+import { adaptTeacher } from "core/types/data.types";
 
 type EventVariant = "pratical" | "labaratory" | "lection";
 
@@ -51,7 +52,7 @@ export const Event: FC<EventProps> = ({ event, type, ...props }) => {
                     subjectType={getSubjectType(event.type as SubjectType)}
                     subjectName={event.subject.title}
                     auditory={event.auditorium}
-                    teacher={event.teachers}
+                    teacher={event.teachers.map(adaptTeacher)}
                     groups={event.groups}
                 />
             </Dialog.Content>

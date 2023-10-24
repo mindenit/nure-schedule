@@ -1,8 +1,8 @@
-import { IGroup } from "@nurejs/api";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { ICommonData, IGroupExtended } from "core/types/data.types";
 
 interface IState {
-    groups: IGroup[];
+    groups: ICommonData[];
     loading: boolean;
     error: null | Error;
 }
@@ -23,10 +23,14 @@ const fetchGroupSlice = createSlice({
         },
         fetchGroupsSuccess: (
             state: IState,
-            action: PayloadAction<IGroup[]>
+            action: PayloadAction<IGroupExtended[]>
         ) => {
             state.loading = false;
-            state.groups = action.payload;
+            state.groups = action.payload.map((el) => {
+                const { lastRequest, isActive, ...cleared } = el;
+                cleared.type = "group";
+                return cleared;
+            });
         },
         fetchGroupsError: (state: IState, action: PayloadAction<Error>) => {
             state.loading = false;

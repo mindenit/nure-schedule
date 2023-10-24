@@ -13,8 +13,9 @@ import {
     SubjectTextCardProps,
 } from "core/types/card.types";
 
-import { getCardDetails } from "core/utils";
 import { IGroup } from "@nurejs/api";
+import { getCardDetails } from "core/utils/getCardDetails";
+import { ICommonData } from "core/types/data.types";
 
 const Card: React.FC<
     CardProps &
@@ -100,8 +101,8 @@ const SubjectCardText: React.FC<SubjectTextCardProps> = ({
             <C.TitleMedium>Авдиторія: {auditory}</C.TitleMedium>
             <C.TitleMedium>
                 Викладач(-і):{" "}
-                {teacher.map((t) => (
-                    <span>{t.fullName}</span>
+                {teacher.map((t: ICommonData) => (
+                    <span key={t.id}>{t.fullName}</span>
                 ))}
             </C.TitleMedium>
             <C.TitleMedium>

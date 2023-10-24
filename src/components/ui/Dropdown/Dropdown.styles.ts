@@ -21,7 +21,7 @@ export const DropDownList = styled.ul`
     left: 0;
     list-style: none;
     padding: 8px 12px;
-    width: 200px;
+    min-width: 200px;
     margin: 0;
     background-color: ${({ theme }) => theme.colors.surfaceContainer};
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -33,4 +33,8 @@ export const DropDownListItem = styled(C.TitleBig)`
     justify-content: space-between;
     padding: 16px 0;
     cursor: pointer;
+`;
+
+export const TextContainer = styled.div`
+    width: 100%;
 `;

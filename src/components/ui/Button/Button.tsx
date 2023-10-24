@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
 import { transparentize } from "polished";
 
-import { getTransition } from "core/utils";
 import { ComponentPropsWithoutRef } from "react";
+import { getTransition } from "core/utils/getTransition";
 
 interface Props extends ComponentPropsWithoutRef<"button"> {
     variant?: "filled" | "outlined" | "text";

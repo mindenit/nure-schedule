@@ -1,13 +1,9 @@
 import { useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
-
 import MainLayout from "pages/layout/MainLayout";
-
 import { media } from "styles/media";
 import * as S from "./Home.styles";
-
 import { Calendar } from "components/ui/Calendar/Calendar";
-
 import { SelectScheduleDialog } from "components/SelectScheduleDialog/SelectScheduleDialog";
 import { RootState } from "core/store/store";
 
@@ -15,14 +11,14 @@ const Home: React.FC = () => {
     const isMobile = useMediaQuery({
         query: media.medium,
     });
-    const { allSelectedGroups, activeGroup } = useSelector(
-        (state: RootState) => state.groups
+    const { allSelectedItems, activeItem } = useSelector(
+        (state: RootState) => state.data
     );
 
     return (
         <MainLayout logoText="Розклад">
             <S.HomeContainer>
-                {allSelectedGroups.length === 0 ? (
+                {allSelectedItems.length === 0 ? (
                     <S.HomeEmptyPageContainer>
                         <S.HomeEmoji />
                         <S.HomeTitle>
@@ -34,8 +30,8 @@ const Home: React.FC = () => {
                 ) : (
                     <S.HomeFilledPageContainer>
                         <Calendar
-                            type="group"
-                            name={activeGroup?.name.toLowerCase() as string}
+                            type={activeItem?.type}
+                            name={activeItem?.name as string}
                         />
                     </S.HomeFilledPageContainer>
                 )}

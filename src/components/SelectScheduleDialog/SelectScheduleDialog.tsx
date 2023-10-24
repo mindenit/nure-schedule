@@ -6,12 +6,13 @@ import { SearchField } from "components/ui/SearchField";
 import { Tabs } from "components/ui/Tabs";
 import { useActions } from "core/hooks/useActions";
 import { useState } from "react";
-import { searchItems } from "core/utils";
-import { IAuditorium, IGroup, ITeacher } from "@nurejs/api";
+import { searchItems } from "core/utils/searchItems";
+import { IAuditorium, IGroup } from "@nurejs/api";
 import * as S from "./SelectScheduleDialog.styles";
 import useMultiFetch from "core/hooks/useMultiFetch";
 import { useSelector } from "react-redux";
 import { RootState } from "core/store/store";
+import { ICommonData } from "core/types/data.types";
 
 export const SelectScheduleDialog = () => {
     const [value, setValue] = useState("");
@@ -29,7 +30,7 @@ export const SelectScheduleDialog = () => {
         (state: RootState) => state.fetchAuditoriums
     );
 
-    const { addGroup, addTeacher } = useActions();
+    const { addItem } = useActions();
 
     return (
         <Dialog.Root>
@@ -71,22 +72,22 @@ export const SelectScheduleDialog = () => {
                                 loading={loading}
                                 error={error}
                                 onItemClick={(group) => {
-                                    addGroup(group);
+                                    addItem(group as ICommonData);
                                 }}
                             />
                         </Tabs.Content>
                         <Tabs.Content value="teachers">
                             <ListView
-                                items={searchItems<ITeacher>(
+                                items={searchItems<ICommonData>(
                                     teachers,
                                     value,
-                                    (el) => el.fullName
+                                    (el) => el.fullName as string
                                 )}
                                 renderItem={(teacher) => teacher.fullName}
                                 loading={loading}
                                 error={error}
                                 onItemClick={(teacher) => {
-                                    addTeacher(teacher);
+                                    addItem(teacher as ICommonData);
                                 }}
                             />
                         </Tabs.Content>
@@ -100,8 +101,8 @@ export const SelectScheduleDialog = () => {
                                 renderItem={(auditorium) => auditorium.name}
                                 loading={loading}
                                 error={error}
-                                onItemClick={() => {
-                                    console.log("Selected aud");
+                                onItemClick={(aud) => {
+                                    addItem(aud as ICommonData);
                                 }}
                             />
                         </Tabs.Content>

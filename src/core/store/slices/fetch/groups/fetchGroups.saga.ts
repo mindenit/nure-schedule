@@ -3,12 +3,12 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import fetchGroupsActions from "core/store/slices/fetch/groups/fetchGroups.slice";
 
 import nurekit from "core/services/nurekit.serivce";
-import { IGroup } from "@nurejs/api";
+import { IGroupExtended } from "core/types/data.types";
 
 function* fetchGroupsSaga() {
     try {
-        const groups: IGroup[] = yield call(nurekit.groups.findMany);
-        yield put(fetchGroupsActions.actions.fetchGroupsSuccess(groups));
+        const res: IGroupExtended[] = yield call(nurekit.groups.findMany);
+        yield put(fetchGroupsActions.actions.fetchGroupsSuccess(res));
     } catch (error: unknown) {
         yield put(fetchGroupsActions.actions.fetchGroupsError(error as Error));
     }

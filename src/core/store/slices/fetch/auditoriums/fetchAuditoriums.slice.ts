@@ -1,8 +1,8 @@
-import { IAuditorium } from "@nurejs/api";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { IAuditoriumExtended, ICommonData } from "core/types/data.types";
 
 interface IState {
-    auditoriums: IAuditorium[];
+    auditoriums: ICommonData[];
     loading: boolean;
     error: null | Error;
 }
@@ -17,24 +17,29 @@ const fetchAuditoriumsSlice = createSlice({
     name: "fetchAuditoriums",
     initialState: initialState,
     reducers: {
-        fetchAuditoriumssAction: (state: IState) => {
+        fetchAuditoriumsAction: (state: IState) => {
             state.loading = true;
             state.error = null;
         },
-        fetchAuditoriumssSuccess: (
+        fetchAuditoriumsSuccess: (
             state: IState,
-            action: PayloadAction<IAuditorium[]>
+            action: PayloadAction<IAuditoriumExtended[]>
         ) => {
             state.loading = false;
-            state.auditoriums = action.payload;
+            state.auditoriums = action.payload.map((el) => {
+                const { lastRequest, isActive, ...cleared } = el;
+                cleared.type = "auditorium";
+                return cleared;
+            });
+            state.error = null;
         },
         fetchAuditoriumsError: (
             state: IState,
             action: PayloadAction<Error>
         ) => {
             state.loading = false;
-            state.error = action.payload;
             state.auditoriums = [];
+            state.error = action.payload;
         },
     },
 });

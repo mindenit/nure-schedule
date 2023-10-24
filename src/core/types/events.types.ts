@@ -8,7 +8,7 @@ interface IEvent extends TEvent<TModifiedSchedule> {}
 type TFetchEventsType = "auditorium" | "group" | "teacher";
 
 interface IEventsArgs {
-    type: TFetchEventsType;
+    type: "auditorium" | "group" | "teacher" | undefined;
     name: string;
 }
 

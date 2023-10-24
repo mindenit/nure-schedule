@@ -1,4 +1,4 @@
-function getMonthName(monthNumber: number) {
+function getName(monthNumber: number) {
     const months = [
         "січня",
         "лютого",
@@ -16,7 +16,12 @@ function getMonthName(monthNumber: number) {
     return months[monthNumber - 1];
 }
 
-export function formatMonth(currentDay: number, currentMonth: number) {
-    const monthName = getMonthName(currentMonth);
+export function formatMonth(
+    currentDay: number | string,
+    currentMonth: number | string
+) {
+    if (typeof currentDay === "string") currentDay = Number(currentDay);
+    if (typeof currentMonth === "string") currentMonth = Number(currentMonth);
+    const monthName = getName(currentMonth);
     return `${currentDay} ${monthName}`;
 }

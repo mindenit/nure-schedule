@@ -1,42 +1,45 @@
 import { ISchedule } from "@nurejs/api";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-
 import { IEventsArgs } from "core/types/events.types";
 import { IFetchScheduleProps } from "core/types/fetch.types";
 
 const initialState: IFetchScheduleProps = {
-    events: [],
+    allEvents: [],
     loading: true,
     error: null,
-    payload: {},
+    fetchState: "group",
 };
 
 const fetchEventsSlice = createSlice({
     name: "fetchEvents",
     initialState: initialState,
     reducers: {
+        setFetchState: (state, action) => {
+            state.fetchState = action.payload;
+        },
         fetchEventsAction: (
             state: IFetchScheduleProps,
             action: PayloadAction<IEventsArgs>
         ) => {
+            state.fetchState = action.payload.type;
             state.loading = true;
             state.error = null;
-            state.payload = action.payload;
         },
         fetchEventsSuccess: (
             state: IFetchScheduleProps,
             action: PayloadAction<ISchedule[]>
         ) => {
             state.loading = false;
-            state.events = action.payload;
+            state.error = null;
+            state.allEvents = action.payload;
         },
         fetchEventsError: (
             state: IFetchScheduleProps,
             action: PayloadAction<Error>
         ) => {
             state.loading = false;
+            state.allEvents = [];
             state.error = action.payload;
-            state.events = [];
         },
     },
 });

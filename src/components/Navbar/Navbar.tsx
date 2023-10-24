@@ -17,9 +17,11 @@ const NavbarComponent = forwardRef<ElementRef<"header">, NavbarProps>(
     }
 );
 
-export const Navbar = { ...{
-    Root: NavbarComponent,
-    Avatar: NavbarAvatar,
-    Icon: NavbarIcon,
-    Item: NavbarItem,
-}};
+export const Navbar = {
+    ...{
+        Root: NavbarComponent,
+        Avatar: NavbarAvatar,
+        Icon: NavbarIcon,
+        Item: NavbarItem,
+    },
+};

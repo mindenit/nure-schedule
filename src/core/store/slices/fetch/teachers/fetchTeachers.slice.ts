@@ -1,8 +1,9 @@
 import { ITeacher } from "@nurejs/api";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { ICommonData, adaptTeacher } from "core/types/data.types";
 
 interface IState {
-    teachers: ITeacher[];
+    teachers: ICommonData[];
     loading: boolean;
     error: null | Error;
 }
@@ -26,7 +27,7 @@ const fetchTeachersSlice = createSlice({
             action: PayloadAction<ITeacher[]>
         ) => {
             state.loading = false;
-            state.teachers = action.payload;
+            state.teachers = action.payload.map(adaptTeacher);
         },
         fetchTeachersError: (state: IState, action: PayloadAction<Error>) => {
             state.loading = false;
