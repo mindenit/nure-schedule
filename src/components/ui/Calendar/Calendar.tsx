@@ -14,11 +14,11 @@ import { CalendarDayView } from "./DayView/DayView";
 import { CalendarMonthView } from "./MonthView/MonthView";
 import { CalendarWeekView } from "./WeekView/WeekView";
 import { SelectScheduleDialog } from "components/SelectScheduleDialog/SelectScheduleDialog";
-import { useCalendar } from "@onetools/calendar";
 
 import { fetchEventsActions } from "core/store/slices/fetch/events/fetchEvents.slice";
 
 import * as C from "styles/components";
+import { useCalendar } from "libs/calendar/useCalendar";
 
 interface CalendarProps {
     type: "auditorium" | "group" | "teacher" | undefined;
