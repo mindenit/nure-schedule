@@ -137,7 +137,7 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
                         </S.StyledToolbar>
                     </Tabs.List>
                     {error !== null ? (
-                        error.statusCode === 500 ? (
+                        error.code === "ERR_BAD_RESPONSE" ? (
                             <C.CenteredElement>
                                 <C.CentredText>
                                     <C.TitleLarge>

@@ -40,7 +40,7 @@ const fetchEventsSlice = createSlice({
         ) => {
             state.loading = false;
             state.allEvents = [];
-            state.error = JSON.parse(action.payload.message);
+            state.error = action.payload;
         },
     },
 });
