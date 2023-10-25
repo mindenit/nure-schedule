@@ -1,1 +1,1 @@
-export const reducersToPersist = ["ui", "data"];
+export const reducersToPersist = ["ui", "data", "filter"];

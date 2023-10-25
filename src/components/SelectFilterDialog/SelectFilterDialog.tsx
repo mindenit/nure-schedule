@@ -6,18 +6,17 @@ import { SearchField } from "components/ui/SearchField";
 import { Tabs } from "components/ui/Tabs";
 import { useAuditoriumsFilter } from "core/hooks/useAuditoriumsFilter";
 import useMultiFetch from "core/hooks/useMultiFetch";
-import { useTeachersFilter } from "core/hooks/useTeachersFilter";
+import { RootState } from "core/store/store";
 import { searchItems } from "core/utils/searchItems";
 import { FC, useState } from "react";
-import * as S from "./SelectFilterDialog.styles";
 import { useSelector } from "react-redux";
-import { RootState } from "core/store/store";
-import { ICommonData } from "core/types/data.types";
+import * as S from "./SelectFilterDialog.styles";
+import { useTeachersFilter } from "core/hooks/useTeachersFilter";
 
 export const SelectFilterDialog: FC = () => {
     const [query, setQuery] = useState("");
-    const { addAuditoriumsFilter } = useAuditoriumsFilter();
-    const { addTeachersFilter } = useTeachersFilter();
+    const { addAuditoriumInFilter } = useAuditoriumsFilter();
+    const { addTeacherInFilter } = useTeachersFilter();
     const { loading, error } = useMultiFetch(true, true, true);
 
     const { teachers } = useSelector((state: RootState) => state.fetchTeachers);
@@ -42,7 +41,7 @@ export const SelectFilterDialog: FC = () => {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                 />
-                <Tabs.Root defaultValue="teachers" asChild>
+                <Tabs.Root defaultValue="auditoriums" asChild>
                     <S.StyledTabsContent>
                         <Tabs.List variant="default">
                             <Tabs.Trigger value="teachers">
@@ -54,8 +53,7 @@ export const SelectFilterDialog: FC = () => {
                         </Tabs.List>
                         <Tabs.Content value="teachers">
                             <ListView
-                                //@ts-ignore
-                                items={searchItems<ICommonData>(
+                                items={searchItems(
                                     teachers,
                                     query,
                                     (el) => el.fullName as string
@@ -63,7 +61,7 @@ export const SelectFilterDialog: FC = () => {
                                 renderItem={(teacher) => teacher.fullName}
                                 loading={loading}
                                 error={error}
-                                onItemClick={addTeachersFilter}
+                                onItemClick={addTeacherInFilter}
                             />
                         </Tabs.Content>
                         <Tabs.Content value="auditoriums">
@@ -76,7 +74,9 @@ export const SelectFilterDialog: FC = () => {
                                 renderItem={(auditorium) => auditorium.name}
                                 loading={loading}
                                 error={error}
-                                onItemClick={addAuditoriumsFilter}
+                                onItemClick={(item) =>
+                                    addAuditoriumInFilter(item)
+                                }
                             />
                         </Tabs.Content>
                     </S.StyledTabsContent>

@@ -6,7 +6,7 @@ import { usePagination } from "core/hooks/usePagination";
 import * as S from "./ListViews.styles";
 
 interface ListViewProps<T> {
-    items: T[];
+    items: (T & { id: number })[];
     renderItem: (item: T) => React.ReactNode;
     loading: boolean;
     error: Error | undefined;
@@ -26,8 +26,8 @@ function ListView<T>({
         <List.Root>
             {loading && <Loader />}
             {error !== undefined && <div>Сталася помилка: {error.message}</div>}
-            {displayedItems.map((item, index) => (
-                <List.Item key={index} onClick={() => onItemClick(item)}>
+            {displayedItems.map((item) => (
+                <List.Item key={item.id} onClick={() => onItemClick(item)}>
                     <List.Header>{renderItem(item)}</List.Header>
                 </List.Item>
             ))}

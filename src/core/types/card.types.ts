@@ -17,6 +17,7 @@ export interface CardProps extends ComponentPropsWithoutRef<"div"> {
 
 export interface SubjectCardProps extends CardProps {
     startTime: string;
+    endTime: string;
     auditory: string;
     type: SubjectType;
     subjectBrief: string;

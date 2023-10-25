@@ -6,11 +6,17 @@ import MainLayout from "pages/layout/MainLayout";
 import { FC } from "react";
 import * as C from "../../styles/components";
 import * as S from "./Filters.styles";
+import { useMediaQuery } from "react-responsive";
+import { media } from "styles/media";
 
 export const FiltersPage: FC = () => {
-    const { auditoriumsFilter, removeAuditoriumsFilter } =
+    const { auditoriumsFilter, removeAuditoriumFromFilter } =
         useAuditoriumsFilter();
-    const { teachersFilter, removeTeacherFilter } = useTeachersFilter();
+    const { teachersFilter, removeTeacherFromFilter } = useTeachersFilter();
+
+    const isMobile = useMediaQuery({
+        query: media.medium,
+    });
 
     return (
         <MainLayout logoText="Фільтр">
@@ -18,8 +24,11 @@ export const FiltersPage: FC = () => {
                 <C.Container>
                     <S.StyledHeader>
                         <C.TitleLarge>Фільтри</C.TitleLarge>
-                        <SelectFilterDialog />
+                        {!isMobile && <SelectFilterDialog />}
                     </S.StyledHeader>
+                    <C.TitleMedium>
+                        Оберіть елементи які не треба показувати
+                    </C.TitleMedium>
                 </C.Container>
                 <C.Container>
                     <S.StyledBody>
@@ -31,7 +40,7 @@ export const FiltersPage: FC = () => {
                                         <div
                                             key={item.id}
                                             onClick={() =>
-                                                removeTeacherFilter(item)
+                                                removeTeacherFromFilter(item)
                                             }
                                         >
                                             <Card
@@ -52,7 +61,7 @@ export const FiltersPage: FC = () => {
                                         <div
                                             key={item.id}
                                             onClick={() =>
-                                                removeAuditoriumsFilter(item)
+                                                removeAuditoriumFromFilter(item)
                                             }
                                         >
                                             <Card
@@ -67,6 +76,11 @@ export const FiltersPage: FC = () => {
                         )}
                     </S.StyledBody>
                 </C.Container>
+                {isMobile && (
+                    <S.FilterButtonContainer>
+                        <SelectFilterDialog />
+                    </S.FilterButtonContainer>
+                )}
             </S.StyledFiltersPage>
         </MainLayout>
     );

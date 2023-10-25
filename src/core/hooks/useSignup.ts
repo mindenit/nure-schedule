@@ -21,7 +21,7 @@ export const useSignup = () => {
             setLoading(false);
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            setError(transformAuthError(error.response.data.message));
+            setError(transformAuthError(error.response.data));
         }
     };
 
