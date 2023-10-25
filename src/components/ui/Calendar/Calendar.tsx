@@ -18,7 +18,7 @@ import { SelectScheduleDialog } from "components/SelectScheduleDialog/SelectSche
 import { fetchEventsActions } from "core/store/slices/fetch/events/fetchEvents.slice";
 
 import * as C from "styles/components";
-import { useCalendar } from "libs/calendar/useCalendar";
+import { useCalendar } from "@onetools/calendar";
 
 interface CalendarProps {
     type: "auditorium" | "group" | "teacher" | undefined;
