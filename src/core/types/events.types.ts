@@ -7,4 +7,9 @@ interface IEvent extends TEvent<TModifiedSchedule> {}
 
 type TFetchEventsType = "auditorium" | "group" | "teacher";
 
-export type { IEvent, TModifiedSchedule, TFetchEventsType };
+interface IEventsArgs {
+    type: "auditorium" | "group" | "teacher" | undefined;
+    name: string;
+}
+
+export type { IEvent, TModifiedSchedule, TFetchEventsType, IEventsArgs };

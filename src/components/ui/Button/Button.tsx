@@ -1,9 +1,10 @@
 import styled, { css } from "styled-components";
 import { transparentize } from "polished";
 
-import { getTransition } from "core/utils";
+import { ComponentPropsWithoutRef } from "react";
+import { getTransition } from "core/utils/getTransition";
 
-interface Props {
+interface Props extends ComponentPropsWithoutRef<"button"> {
     variant?: "filled" | "outlined" | "text";
 }
 
@@ -58,6 +59,7 @@ const Button = styled.button<Props>`
                             0.9,
                             theme.colors.primary
                         )};
+                        color: ${transparentize(0.38, theme.colors.emojiColor)};
                         &:hover {
                             box-shadow: none;
                             cursor: auto;
@@ -73,6 +75,9 @@ const Button = styled.button<Props>`
                     &:active,
                     &:focus {
                         border: 1px solid ${theme.colors.primary};
+                    }
+                    &:hover {
+                        background: ${theme.colors.surfaceContainer};
                     }
                     &:disabled {
                         background-color: ${transparentize(

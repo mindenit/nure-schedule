@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { media } from "styles/media";
 
-export const StyledCard = styled.div`
+interface Props {
+    isFullWidth: boolean;
+}
+
+export const StyledCard = styled.div<Props>`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -10,16 +14,31 @@ export const StyledCard = styled.div`
     border: 1px solid ${({ theme }) => theme.colors.outline};
     border-radius: 12px;
 
-    margin-bottom: 15px;
-
     background-color: ${({ theme }) => theme.colors.surface};
 
     padding: 16px;
 
-    width: 330px;
+    width: ${({ isFullWidth }) => (isFullWidth === true ? "100%" : "350px")};
+
+    cursor: pointer;
+
+    &:focus,
+    &:active {
+        background-color: ${({ theme }) => theme.colors.activeCard};
+    }
+
     @media ${media.small} {
         width: 100%;
     }
+`;
+
+export const StyledTextCard = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
+    align-self: stretch;
+    width: 100%;
 `;
 
 export const StyledCardGrid = styled.div`
@@ -51,8 +70,16 @@ export const InfoCardText = styled.h5`
     letter-spacing: 0.25px;
 `;
 
-export const InfoCardGroup = styled.div`
+export const InfoCardGroup = styled.div<{ desc: string }>`
     display: flex;
     flex-direction: column;
-    margin-bottom: 32px;
+
+    margin-bottom: ${({ desc }) => (desc ? "32px" : "0")};
+`;
+
+export const StyledSubjectTextCardContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
 `;

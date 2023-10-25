@@ -6,10 +6,13 @@ import { SearchField } from "components/ui/SearchField";
 import { Tabs } from "components/ui/Tabs";
 import { useActions } from "core/hooks/useActions";
 import { useState } from "react";
-import { searchItems } from "core/utils";
-import { IAuditorium, IGroup, ITeacher } from "@nurejs/api";
+import { searchItems } from "core/utils/searchItems";
+import { IAuditorium, IGroup } from "@nurejs/api";
 import * as S from "./SelectScheduleDialog.styles";
 import useMultiFetch from "core/hooks/useMultiFetch";
+import { useSelector } from "react-redux";
+import { RootState } from "core/store/store";
+import { ICommonData } from "core/types/data.types";
 
 export const SelectScheduleDialog = () => {
     const [value, setValue] = useState("");
@@ -19,13 +22,15 @@ export const SelectScheduleDialog = () => {
         setValue(inputValue);
     };
 
-    const { groups, auditoriums, teachers, loading, error } = useMultiFetch(
-        true,
-        true,
-        true
+    const { loading, error } = useMultiFetch(true, true, true);
+
+    const { groups } = useSelector((state: RootState) => state.fetchGroups);
+    const { teachers } = useSelector((state: RootState) => state.fetchTeachers);
+    const { auditoriums } = useSelector(
+        (state: RootState) => state.fetchAuditoriums
     );
 
-    const { addGroup } = useActions();
+    const { addItem } = useActions();
 
     return (
         <Dialog.Root>
@@ -45,8 +50,8 @@ export const SelectScheduleDialog = () => {
                     onChange={handleChange}
                     autoFocus
                 />
-                <Tabs.Root defaultValue="groups">
-                    <S.StyledDialogContainer>
+                <Tabs.Root defaultValue="groups" asChild>
+                    <S.StyledTabsContent>
                         <Tabs.List>
                             <Tabs.Trigger value="groups">Групи</Tabs.Trigger>
                             <Tabs.Trigger value="teachers">
@@ -56,52 +61,52 @@ export const SelectScheduleDialog = () => {
                                 Авдиторії
                             </Tabs.Trigger>
                         </Tabs.List>
-                    </S.StyledDialogContainer>
-                    <Tabs.Content value="groups">
-                        <ListView
-                            items={searchItems<IGroup>(
-                                groups,
-                                value,
-                                (el) => el.name
-                            )}
-                            renderItem={(group) => group.name}
-                            loading={loading}
-                            error={error}
-                            onItemClick={(group) => {
-                                addGroup(group);
-                            }}
-                        />
-                    </Tabs.Content>
-                    <Tabs.Content value="teachers">
-                        <ListView
-                            items={searchItems<ITeacher>(
-                                teachers,
-                                value,
-                                (el) => el.fullName
-                            )}
-                            renderItem={(teacher) => teacher.fullName}
-                            loading={loading}
-                            error={error}
-                            onItemClick={() => {
-                                console.log("Selected teacher");
-                            }}
-                        />
-                    </Tabs.Content>
-                    <Tabs.Content value="auditoriums">
-                        <ListView
-                            items={searchItems<IAuditorium>(
-                                auditoriums,
-                                value,
-                                (el) => el.name
-                            )}
-                            renderItem={(auditorium) => auditorium.name}
-                            loading={loading}
-                            error={error}
-                            onItemClick={() => {
-                                console.log("Selected aud");
-                            }}
-                        />
-                    </Tabs.Content>
+                        <Tabs.Content value="groups">
+                            <ListView
+                                items={searchItems<IGroup>(
+                                    groups,
+                                    value,
+                                    (el) => el.name
+                                )}
+                                renderItem={(group) => group.name}
+                                loading={loading}
+                                error={error}
+                                onItemClick={(group) => {
+                                    addItem(group as ICommonData);
+                                }}
+                            />
+                        </Tabs.Content>
+                        <Tabs.Content value="teachers">
+                            <ListView
+                                items={searchItems<ICommonData>(
+                                    teachers,
+                                    value,
+                                    (el) => el.fullName as string
+                                )}
+                                renderItem={(teacher) => teacher.fullName}
+                                loading={loading}
+                                error={error}
+                                onItemClick={(teacher) => {
+                                    addItem(teacher as ICommonData);
+                                }}
+                            />
+                        </Tabs.Content>
+                        <Tabs.Content value="auditoriums">
+                            <ListView
+                                items={searchItems<IAuditorium>(
+                                    auditoriums,
+                                    value,
+                                    (el) => el.name
+                                )}
+                                renderItem={(auditorium) => auditorium.name}
+                                loading={loading}
+                                error={error}
+                                onItemClick={(aud) => {
+                                    addItem(aud as ICommonData);
+                                }}
+                            />
+                        </Tabs.Content>
+                    </S.StyledTabsContent>
                 </Tabs.Root>
             </Dialog.Content>
         </Dialog.Root>

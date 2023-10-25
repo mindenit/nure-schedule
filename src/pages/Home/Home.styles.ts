@@ -27,31 +27,53 @@ export const HomeFilledPageContainer = styled.div`
 
 export const HomeEmoji = styled(SentimentVeryDissatisfiedIcon)`
     color: ${({ theme }) => theme.colors.emojiColor};
-    width: 165px !important;
-    height: 165px !important;
 
-    margin-bottom: 10px;
+    width: 175px !important;
+    height: 175px !important;
+
+    @media ${media.small} {
+        width: 165px !important;
+        height: 165px !important;
+        margin-bottom: 10px;
+    }
 `;
 
-// TODO: Remove !important tags
+export const HomeTitle = styled.h2`
+    color: ${({ theme }) => theme.colors.textContrast};
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+    letter-spacing: 0.5px;
+    font-size: 40px;
+    line-height: 45px;
 
-export const HomeTitle = styled(C.TitleBig)`
-    @media ${media.small} {
-        font-size: 40px;
-        line-height: 45px;
-    }
-
-    @media ${media.large} {
+    @media ${media.medium} {
+        color: ${({ theme }) => theme.colors.textContrast};
         font-size: 20px;
+        font-weight: 700;
         line-height: 24px;
     }
 `;
 
+export const HomeSubtitle = styled.h3`
+    color: ${({ theme }) => theme.colors.textContrast};
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+
+    @media ${media.medium} {
+        color: ${({ theme }) => theme.colors.text};
+    }
+`;
+
 export const HomeButtonContainer = styled.div`
-    @media ${media.small} {
-        position: absolute;
-        bottom: 20px;
-        right: 0;
+    @media ${media.medium} {
+        position: fixed;
+        bottom: 100px;
+        right: 15px;
+        z-index: 2;
     }
 `;
 

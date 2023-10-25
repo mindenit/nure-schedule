@@ -1,18 +1,38 @@
+import { ComponentPropsWithoutRef } from "react";
 import { IGroup } from "@nurejs/api";
+import { ICommonData } from "./data.types";
 
 export type SubjectType = "Лк" | "Лб" | "Пз";
+export type SubjectTypeExtended =
+    | "Лекція"
+    | "Лабораторна робота"
+    | "Практичне заняття";
+export type CardType = "info" | "subject" | "subjectText" | "group";
 
-export interface CardProps {
+export interface CardProps extends ComponentPropsWithoutRef<"div"> {
     id: string;
-    cardType: "info" | "subject" | "group";
+    cardType: CardType;
+    isFullWidth?: boolean;
 }
 
 export interface SubjectCardProps extends CardProps {
     startTime: string;
+    endTime: string;
     auditory: string;
     type: SubjectType;
     subjectBrief: string;
     subjectName: string;
+}
+
+export interface SubjectTextCardProps extends CardProps {
+    weekday: string;
+    date: string;
+    startTime: string;
+    subjectType: SubjectType | SubjectTypeExtended;
+    subjectName: string;
+    auditory: string;
+    teacher: ICommonData[];
+    groups: IGroup[];
 }
 
 export interface InfoCardProps extends CardProps {
@@ -30,4 +50,10 @@ export interface GroupCardProps extends CardProps {
 export interface CardDetailsProps {
     avatarColor: string;
     subjectType: string;
+}
+
+export interface RawInfoCardProps {
+    title?: string;
+    subhead?: string;
+    desc?: string;
 }

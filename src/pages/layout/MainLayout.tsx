@@ -1,68 +1,147 @@
+import { useEffect } from "react";
+import { useMediaQuery } from "react-responsive";
+import { useLocation } from "react-router-dom";
+
+import { media } from "styles/media";
 import * as S from "./MainLayout.styles";
 
+import { Navbar } from "components/Navbar/Navbar";
 import { Logo } from "components/ui/Logo";
 
-import { ImportContacts } from "@mui/icons-material";
-import { Navbar } from "components/Navbar/Navbar";
-
-import { Dialog } from "components/ui/Dialog";
-import { List } from "components/ui/List";
+import { DarkMode, LightMode } from "@mui/icons-material";
+import { Button } from "components/ui/Button";
+// import { LOCAL_KEYS } from "core/constants";
+import { useActions } from "core/hooks/useActions";
+// import { useLogout } from "core/hooks/useLogout";
+import { RootState } from "core/store/store";
+import pagesData from "pages/pagesData";
+import { useSelector } from "react-redux";
 
 interface Props {
+    logoText?: string | undefined;
     children: React.ReactNode | React.ReactNode[];
 }
 
-const MainLayout: React.FC<Props> = ({ children }) => {
+const MainLayout: React.FC<Props> = ({ logoText, children }) => {
+    // const { logout, isLoading } = useLogout();
+    const location = useLocation();
+    const isMobile = useMediaQuery({
+        query: media.medium,
+    });
+    const navbarPages = pagesData.filter((page) => page.showInNavbar);
+
+    useEffect(() => {
+        const currentPage = pagesData.find(
+            (page) => page.path === location.pathname
+        );
+
+        if (currentPage && currentPage.title) {
+            document.title = `${currentPage.title} | Nure Schedule`;
+        }
+    }, [location.pathname]);
+    const { toggleTheme } = useActions();
+    const { theme } = useSelector((state: RootState) => state.ui);
+
     return (
         <S.MainLayoutContainer>
-            <S.MainLayoutHeader>
-                <Logo text="Розклад" />
-            </S.MainLayoutHeader>
-            <S.MainLayoutContent>{children}</S.MainLayoutContent>
-            <S.MainLayoutFooter>
-                <Navbar.Root>
-                    <Navbar.Item isActive={true}>
-                        <Navbar.Icon badgeCount={4}>
-                            <ImportContacts />
-                        </Navbar.Icon>
-                        Label
-                    </Navbar.Item>
-                    <Navbar.Item>
-                        <Navbar.Icon>
-                            <ImportContacts />
-                        </Navbar.Icon>
-                        Label
-                    </Navbar.Item>
-                    <Navbar.Item>
-                        <Navbar.Icon>
-                            <ImportContacts />
-                        </Navbar.Icon>
-                        Label
-                    </Navbar.Item>
-                    <Navbar.Item>
-                        <Navbar.Icon>
-                            <ImportContacts />
-                        </Navbar.Icon>
-                        Label
-                    </Navbar.Item>
-                    <Dialog.Root>
-                        <Dialog.Trigger>
-                            <Navbar.Item>
-                                <Navbar.Avatar src="https://i.pravatar.cc/80" />
-                                User
+            {isMobile ? (
+                <>
+                    <S.MainLayoutHeader>
+                        {logoText !== undefined && <Logo text={logoText} />}
+                        <Button variant="text" onClick={() => toggleTheme()}>
+                            {theme === "dark" ? <DarkMode /> : <LightMode />}
+                        </Button>
+                    </S.MainLayoutHeader>
+                    <S.MainLayoutContent>{children}</S.MainLayoutContent>
+                    <S.MainLayoutFooter>
+                        <Navbar.Root>
+                            {navbarPages.map((page, index) => (
+                                <Navbar.Item
+                                    key={index}
+                                    to={page.path}
+                                    isActive={page.path === location.pathname}
+                                >
+                                    <Navbar.Icon>
+                                        {page.navbarItem?.icon}
+                                    </Navbar.Icon>
+                                    {page.navbarItem?.label}
+                                </Navbar.Item>
+                            ))}
+                            {/* <Navbar.Item
+                                to={"/account"}
+                                isActive={location.pathname === "/account"}
+                            >
+                                <Navbar.Avatar src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010" />
+                                {localStorage.getItem(LOCAL_KEYS.AUTH_TOKENS)
+                                    ? "Аккаунт"
+                                    : "Гість"}
+                            </Navbar.Item> */}
+                            <Navbar.Item
+                                to={"/account"}
+                                isActive={location.pathname === "/account"}
+                            >
+                                <Navbar.Avatar src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010" />
+                                Акаунт
                             </Navbar.Item>
-                        </Dialog.Trigger>
-                        <Dialog.Content>
-                            <Dialog.Header title="sdsd" />
-                            <List.Root>
-                                <List.Item>
-                                    <List.Header>Практичні роботи</List.Header>
-                                </List.Item>
-                            </List.Root>
-                        </Dialog.Content>
-                    </Dialog.Root>
-                </Navbar.Root>
-            </S.MainLayoutFooter>
+                        </Navbar.Root>
+                    </S.MainLayoutFooter>
+                </>
+            ) : (
+                <>
+                    <S.MainLayoutDesktopHeader>
+                        <S.MainLayoutDesktopContainer>
+                            {logoText !== undefined && <Logo text={logoText} />}
+                            <S.StyledNavbarContainer>
+                                <Navbar.Root>
+                                    {navbarPages.map((page, index) => (
+                                        <Navbar.Item
+                                            key={index}
+                                            to={page.path}
+                                            isActive={
+                                                page.path === location.pathname
+                                            }
+                                        >
+                                            <Navbar.Icon>
+                                                {page.navbarItem?.icon}
+                                            </Navbar.Icon>
+                                            {page.navbarItem?.label}
+                                        </Navbar.Item>
+                                    ))}
+                                </Navbar.Root>
+                                <Button
+                                    variant="text"
+                                    onClick={() => toggleTheme()}
+                                >
+                                    {theme === "dark" ? (
+                                        <DarkMode />
+                                    ) : (
+                                        <LightMode />
+                                    )}
+                                </Button>
+                                {/* {!localStorage.getItem(
+                                    LOCAL_KEYS.AUTH_TOKENS
+                                ) ? (
+                                    <Link to="/signin">
+                                        <Button>
+                                            <Login />
+                                            Увійти в аккаунт
+                                        </Button>
+                                    </Link>
+                                ) : (
+                                    <Button
+                                        onClick={logout}
+                                        disabled={isLoading}
+                                    >
+                                        <Logout />
+                                        Вийти
+                                    </Button>
+                                )} */}
+                            </S.StyledNavbarContainer>
+                        </S.MainLayoutDesktopContainer>
+                    </S.MainLayoutDesktopHeader>
+                    <S.MainLayoutContent>{children}</S.MainLayoutContent>
+                </>
+            )}
         </S.MainLayoutContainer>
     );
 };

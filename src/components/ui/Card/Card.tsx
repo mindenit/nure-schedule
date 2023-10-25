@@ -10,28 +10,55 @@ import {
     GroupCardProps,
     InfoCardProps,
     SubjectCardProps,
+    SubjectTextCardProps,
 } from "core/types/card.types";
 
-import { getCardDetails } from "core/utils";
+import { IGroup } from "@nurejs/api";
+import { getCardDetails } from "core/utils/getCardDetails";
+import { ICommonData } from "core/types/data.types";
 
 const Card: React.FC<
-    CardProps & (SubjectCardProps | InfoCardProps | GroupCardProps)
-> = ({ cardType, ...props }) => {
-    return (
-        <S.StyledCard>
-            {cardType === "subject" && (
-                <SubjectCard {...(props as SubjectCardProps)}></SubjectCard>
-            )}
-            {cardType === "info" && <InfoCard {...(props as InfoCardProps)} />}
-            {cardType === "group" && (
+    CardProps &
+        (
+            | SubjectCardProps
+            | SubjectTextCardProps
+            | InfoCardProps
+            | GroupCardProps
+        )
+> = ({ cardType, isFullWidth = false, ...props }) => {
+    if (cardType === "subject") {
+        return (
+            <S.StyledCard isFullWidth={isFullWidth} {...props}>
+                <SubjectCard {...(props as SubjectCardProps)} />
+            </S.StyledCard>
+        );
+    }
+    if (cardType === "info") {
+        return (
+            <S.StyledCard isFullWidth={isFullWidth} {...props}>
+                <InfoCard {...(props as InfoCardProps)} />
+            </S.StyledCard>
+        );
+    }
+    if (cardType === "group") {
+        return (
+            <S.StyledCard isFullWidth={isFullWidth} {...props}>
                 <GroupCard {...(props as GroupCardProps)} />
-            )}
-        </S.StyledCard>
-    );
+            </S.StyledCard>
+        );
+    }
+    if (cardType === "subjectText") {
+        return (
+            <S.StyledTextCard {...props}>
+                <SubjectCardText {...(props as SubjectTextCardProps)} />
+            </S.StyledTextCard>
+        );
+    }
 };
 
 const SubjectCard: React.FC<SubjectCardProps> = ({
     startTime,
+    endTime,
     auditory,
     type,
     subjectBrief,
@@ -46,7 +73,7 @@ const SubjectCard: React.FC<SubjectCardProps> = ({
             <S.StyledCardText>
                 <C.TitleMedium>
                     <b>
-                        {startTime} {auditory}
+                        {startTime}-{endTime} {auditory}
                     </b>{" "}
                     {subjectType}
                 </C.TitleMedium>
@@ -56,14 +83,47 @@ const SubjectCard: React.FC<SubjectCardProps> = ({
     );
 };
 
+const SubjectCardText: React.FC<SubjectTextCardProps> = ({
+    weekday,
+    date,
+    startTime,
+    subjectType,
+    subjectName,
+    auditory,
+    teacher,
+    groups,
+}) => {
+    return (
+        <S.StyledSubjectTextCardContainer>
+            <C.TitleLight>
+                {weekday} {date} {startTime}. {subjectType}
+            </C.TitleLight>
+            <C.TitleBig>{subjectName}</C.TitleBig>
+            <C.TitleMedium>Авдиторія: {auditory}</C.TitleMedium>
+            <C.TitleMedium>
+                Викладач(-і):{" "}
+                {teacher.map((t: ICommonData) => (
+                    <span key={t.id}>{t.fullName}</span>
+                ))}
+            </C.TitleMedium>
+            <C.TitleMedium>
+                Група(-и):{" "}
+                {groups.map((group: IGroup) => (
+                    <span key={group.id}>{group.name}</span>
+                ))}
+            </C.TitleMedium>
+        </S.StyledSubjectTextCardContainer>
+    );
+};
+
 const InfoCard: React.FC<InfoCardProps> = ({ title, subhead, desc }) => {
     return (
         <>
-            <S.InfoCardGroup>
-                <C.TitleBig>{title}</C.TitleBig>
-                <S.InfoCardText>{subhead}</S.InfoCardText>
+            <S.InfoCardGroup desc={desc as string}>
+                {title && <C.TitleBig>{title}</C.TitleBig>}
+                {subhead && <S.InfoCardText>{subhead}</S.InfoCardText>}
             </S.InfoCardGroup>
-            <S.InfoCardText>{desc}</S.InfoCardText>
+            {desc && <S.InfoCardText>{desc}</S.InfoCardText>}
         </>
     );
 };

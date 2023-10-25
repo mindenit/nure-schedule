@@ -13,10 +13,13 @@ export const lightTheme: ITheme = {
         modalBg: "#FFFFFF",
         modalCloseElement: "#000000",
 
+        activeCard: "#EFF6F7",
+
         appBackground: "#F7FEFF",
         windowBackground: "#FFFFFF",
         surface: "#F7FEFF",
         surfaceVariant: "#E0ECEB",
+        desktopHeader: "#F7FEFF",
 
         text: "#49454F",
         textDarker: "#1D1B20",
@@ -46,10 +49,13 @@ export const darkTheme: ITheme = {
         modalBg: "#000000",
         modalCloseElement: "#FFFFFF",
 
+        activeCard: "#191919",
+
         appBackground: "#141218",
         windowBackground: "#141218",
         surface: "#1D1B20",
         surfaceVariant: "#1D192B",
+        desktopHeader: "#000000",
 
         text: "#CAC4D0",
         textDarker: "#FFFFFF",

@@ -1,12 +1,12 @@
-import { useState } from "react";
-
-import { List } from "components/ui/List";
 import { Button } from "components/ui/Button";
+import { List } from "components/ui/List";
 
+import { Loader } from "components/ui/Loader";
+import { usePagination } from "core/hooks/usePagination";
 import * as S from "./ListViews.styles";
 
 interface ListViewProps<T> {
-    items: T[];
+    items: (T & { id: number })[];
     renderItem: (item: T) => React.ReactNode;
     loading: boolean;
     error: Error | undefined;
@@ -20,31 +20,19 @@ function ListView<T>({
     error,
     onItemClick,
 }: ListViewProps<T>): JSX.Element {
-    const [currentPage, setCurrentPage] = useState(1);
-    const ITEMS_PER_PAGE = 20;
-
-    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    const endIndex = startIndex + ITEMS_PER_PAGE;
-    const displayed = items.slice(0, endIndex);
-
-    const totalItems = items.length;
-    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
-
-    const loadMore = () => {
-        if (currentPage < totalPages) setCurrentPage(currentPage + 1);
-    };
+    const { displayedItems, loadMore, showButton } = usePagination(items);
 
     return (
         <List.Root>
-            {loading && <div>Завантаження...</div>}
+            {loading && <Loader />}
             {error !== undefined && <div>Сталася помилка: {error.message}</div>}
-            {displayed.map((item, index) => (
-                <List.Item key={index} onClick={() => onItemClick(item)}>
+            {displayedItems.map((item) => (
+                <List.Item key={item.id} onClick={() => onItemClick(item)}>
                     <List.Header>{renderItem(item)}</List.Header>
                 </List.Item>
             ))}
 
-            {currentPage < totalPages && (
+            {showButton && (
                 <S.StyledButtonCont>
                     <Button variant="outlined" onClick={loadMore}>
                         Завантажити ще

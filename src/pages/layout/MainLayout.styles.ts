@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import * as C from "styles/components";
 
 export const MainLayoutContainer = styled.div`
     display: flex;
@@ -20,8 +21,32 @@ export const MainLayoutFooter = styled.div`
 export const MainLayoutHeader = styled.div`
     display: flex;
     align-items: center;
+    justify-content: space-between;
     justify-content: center;
 
     margin-top: 15px;
     margin-bottom: 10px;
+    padding: 0 1rem;
+`;
+
+export const MainLayoutDesktopHeader = styled.div`
+    background-color: ${({ theme }) => theme.colors.desktopHeader};
+    padding-top: 25px;
+    padding-bottom: 25px;
+    margin-bottom: 10px;
+`;
+
+export const MainLayoutDesktopContainer = styled(C.Container)`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+export const StyledNavbarContainer = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: fit-content;
+    height: auto;
+    gap: 1rem;
 `;

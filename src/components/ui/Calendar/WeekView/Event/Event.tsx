@@ -2,8 +2,10 @@ import { IEvent } from "core/types/events.types";
 import { SubjectType } from "core/types/ui.types";
 import { ComponentPropsWithoutRef, FC } from "react";
 import * as S from "./Event.styles";
+import { Card } from "components/ui/Card";
 import { Dialog } from "components/ui/Dialog";
 import { getSubjectType } from "core/utils/getSubjectType";
+import { adaptTeacher } from "core/types/data.types";
 
 type EventVariant = "pratical" | "labaratory" | "lection";
 
@@ -27,7 +29,6 @@ const getEventVariant = (brief: SubjectType): EventVariant => {
 
 export const Event: FC<EventProps> = ({ event, type, ...props }) => {
     const variant = getEventVariant(event.type as SubjectType);
-    const subjectType = getSubjectType(event.type as SubjectType);
 
     return (
         <Dialog.Root>
@@ -43,21 +44,17 @@ export const Event: FC<EventProps> = ({ event, type, ...props }) => {
                 </S.StyledEvents>
             </Dialog.Trigger>
             <Dialog.Content>
-                <Dialog.Header title={event.subject.title} />
-                <p>Тип: {subjectType}</p>
-                <p>Авдиторія: {event.auditorium}</p>
-                <S.StyledDialogContainer>
-                    <p>Викладач:</p>
-                    {event.teachers.map((teacher) => (
-                        <p>{teacher.fullName}</p>
-                    ))}
-                </S.StyledDialogContainer>
-                <S.StyledDialogContainer>
-                    <p>Групи:</p>
-                    {event.groups.map((group) => (
-                        <p>{group.name}</p>
-                    ))}
-                </S.StyledDialogContainer>
+                <Dialog.Header title="Розклад" />
+                <Card
+                    cardType="subjectText"
+                    id={String(event.id + event.id)}
+                    startTime={event.startTime}
+                    subjectType={getSubjectType(event.type as SubjectType)}
+                    subjectName={event.subject.title}
+                    auditory={event.auditorium}
+                    teacher={event.teachers.map(adaptTeacher)}
+                    groups={event.groups}
+                />
             </Dialog.Content>
         </Dialog.Root>
     );

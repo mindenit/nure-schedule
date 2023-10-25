@@ -1,5 +1,5 @@
 import { TDayWithEvents } from "@onetools/calendar";
-import { ComponentPropsWithoutRef, FC } from "react";
+import { ComponentPropsWithoutRef, FC, memo } from "react";
 import { CalendarDay } from "./Day/Day";
 import { CalendarHeader } from "./Header/Header";
 import * as S from "./MonthView.styles";
@@ -10,11 +10,7 @@ interface CalendarMonthViewProps extends ComponentPropsWithoutRef<"section"> {
     headers: string[];
 }
 
-export const CalendarMonthView: FC<CalendarMonthViewProps> = ({
-    days,
-    headers,
-    ...props
-}) => {
+const Component: FC<CalendarMonthViewProps> = ({ days, headers, ...props }) => {
     return (
         <S.StyledMonthView {...props}>
             <S.StyledHeadersRoot>
@@ -23,10 +19,15 @@ export const CalendarMonthView: FC<CalendarMonthViewProps> = ({
                 ))}
             </S.StyledHeadersRoot>
             <S.StyledDaysRoot {...props}>
-                {days.map((day, index) => (
-                    <CalendarDay key={index} day={day} />
+                {days.map((day) => (
+                    <CalendarDay
+                        key={`${day.day} ${day.month} ${day.year}`}
+                        day={day}
+                    />
                 ))}
             </S.StyledDaysRoot>
         </S.StyledMonthView>
     );
 };
+
+export const CalendarMonthView = memo(Component);

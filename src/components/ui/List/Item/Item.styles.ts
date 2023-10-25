@@ -1,8 +1,6 @@
 import styled from "styled-components";
-import { media } from "styles/media";
 
 export const StyledItem = styled.div`
-  @media ${media.small} {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -17,19 +15,18 @@ export const StyledItem = styled.div`
     padding: 0 1rem;
     border-radius: 27px;
     .Dot {
-      display: flex;
+        display: flex;
     }
 
     &:hover {
-      background-color: ${({ theme }) => theme.colors.navbarChip};
-      color: ${({ theme }) => theme.colors.textContrast};
-      .Dot {
-        display: flex;
-        width: 12px;
-        height: 12px;
-        background-color: ${({ theme }) => theme.colors.textContrast};
-        border-radius: 8px;
-      }
+        background-color: ${({ theme }) => theme.colors.navbarChip};
+        color: ${({ theme }) => theme.colors.textContrast};
+        .Dot {
+            display: flex;
+            width: 12px;
+            height: 12px;
+            background-color: ${({ theme }) => theme.colors.textContrast};
+            border-radius: 8px;
+        }
     }
-  }
 `;

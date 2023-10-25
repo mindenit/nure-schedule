@@ -1,6 +1,6 @@
 import { ISchedule } from "@nurejs/api";
 import { TDayWithEvents } from "@onetools/calendar";
-import { ComponentPropsWithoutRef, FC } from "react";
+import { ComponentPropsWithoutRef, FC, memo } from "react";
 import { WeekHeader } from "./Header/Header";
 import { EventsColumn } from "./EventsColumn/EventsColumn";
 import { CalendarTimeline } from "./Timeline/Timeline";
@@ -10,28 +10,27 @@ interface CalendarWeekViewProps extends ComponentPropsWithoutRef<"section"> {
     days: TDayWithEvents<ISchedule>[];
 }
 
-export const CalendarWeekView: FC<CalendarWeekViewProps> = ({
-    days,
-    ...props
-}) => {
+export const Component: FC<CalendarWeekViewProps> = ({ days, ...props }) => {
     return (
         <S.StyledWeekView {...props}>
             <CalendarTimeline />
-            <div>
-                <div style={{ display: "flex", flexWrap: "nowrap" }}>
+            <S.StyledWrapper>
+                <S.StyledContainer>
                     {days.map((day) => (
                         <WeekHeader key={`${day.day} ${day.month}`} day={day} />
                     ))}
-                </div>
-                <div style={{ display: "flex", flexWrap: "nowrap" }}>
+                </S.StyledContainer>
+                <S.StyledContainer>
                     {days.map((day) => (
                         <EventsColumn
                             key={`${day.day} ${day.month}`}
                             day={day}
                         />
                     ))}
-                </div>
-            </div>
+                </S.StyledContainer>
+            </S.StyledWrapper>
         </S.StyledWeekView>
     );
 };
+
+export const CalendarWeekView = memo(Component);
