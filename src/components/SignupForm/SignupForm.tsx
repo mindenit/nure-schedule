@@ -49,7 +49,7 @@ export const SignupForm = () => {
             </Button>
             <S.StyledTextContainer>
                 <C.TitleMedium>
-                    Не має аккаунту? <Link to="/signin">Увійти</Link>
+                    Вже є аккаунт? <Link to="/signin">Увійти</Link>
                 </C.TitleMedium>
                 <Link to="/">Продовжити як гість</Link>
             </S.StyledTextContainer>
