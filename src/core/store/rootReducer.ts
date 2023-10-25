@@ -4,6 +4,7 @@ import fetchGroupSlice from "./slices/fetch/groups/fetchGroups.slice";
 import fetchTeachersSlice from "./slices/fetch/teachers/fetchTeachers.slice";
 import fetchAuditoriumsSlice from "./slices/fetch/auditoriums/fetchAuditoriums.slice";
 import fetchEventsSlice from "./slices/fetch/events/fetchEvents.slice";
+import filterSlice from "./slices/filter.slice";
 
 const rootReducers = {
     ui: uiSlice.reducer,
@@ -12,6 +13,7 @@ const rootReducers = {
     fetchTeachers: fetchTeachersSlice.reducer,
     fetchAuditoriums: fetchAuditoriumsSlice.reducer,
     fetchEvents: fetchEventsSlice.reducer,
+    filter: filterSlice.reducer,
 };
 
 export default rootReducers;

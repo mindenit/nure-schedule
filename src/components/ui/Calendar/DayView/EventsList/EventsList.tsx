@@ -30,6 +30,7 @@ export const EventsList: FC<EventsListProps> = ({ events, day, ...props }) => {
                                             id={String(event.id)}
                                             cardType="subject"
                                             startTime={event.startTime}
+                                            endTime={event.endTime}
                                             type={event.type as SubjectType}
                                             auditory={event.auditorium}
                                             subjectBrief={event.subject.brief}

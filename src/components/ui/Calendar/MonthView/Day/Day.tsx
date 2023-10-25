@@ -27,7 +27,7 @@ interface CalendarDayProps extends ComponentPropsWithoutRef<"div"> {
 export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
     ({ day, ...props }, ref) => {
         const [clickedCardId, setClickedCardId] = useState<number | null>(null);
-        const [showDialog, setShowDialog] = useState<boolean>(false);
+        const [showDialog, setShowDialog] = useState(false);
         const { activeItem } = useSelector((state: RootState) => state.data);
 
         const handleClick = (id: number) => {
@@ -82,6 +82,7 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                                                         startTime={
                                                             event.startTime
                                                         }
+                                                        endTime={event.endTime}
                                                         auditory={
                                                             event.auditorium
                                                         }
@@ -109,6 +110,7 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                                                     weekday={day.weekday}
                                                     date={`${day.day}.${day.month}.${day.year}`}
                                                     startTime={event.startTime}
+                                                    endTime={event.endTime}
                                                     subjectType={getSubjectType(
                                                         event.type as SubjectType
                                                     )}
@@ -169,6 +171,7 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                                                 id={String(event.id)}
                                                 isFullWidth
                                                 startTime={event.startTime}
+                                                endTime={event.endTime}
                                                 auditory={event.auditorium}
                                                 type={event.type as SubjectType}
                                                 subjectBrief={

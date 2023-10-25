@@ -4,11 +4,11 @@ import { useTeachersFilter } from "./useTeachersFilter";
 import { pipe } from "core/utils/pipe";
 
 export const useFilters = () => {
-    const { applyAuditoriumsFilter } = useAuditoriumsFilter();
+    const { applyAuditoriumFilter } = useAuditoriumsFilter();
     const { applyTeachersFilter } = useTeachersFilter();
 
     const applyFilters = (events: ISchedule[]) => {
-        return pipe(events, applyAuditoriumsFilter(), applyTeachersFilter());
+        return pipe(events, applyAuditoriumFilter(), applyTeachersFilter());
     };
 
     return { applyFilters };

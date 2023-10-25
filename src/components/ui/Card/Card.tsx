@@ -58,6 +58,7 @@ const Card: React.FC<
 
 const SubjectCard: React.FC<SubjectCardProps> = ({
     startTime,
+    endTime,
     auditory,
     type,
     subjectBrief,
@@ -72,7 +73,7 @@ const SubjectCard: React.FC<SubjectCardProps> = ({
             <S.StyledCardText>
                 <C.TitleMedium>
                     <b>
-                        {startTime} {auditory}
+                        {startTime}-{endTime} {auditory}
                     </b>{" "}
                     {subjectType}
                 </C.TitleMedium>
