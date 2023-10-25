@@ -39,6 +39,10 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
         dispatch(fetchEventsActions.fetchEventsAction({ type, name }));
     }, [type, name]);
 
+    useEffect(() => {
+        console.info(error);
+    }, [error]);
+
     const { applyFilters } = useFilters();
 
     const isMobile = useMediaQuery({
@@ -133,10 +137,24 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
                         </S.StyledToolbar>
                     </Tabs.List>
                     {error !== null ? (
-                        <C.CenteredElement>
-                            <C.TitleLarge>Сталася помилка</C.TitleLarge>
-                            <C.TitleMedium>{error.message}</C.TitleMedium>
-                        </C.CenteredElement>
+                        error.statusCode === 500 ? (
+                            <C.CenteredElement>
+                                <C.CentredText>
+                                    <C.TitleLarge>
+                                        Розклад недоступний
+                                    </C.TitleLarge>
+                                </C.CentredText>
+                            </C.CenteredElement>
+                        ) : (
+                            <C.CenteredElement>
+                                <C.CentredText>
+                                    <C.TitleLarge>Сталася помилка</C.TitleLarge>
+                                    <C.TitleMedium>
+                                        {error.message}
+                                    </C.TitleMedium>
+                                </C.CentredText>
+                            </C.CenteredElement>
+                        )
                     ) : (
                         <>
                             <Tabs.Content value="month">

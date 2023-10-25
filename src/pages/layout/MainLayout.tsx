@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { media } from "styles/media";
 import * as S from "./MainLayout.styles";
@@ -8,11 +8,11 @@ import * as S from "./MainLayout.styles";
 import { Navbar } from "components/Navbar/Navbar";
 import { Logo } from "components/ui/Logo";
 
-import { DarkMode, LightMode, Login, Logout } from "@mui/icons-material";
+import { DarkMode, LightMode } from "@mui/icons-material";
 import { Button } from "components/ui/Button";
-import { LOCAL_KEYS } from "core/constants";
+// import { LOCAL_KEYS } from "core/constants";
 import { useActions } from "core/hooks/useActions";
-import { useLogout } from "core/hooks/useLogout";
+// import { useLogout } from "core/hooks/useLogout";
 import { RootState } from "core/store/store";
 import pagesData from "pages/pagesData";
 import { useSelector } from "react-redux";
@@ -23,7 +23,7 @@ interface Props {
 }
 
 const MainLayout: React.FC<Props> = ({ logoText, children }) => {
-    const { logout, isLoading } = useLogout();
+    // const { logout, isLoading } = useLogout();
     const location = useLocation();
     const isMobile = useMediaQuery({
         query: media.medium,
@@ -67,7 +67,7 @@ const MainLayout: React.FC<Props> = ({ logoText, children }) => {
                                     {page.navbarItem?.label}
                                 </Navbar.Item>
                             ))}
-                            <Navbar.Item
+                            {/* <Navbar.Item
                                 to={"/account"}
                                 isActive={location.pathname === "/account"}
                             >
@@ -75,6 +75,13 @@ const MainLayout: React.FC<Props> = ({ logoText, children }) => {
                                 {localStorage.getItem(LOCAL_KEYS.AUTH_TOKENS)
                                     ? "Аккаунт"
                                     : "Гість"}
+                            </Navbar.Item> */}
+                            <Navbar.Item
+                                to={"/account"}
+                                isActive={location.pathname === "/account"}
+                            >
+                                <Navbar.Avatar src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010" />
+                                Акаунт
                             </Navbar.Item>
                         </Navbar.Root>
                     </S.MainLayoutFooter>
@@ -111,7 +118,7 @@ const MainLayout: React.FC<Props> = ({ logoText, children }) => {
                                         <LightMode />
                                     )}
                                 </Button>
-                                {!localStorage.getItem(
+                                {/* {!localStorage.getItem(
                                     LOCAL_KEYS.AUTH_TOKENS
                                 ) ? (
                                     <Link to="/signin">
@@ -128,7 +135,7 @@ const MainLayout: React.FC<Props> = ({ logoText, children }) => {
                                         <Logout />
                                         Вийти
                                     </Button>
-                                )}
+                                )} */}
                             </S.StyledNavbarContainer>
                         </S.MainLayoutDesktopContainer>
                     </S.MainLayoutDesktopHeader>

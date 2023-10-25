@@ -8,6 +8,7 @@ import { IEventsArgs } from "core/types/events.types";
 import { PayloadAction } from "@reduxjs/toolkit";
 import nurekit from "core/services/nurekit.serivce";
 import { getMonth } from "core/utils/getMonth";
+import { IError } from "core/types/error.types";
 
 function* fetchEventsSaga(action: PayloadAction<IEventsArgs>) {
     try {
@@ -39,7 +40,7 @@ function* fetchEventsSaga(action: PayloadAction<IEventsArgs>) {
             yield put(fetchEventsActions.actions.fetchEventsSuccess(res));
         }
     } catch (error: unknown) {
-        yield put(fetchEventsActions.actions.fetchEventsError(error as Error));
+        yield put(fetchEventsActions.actions.fetchEventsError(error as IError));
     }
 }
 

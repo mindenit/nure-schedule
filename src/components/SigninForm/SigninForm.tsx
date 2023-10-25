@@ -43,7 +43,9 @@ export const SigninForm = () => {
                     validatonError !== null ? validatonError["password"] : ""
                 }
             />
-            {formError !== null && <p>{String(formError)}</p>}
+            {formError !== null && (
+                <C.ErrorText>{String(formError)}</C.ErrorText>
+            )}
             <Button variant="filled" disabled={isDisabled || isLoading}>
                 {isLoading ? "Вхід..." : "Увійти"}
             </Button>

@@ -1,11 +1,9 @@
 import { ISchedule } from "@nurejs/api";
+import { IError } from "./error.types";
 
 export interface IFetchScheduleProps {
-    // groupEvents: ISchedule[];
-    // teacherEvents: ISchedule[];
-    // auditoriumEvents: ISchedule[];
     allEvents: ISchedule[];
     loading: boolean;
-    error: null | Error;
+    error: null | IError;
     fetchState: "group" | "auditorium" | "teacher" | undefined;
 }

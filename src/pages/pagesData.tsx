@@ -8,10 +8,11 @@ import { DateRange } from "@mui/icons-material";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
 import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
-import { ChangesPage } from "./ChangesPage";
 import { FiltersPage } from "./Filters/FiltersPage";
 import { SignupPage } from "./SignupPage";
-import { AccountPage } from "./AccountPage";
+// import { ChangesPage } from "./ChangesPage";
+// import { AccountPage } from "./AccountPage";
+import { InDevelopment } from "./InDevelopment";
 
 // import { RawInfoCardProps } from "core/types/card.types";
 
@@ -28,7 +29,8 @@ const pagesData: IRouter[] = [
     },
     {
         path: "/changes",
-        element: <ChangesPage />,
+        element: <InDevelopment />,
+        // element: <ChangesPage />,
         title: "Зміни",
         showInNavbar: true,
         navbarItem: {
@@ -58,7 +60,8 @@ const pagesData: IRouter[] = [
     },
     {
         path: "/account",
-        element: <AccountPage />,
+        // element: <AccountPage />,
+        element: <InDevelopment />,
         title: "Аккаунт",
         showInNavbar: false,
     },

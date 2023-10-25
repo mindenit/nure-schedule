@@ -2,7 +2,7 @@ import { TextField } from "components/ui/TextField/TextField";
 import * as S from "./Signup.styles";
 import { Button } from "components/ui/Button";
 import { useSignupForm } from "core/hooks/useSignupForm";
-import * as C from "../../styles/components";
+import * as C from "styles/components";
 import { Link } from "react-router-dom";
 
 export const SignupForm = () => {
@@ -43,7 +43,9 @@ export const SignupForm = () => {
                     validatonError !== null ? validatonError["password"] : ""
                 }
             />
-            {formError !== null && <p>{String(formError)}</p>}
+            {formError !== null && (
+                <C.ErrorText>{String(formError)}</C.ErrorText>
+            )}
             <Button variant="filled" disabled={isDisabled || isLoading}>
                 {isLoading ? "Реєстратиція..." : "Зареєструватися"}
             </Button>

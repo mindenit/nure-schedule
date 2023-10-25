@@ -7,14 +7,12 @@ export const useLogout = () => {
     const navigate = useNavigate();
     const [isLoading, setLoading] = useState(false);
     const [error, setError] = useState<unknown>(null);
-    const token = localStorage.getItem(LOCAL_KEYS.AUTH_TOKENS);
+    // const token = localStorage.getItem(LOCAL_KEYS.AUTH_TOKENS);
 
     const logout = async () => {
         setLoading(true);
 
         try {
-            console.log(token?.slice(0, -1).slice(0, 0));
-
             await axiosClient.post(
                 "logout",
                 {},
@@ -31,7 +29,7 @@ export const useLogout = () => {
             setLoading(false);
             navigate("/");
         } catch (error) {
-            console.log(error);
+            console.error(`logout error: ${error}`);
             localStorage.removeItem(LOCAL_KEYS.AUTH_TOKENS);
             setLoading(false);
             setError(error);

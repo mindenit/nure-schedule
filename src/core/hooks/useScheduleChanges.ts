@@ -16,7 +16,7 @@ export const useScheduleChanges = () => {
                 setChanges(changes.data);
                 setLoading(false);
             } catch (error) {
-                console.log(error);
+                console.error(`/user/groups/changes error: ${error}`);
                 setLoading(false);
                 setError(error);
             }

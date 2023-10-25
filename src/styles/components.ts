@@ -66,3 +66,11 @@ export const CenteredElement = styled.div`
     width: 100%;
     height: 500px;
 `;
+
+export const ErrorText = styled.p`
+    color: ${({ theme }) => theme.colors.bgError};
+`;
+
+export const CentredText = styled.div`
+    text-align: center;
+`;

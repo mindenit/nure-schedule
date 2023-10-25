@@ -1,5 +1,6 @@
 import { ISchedule } from "@nurejs/api";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { IError } from "core/types/error.types";
 import { IEventsArgs } from "core/types/events.types";
 import { IFetchScheduleProps } from "core/types/fetch.types";
 
@@ -35,11 +36,11 @@ const fetchEventsSlice = createSlice({
         },
         fetchEventsError: (
             state: IFetchScheduleProps,
-            action: PayloadAction<Error>
+            action: PayloadAction<IError>
         ) => {
             state.loading = false;
             state.allEvents = [];
-            state.error = action.payload;
+            state.error = JSON.parse(action.payload.message);
         },
     },
 });

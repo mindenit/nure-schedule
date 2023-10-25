@@ -25,7 +25,7 @@ export const useSignin = () => {
             navigate("/");
         } catch (error) {
             setLoading(false);
-            console.log(error);
+            console.error(`useSignin error: ${error}`);
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             setError(transformAuthError(error.response.data.message));
