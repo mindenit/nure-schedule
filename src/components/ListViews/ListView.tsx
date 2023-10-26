@@ -1,5 +1,5 @@
 import { Button } from "components/ui/Button";
-import { List } from "components/ui/List";
+import { List } from "components/ui/NavigationDrawer";
 
 import { Loader } from "components/ui/Loader";
 import { usePagination } from "core/hooks/usePagination";

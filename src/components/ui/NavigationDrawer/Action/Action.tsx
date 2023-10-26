@@ -3,8 +3,10 @@ import * as S from "./Action.styles";
 
 interface ListActionProps extends ComponentPropsWithoutRef<"button"> {}
 
-export const ListAction = forwardRef<ElementRef<"button">, ListActionProps>(({ ...props }, ref) => {
-  return <S.StyledListAction ref={ref} {...props} />
-});
+export const ListAction = forwardRef<ElementRef<"button">, ListActionProps>(
+    ({ ...props }, ref) => {
+        return <S.StyledListAction ref={ref} {...props} />;
+    }
+);
 
 ListAction.displayName = "ListAction";
