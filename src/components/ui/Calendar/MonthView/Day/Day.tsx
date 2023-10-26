@@ -1,6 +1,7 @@
 import {
     ComponentPropsWithoutRef,
     ElementRef,
+    Fragment,
     forwardRef,
     useState,
 } from "react";
@@ -67,7 +68,7 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                                     .slice(0)
                                     .reverse()
                                     .map((event) => (
-                                        <Dialog.Root>
+                                        <Dialog.Root key={event.id}>
                                             <Dialog.Trigger>
                                                 <C.FullWidthContainer
                                                     onClick={() =>
@@ -159,7 +160,7 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                                 .slice(0)
                                 .reverse()
                                 .map((event) => (
-                                    <>
+                                    <Fragment key={event.id}>
                                         <C.FullWidthContainer
                                             onClick={() =>
                                                 handleClick(event.id)
@@ -167,7 +168,6 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                                         >
                                             <Card
                                                 cardType="subject"
-                                                key={event.id}
                                                 id={String(event.id)}
                                                 isFullWidth
                                                 startTime={event.startTime}
@@ -202,7 +202,7 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                                                 groups={event.groups}
                                             />
                                         )}
-                                    </>
+                                    </Fragment>
                                 ))}
                         </Dialog.Content>
                     </Dialog.Root>
