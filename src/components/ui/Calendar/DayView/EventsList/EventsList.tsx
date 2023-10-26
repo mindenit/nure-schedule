@@ -22,7 +22,7 @@ export const EventsList: FC<EventsListProps> = ({ events, day, ...props }) => {
                         .slice(0)
                         .reverse()
                         .map((event) => (
-                            <Dialog.Root>
+                            <Dialog.Root key={event.id}>
                                 <Dialog.Trigger>
                                     <div>
                                         <Card
