@@ -13,6 +13,8 @@ export const StyledWeekView = styled.section`
         max-height: 600px;
         overflow-y: auto;
         overflow-x: scroll;
+        padding: 0 0 120px 0;
+        box-sizing: border-box;
     }
 
     @media (min-width: 900px) {

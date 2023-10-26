@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { media } from "styles/media";
 
 export const StyledDayView = styled.section`
     display: flex;
@@ -10,4 +11,8 @@ export const StyledDayView = styled.section`
     gap: 1rem;
     margin: 1rem 0 0 0;
     box-sizing: border-box;
+
+    @media ${media.small} {
+        padding: 0 0 120px 0;
+    }
 `;
