@@ -74,3 +74,9 @@ export const StyledDayCircle = styled.span`
         color: ${({ theme }) => theme.colors.appBackground};
     }
 `;
+
+export const InlineFlex = styled.div`
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+`;

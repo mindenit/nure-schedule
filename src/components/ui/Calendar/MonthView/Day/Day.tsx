@@ -20,6 +20,7 @@ import { formatMonth } from "core/utils/formatMonth";
 import type { RootState } from "core/store/store";
 import { getSubjectType } from "core/utils/getSubjectType";
 import { ICommonData, adaptTeacher } from "core/types/data.types";
+import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 
 interface CalendarDayProps extends ComponentPropsWithoutRef<"div"> {
     day: TDayWithEvents<TModifiedSchedule>;
@@ -41,9 +42,9 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
             query: media.medium,
         });
 
-        return day.events.length > 0 ? (
-            <>
-                {isMobile ? (
+        if (day.events.length > 0) {
+            if (isMobile) {
+                return (
                     <>
                         <S.StyledDayCell
                             ref={ref}
@@ -130,7 +131,9 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                             </MobileDayModal>
                         )}
                     </>
-                ) : (
+                );
+            } else {
+                return (
                     <Dialog.Root>
                         <Dialog.Trigger>
                             <S.StyledDayCell
@@ -206,30 +209,65 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                                 ))}
                         </Dialog.Content>
                     </Dialog.Root>
-                )}
-            </>
-        ) : (
-            <>
-                <S.StyledDayCell
-                    ref={ref}
-                    data-current={day.isCurrentMonth}
-                    {...props}
-                    onClick={() => setShowDialog(true)}
-                >
-                    <S.StyledDayCircle data-current={day.isCurrentDay}>
-                        {day.day}
-                    </S.StyledDayCircle>
-                </S.StyledDayCell>
-                {showDialog && isMobile && (
-                    <MobileDayModal
-                        groups={activeItem as ICommonData}
-                        dayAndMonth={formatMonth(day.day, day.month)}
-                        onCloseClick={() => setShowDialog(false)}
-                        isEmpty={true}
-                    ></MobileDayModal>
-                )}
-            </>
-        );
+                );
+            }
+        } else {
+            if (isMobile) {
+                return (
+                    <>
+                        <S.StyledDayCell
+                            ref={ref}
+                            data-current={day.isCurrentMonth}
+                            {...props}
+                            onClick={() => setShowDialog(true)}
+                        >
+                            <S.StyledDayCircle data-current={day.isCurrentDay}>
+                                {day.day}
+                            </S.StyledDayCircle>
+                        </S.StyledDayCell>
+                        {showDialog && isMobile && (
+                            <MobileDayModal
+                                groups={activeItem as ICommonData}
+                                dayAndMonth={formatMonth(day.day, day.month)}
+                                onCloseClick={() => setShowDialog(false)}
+                                isEmpty={true}
+                            ></MobileDayModal>
+                        )}
+                    </>
+                );
+            } else {
+                return (
+                    <Dialog.Root>
+                        <Dialog.Trigger>
+                            <S.StyledDayCell
+                                ref={ref}
+                                data-current={day.isCurrentMonth}
+                                {...props}
+                            >
+                                <S.StyledDayCircle
+                                    data-current={day.isCurrentDay}
+                                >
+                                    {day.day}
+                                </S.StyledDayCircle>
+                            </S.StyledDayCell>
+                        </Dialog.Trigger>
+                        <Dialog.Content>
+                            <Dialog.Header title="Розклад" />
+                            <C.TitleMedium>
+                                Група {activeItem!.name}
+                            </C.TitleMedium>
+                            <C.TitleLarge>
+                                {formatMonth(day.day, day.month)}
+                            </C.TitleLarge>
+                            <S.InlineFlex>
+                                <EmojiEmotionsIcon />
+                                <C.TitleBig>Сьогодні пар немає</C.TitleBig>
+                            </S.InlineFlex>
+                        </Dialog.Content>
+                    </Dialog.Root>
+                );
+            }
+        }
     }
 );
 
