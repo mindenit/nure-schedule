@@ -33,6 +33,8 @@ export const lightTheme: ITheme = {
         textError: "#FFFFFF",
 
         outline: "#CAC4D0",
+        primaryContainer: "#EADDFF",
+        onPrimaryContainer: "#4F378B",
     },
 };
 
@@ -69,5 +71,7 @@ export const darkTheme: ITheme = {
         textError: "#601410",
 
         outline: "#CAC4D0",
+        primaryContainer: "#4F378B",
+        onPrimaryContainer: "#EADDFF",
     },
 };

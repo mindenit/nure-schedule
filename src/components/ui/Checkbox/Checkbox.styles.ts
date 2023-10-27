@@ -9,7 +9,7 @@ export const StyledCheckboxContainer = styled.div`
     width: 40px;
     height: 40px;
     border-radius: 20px;
-    background: ${({ theme }) => theme.colors.appBackground};
+    background: transparent;
 
     &:hover {
         background: ${({ theme }) =>
@@ -42,6 +42,9 @@ export const StyledCheckbox = styled(CheckboxPrimitive.Root)`
     border-radius: 4px;
 
     svg {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 18px;
         height: 18px;
         color: transparent;
