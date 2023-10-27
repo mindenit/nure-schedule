@@ -1,5 +1,5 @@
 import { Add } from "@mui/icons-material";
-import { ListView } from "components/ListViews";
+import { NavigationView } from "components/NavigationView";
 import { Button } from "components/ui/Button";
 import { Dialog } from "components/ui/Dialog";
 import { SearchField } from "components/ui/SearchField";
@@ -62,7 +62,7 @@ export const SelectScheduleDialog = () => {
                             </Tabs.Trigger>
                         </Tabs.List>
                         <Tabs.Content value="groups">
-                            <ListView
+                            <NavigationView
                                 items={searchItems<IGroup>(
                                     groups,
                                     value,
@@ -77,7 +77,7 @@ export const SelectScheduleDialog = () => {
                             />
                         </Tabs.Content>
                         <Tabs.Content value="teachers">
-                            <ListView
+                            <NavigationView
                                 items={searchItems<ICommonData>(
                                     teachers,
                                     value,
@@ -92,7 +92,7 @@ export const SelectScheduleDialog = () => {
                             />
                         </Tabs.Content>
                         <Tabs.Content value="auditoriums">
-                            <ListView
+                            <NavigationView
                                 items={searchItems<IAuditorium>(
                                     auditoriums,
                                     value,
