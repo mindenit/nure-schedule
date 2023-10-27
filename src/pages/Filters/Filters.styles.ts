@@ -11,10 +11,6 @@ export const StyledFiltersPage = styled.section`
     margin: 1rem auto;
     padding: 0 1rem;
     box-sizing: border-box;
-
-    @media (min-width: 900px) {
-        width: 700px;
-    }
 `;
 
 export const StyledHeader = styled.header`
