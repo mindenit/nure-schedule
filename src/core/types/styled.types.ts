@@ -31,6 +31,8 @@ export interface ITheme {
         textError: string;
 
         outline: string;
+        primaryContainer: string;
+        onPrimaryContainer: string;
     };
 }
 

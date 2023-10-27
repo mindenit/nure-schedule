@@ -1,11 +1,11 @@
 import { Button } from "components/ui/Button";
-import { List } from "components/ui/List";
+import { NavigationDrawer } from "components/ui/NavigationDrawer";
 
 import { Loader } from "components/ui/Loader";
 import { usePagination } from "core/hooks/usePagination";
-import * as S from "./ListViews.styles";
+import * as S from "./Navigation.styles";
 
-interface ListViewProps<T> {
+interface NavigationViewProps<T> {
     items: (T & { id: number })[];
     renderItem: (item: T) => React.ReactNode;
     loading: boolean;
@@ -13,23 +13,28 @@ interface ListViewProps<T> {
     onItemClick: (item: T) => void;
 }
 
-function ListView<T>({
+function NavigationView<T>({
     items,
     renderItem,
     loading,
     error,
     onItemClick,
-}: ListViewProps<T>): JSX.Element {
+}: NavigationViewProps<T>): JSX.Element {
     const { displayedItems, loadMore, showButton } = usePagination(items);
 
     return (
-        <List.Root>
+        <NavigationDrawer.Root>
             {loading && <Loader />}
             {error !== undefined && <div>Сталася помилка: {error.message}</div>}
             {displayedItems.map((item) => (
-                <List.Item key={item.id} onClick={() => onItemClick(item)}>
-                    <List.Header>{renderItem(item)}</List.Header>
-                </List.Item>
+                <NavigationDrawer.Item
+                    key={item.id}
+                    onClick={() => onItemClick(item)}
+                >
+                    <NavigationDrawer.Header>
+                        {renderItem(item)}
+                    </NavigationDrawer.Header>
+                </NavigationDrawer.Item>
             ))}
 
             {showButton && (
@@ -39,8 +44,8 @@ function ListView<T>({
                     </Button>
                 </S.StyledButtonCont>
             )}
-        </List.Root>
+        </NavigationDrawer.Root>
     );
 }
 
-export { ListView };
+export { NavigationView };
