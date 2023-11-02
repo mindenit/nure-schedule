@@ -1,14 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ILessonFilter } from "core/interfaces/filters.interface";
 import { ICommonData } from "core/types/data.types";
 
 interface IState {
     teachersFilter: ICommonData[];
     auditoriumsFilter: ICommonData[];
+    lessonsFilter: ILessonFilter[];
 }
 
 const initialState: IState = {
     teachersFilter: [],
     auditoriumsFilter: [],
+    lessonsFilter: [],
 };
 
 const filterSlice = createSlice({
@@ -29,6 +32,10 @@ const filterSlice = createSlice({
                 (element: ICommonData) => element.id === action.payload.id
             );
             if (!exists) state.auditoriumsFilter.push(action.payload);
+        },
+        addLessonToFilter(state: IState, action: PayloadAction<ILessonFilter>) {
+            const exists = state.lessonsFilter.includes(action.payload);
+            if (!exists) state.lessonsFilter.push(action.payload);
         },
         resetAuditoriumsFilter(state: IState) {
             state.auditoriumsFilter = [];
@@ -54,6 +61,15 @@ const filterSlice = createSlice({
             );
             if (removedItemId !== -1)
                 state.auditoriumsFilter.splice(removedItemIndex, 1);
+        },
+        removeLessonFromFilter(
+            state: IState,
+            action: PayloadAction<ILessonFilter>
+        ) {
+            const removedItemIndex = state.lessonsFilter.findIndex(
+                (element: ILessonFilter) => element === action.payload
+            );
+            state.lessonsFilter.splice(removedItemIndex, 1);
         },
     },
 });

@@ -20,3 +20,18 @@ export const LOCAL_KEYS = {
     TEACHERS_FILTER: "teachers_filter",
     AUDITORIUMS_FILTER: "auditoriums_filter",
 } as const;
+
+export const LESSONS_TYPE = [
+    {
+        name: "Лекції",
+        type: "Лк",
+    },
+    {
+        name: "Практичні заняття",
+        type: "Пз",
+    },
+    {
+        name: "Лабораторні роботи",
+        type: "Лб",
+    },
+];
