@@ -8,11 +8,13 @@ import * as C from "../../styles/components";
 import * as S from "./Filters.styles";
 import { useMediaQuery } from "react-responsive";
 import { media } from "styles/media";
+import { useLessonsFilter } from "core/hooks/useLessonsFilter";
 
 export const FiltersPage: FC = () => {
     const { auditoriumsFilter, removeAuditoriumFromFilter } =
         useAuditoriumsFilter();
     const { teachersFilter, removeTeacherFromFilter } = useTeachersFilter();
+    const { lessonsFilter, removeLessonFromFilter } = useLessonsFilter();
 
     const isMobile = useMediaQuery({
         query: media.medium,
@@ -34,7 +36,7 @@ export const FiltersPage: FC = () => {
                     <S.StyledBody>
                         {teachersFilter.length > 0 && (
                             <S.StyledWrapper>
-                                <C.TitleLarge>Викладачі</C.TitleLarge>
+                                <C.TitleLarge>Викладачі:</C.TitleLarge>
                                 <S.StyledCardsContainer>
                                     {teachersFilter.map((item) => (
                                         <div
@@ -55,7 +57,7 @@ export const FiltersPage: FC = () => {
                         )}
                         {auditoriumsFilter.length > 0 && (
                             <S.StyledWrapper>
-                                <C.TitleLarge>Авдиторії</C.TitleLarge>
+                                <C.TitleLarge>Авдиторії:</C.TitleLarge>
                                 <S.StyledCardsContainer>
                                     {auditoriumsFilter.map((item) => (
                                         <div
@@ -66,6 +68,27 @@ export const FiltersPage: FC = () => {
                                         >
                                             <Card
                                                 id={item.id.toString()}
+                                                cardType="info"
+                                                title={item.name}
+                                            />
+                                        </div>
+                                    ))}
+                                </S.StyledCardsContainer>
+                            </S.StyledWrapper>
+                        )}
+                        {lessonsFilter.length > 0 && (
+                            <S.StyledWrapper>
+                                <C.TitleLarge>Тип пар:</C.TitleLarge>
+                                <S.StyledCardsContainer>
+                                    {lessonsFilter.map((item) => (
+                                        <div
+                                            key={item.type}
+                                            onClick={() =>
+                                                removeLessonFromFilter(item)
+                                            }
+                                        >
+                                            <Card
+                                                id={item.type}
                                                 cardType="info"
                                                 title={item.name}
                                             />

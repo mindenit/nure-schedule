@@ -8,6 +8,7 @@ import { FC, useState } from "react";
 import { AuditoriumsView } from "./AuditoriumsView";
 import * as S from "./SelectFilterDialog.styles";
 import { TeachersView } from "./TeachersView";
+import { LessonsView } from "./LessonsView";
 
 export const SelectFilterDialog: FC = () => {
     const [query, setQuery] = useState("");
@@ -39,6 +40,7 @@ export const SelectFilterDialog: FC = () => {
                             <Tabs.Trigger value="auditoriums">
                                 Авдиторії
                             </Tabs.Trigger>
+                            <Tabs.Trigger value="lessons">Пари</Tabs.Trigger>
                         </Tabs.List>
                         <Tabs.Content value="teachers">
                             <TeachersView
@@ -53,6 +55,9 @@ export const SelectFilterDialog: FC = () => {
                                 error={error}
                                 query={query}
                             />
+                        </Tabs.Content>
+                        <Tabs.Content value="lessons">
+                            <LessonsView />
                         </Tabs.Content>
                     </S.StyledTabsContent>
                 </Tabs.Root>
