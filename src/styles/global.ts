@@ -21,10 +21,13 @@ const GlobalStyles = createGlobalStyle`
     }
 
     body {
-        min-height: 100vh;
+        height: 100dvh;
 
         font-family: "Roboto", sans-serif;
         font-size: 14px;
+
+        background-color: ${({ theme }) => theme.colors.appBackground};
+        color: ${({ theme }) => theme.colors.text}
     }
 `;
 
