@@ -2,7 +2,7 @@ import { put, takeEvery } from "redux-saga/effects";
 
 import fetchEventsActions from "core/store/slices/fetch/events/fetchEvents.slice";
 
-import { ISchedule } from "@nurejs/api";
+import { ISchedule } from "nurekit";
 
 import { IEventsArgs } from "core/types/events.types";
 import { PayloadAction } from "@reduxjs/toolkit";

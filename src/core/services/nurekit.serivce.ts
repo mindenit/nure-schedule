@@ -1,4 +1,4 @@
-import { Nurekit } from "@nurejs/api";
+import { Nurekit } from "nurekit";
 
 const nurekit = new Nurekit();
 

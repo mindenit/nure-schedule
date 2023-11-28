@@ -13,7 +13,7 @@ import {
     SubjectTextCardProps,
 } from "core/types/card.types";
 
-import { IGroup } from "@nurejs/api";
+import { IGroup } from "nurekit";
 import { getCardDetails } from "core/utils/getCardDetails";
 import { ICommonData } from "core/types/data.types";
 

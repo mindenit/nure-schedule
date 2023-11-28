@@ -1,4 +1,4 @@
-import { ISchedule } from "@nurejs/api";
+import { ISchedule } from "nurekit";
 import { TDayWithEvents } from "@onetools/calendar";
 import { ComponentPropsWithoutRef, FC, memo } from "react";
 import { WeekHeader } from "./Header/Header";

@@ -1,4 +1,4 @@
-import { ISchedule } from "@nurejs/api";
+import { ISchedule } from "nurekit";
 import { RootState } from "core/store/store";
 import { useSelector } from "react-redux";
 import { useActions } from "./useActions";

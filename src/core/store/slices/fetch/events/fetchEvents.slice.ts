@@ -1,4 +1,4 @@
-import { ISchedule } from "@nurejs/api";
+import { ISchedule } from "nurekit";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IError } from "core/types/error.types";
 import { IEventsArgs } from "core/types/events.types";
