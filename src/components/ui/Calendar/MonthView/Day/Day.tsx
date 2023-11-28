@@ -65,69 +65,60 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                                 dayAndMonth={formatMonth(day.day, day.month)}
                                 onCloseClick={() => setShowDialog(false)}
                             >
-                                {day.events
-                                    .slice(0)
-                                    .reverse()
-                                    .map((event) => (
-                                        <Dialog.Root key={event.id}>
-                                            <Dialog.Trigger>
-                                                <C.FullWidthContainer
-                                                    onClick={() =>
-                                                        handleClick(event.id)
-                                                    }
-                                                >
-                                                    <Card
-                                                        cardType="subject"
-                                                        key={event.id}
-                                                        id={String(event.id)}
-                                                        isFullWidth
-                                                        startTime={
-                                                            event.startTime
-                                                        }
-                                                        endTime={event.endTime}
-                                                        auditory={
-                                                            event.auditorium
-                                                        }
-                                                        type={
-                                                            event.type as SubjectType
-                                                        }
-                                                        subjectBrief={
-                                                            event.subject.brief
-                                                        }
-                                                        subjectName={
-                                                            event.subject.brief
-                                                        }
-                                                    />
-                                                </C.FullWidthContainer>
-                                            </Dialog.Trigger>
-                                            <Dialog.Content>
-                                                <Dialog.Header
-                                                    title={`${day.day}.${day.month}.${day.year}`}
-                                                />
+                                {day.events.map((event) => (
+                                    <Dialog.Root key={event.id}>
+                                        <Dialog.Trigger>
+                                            <C.FullWidthContainer
+                                                onClick={() =>
+                                                    handleClick(event.id)
+                                                }
+                                            >
                                                 <Card
-                                                    cardType="subjectText"
-                                                    id={String(
-                                                        event.id + event.id
-                                                    )}
-                                                    weekday={day.weekday}
-                                                    date={`${day.day}.${day.month}.${day.year}`}
+                                                    cardType="subject"
+                                                    key={event.id}
+                                                    id={String(event.id)}
+                                                    isFullWidth
                                                     startTime={event.startTime}
                                                     endTime={event.endTime}
-                                                    subjectType={getSubjectType(
-                                                        event.type as SubjectType
-                                                    )}
-                                                    subjectName={
-                                                        event.subject.title
-                                                    }
                                                     auditory={event.auditorium}
-                                                    teacher={event.teachers.map(
-                                                        adaptTeacher
-                                                    )}
-                                                    groups={event.groups}
+                                                    type={
+                                                        event.type as SubjectType
+                                                    }
+                                                    subjectBrief={
+                                                        event.subject.brief
+                                                    }
+                                                    subjectName={
+                                                        event.subject.brief
+                                                    }
                                                 />
-                                            </Dialog.Content>
-                                        </Dialog.Root>
-                                    ))}
+                                            </C.FullWidthContainer>
+                                        </Dialog.Trigger>
+                                        <Dialog.Content>
+                                            <Dialog.Header
+                                                title={`${day.day}.${day.month}.${day.year}`}
+                                            />
+                                            <Card
+                                                cardType="subjectText"
+                                                id={String(event.id + event.id)}
+                                                weekday={day.weekday}
+                                                date={`${day.day}.${day.month}.${day.year}`}
+                                                startTime={event.startTime}
+                                                endTime={event.endTime}
+                                                subjectType={getSubjectType(
+                                                    event.type as SubjectType
+                                                )}
+                                                subjectName={
+                                                    event.subject.title
+                                                }
+                                                auditory={event.auditorium}
+                                                teacher={event.teachers.map(
+                                                    adaptTeacher
+                                                )}
+                                                groups={event.groups}
+                                            />
+                                        </Dialog.Content>
+                                    </Dialog.Root>
+                                ))}
                             </MobileDayModal>
                         )}
                     </>
@@ -159,54 +150,43 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                             <C.TitleLarge>
                                 {formatMonth(day.day, day.month)}
                             </C.TitleLarge>
-                            {day.events
-                                .slice(0)
-                                .reverse()
-                                .map((event) => (
-                                    <Fragment key={event.id}>
-                                        <C.FullWidthContainer
-                                            onClick={() =>
-                                                handleClick(event.id)
-                                            }
-                                        >
-                                            <Card
-                                                cardType="subject"
-                                                id={String(event.id)}
-                                                isFullWidth
-                                                startTime={event.startTime}
-                                                endTime={event.endTime}
-                                                auditory={event.auditorium}
-                                                type={event.type as SubjectType}
-                                                subjectBrief={
-                                                    event.subject.brief
-                                                }
-                                                subjectName={
-                                                    event.subject.brief
-                                                }
-                                            />
-                                        </C.FullWidthContainer>
-                                        {clickedCardId === event.id && (
-                                            <Card
-                                                cardType="subjectText"
-                                                id={String(event.id + event.id)}
-                                                weekday={day.weekday}
-                                                date={`${day.day}.${day.month}.${day.year}`}
-                                                startTime={event.startTime}
-                                                subjectType={getSubjectType(
-                                                    event.type as SubjectType
-                                                )}
-                                                subjectName={
-                                                    event.subject.title
-                                                }
-                                                auditory={event.auditorium}
-                                                teacher={event.teachers.map(
-                                                    adaptTeacher
-                                                )}
-                                                groups={event.groups}
-                                            />
-                                        )}
-                                    </Fragment>
-                                ))}
+                            {day.events.map((event) => (
+                                <Fragment key={event.id}>
+                                    <C.FullWidthContainer
+                                        onClick={() => handleClick(event.id)}
+                                    >
+                                        <Card
+                                            cardType="subject"
+                                            id={String(event.id)}
+                                            isFullWidth
+                                            startTime={event.startTime}
+                                            endTime={event.endTime}
+                                            auditory={event.auditorium}
+                                            type={event.type as SubjectType}
+                                            subjectBrief={event.subject.brief}
+                                            subjectName={event.subject.brief}
+                                        />
+                                    </C.FullWidthContainer>
+                                    {clickedCardId === event.id && (
+                                        <Card
+                                            cardType="subjectText"
+                                            id={String(event.id + event.id)}
+                                            weekday={day.weekday}
+                                            date={`${day.day}.${day.month}.${day.year}`}
+                                            startTime={event.startTime}
+                                            subjectType={getSubjectType(
+                                                event.type as SubjectType
+                                            )}
+                                            subjectName={event.subject.title}
+                                            auditory={event.auditorium}
+                                            teacher={event.teachers.map(
+                                                adaptTeacher
+                                            )}
+                                            groups={event.groups}
+                                        />
+                                    )}
+                                </Fragment>
+                            ))}
                         </Dialog.Content>
                     </Dialog.Root>
                 );

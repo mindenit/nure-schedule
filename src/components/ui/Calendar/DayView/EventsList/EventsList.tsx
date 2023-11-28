@@ -18,47 +18,42 @@ export const EventsList: FC<EventsListProps> = ({ events, day, ...props }) => {
         <S.StyledEventsList {...props}>
             <>
                 {events.length > 0 ? (
-                    events
-                        .slice(0)
-                        .reverse()
-                        .map((event) => (
-                            <Dialog.Root key={event.id}>
-                                <Dialog.Trigger>
-                                    <div>
-                                        <Card
-                                            key={event.id}
-                                            id={String(event.id)}
-                                            cardType="subject"
-                                            startTime={event.startTime}
-                                            endTime={event.endTime}
-                                            type={event.type as SubjectType}
-                                            auditory={event.auditorium}
-                                            subjectBrief={event.subject.brief}
-                                            subjectName={event.subject.brief}
-                                        />
-                                    </div>
-                                </Dialog.Trigger>
-                                <Dialog.Content>
-                                    <Dialog.Header title="Розклад" />
+                    events.map((event) => (
+                        <Dialog.Root key={event.id}>
+                            <Dialog.Trigger>
+                                <div>
                                     <Card
-                                        cardType="subjectText"
-                                        id={String(event.id + event.id)}
-                                        weekday={day.weekday}
-                                        date={`${day.day}.${day.month}.${day.year}`}
+                                        key={event.id}
+                                        id={String(event.id)}
+                                        cardType="subject"
                                         startTime={event.startTime}
-                                        subjectType={getSubjectType(
-                                            event.type as SubjectType
-                                        )}
-                                        subjectName={event.subject.title}
+                                        endTime={event.endTime}
+                                        type={event.type as SubjectType}
                                         auditory={event.auditorium}
-                                        teacher={event.teachers.map(
-                                            adaptTeacher
-                                        )}
-                                        groups={event.groups}
+                                        subjectBrief={event.subject.brief}
+                                        subjectName={event.subject.brief}
                                     />
-                                </Dialog.Content>
-                            </Dialog.Root>
-                        ))
+                                </div>
+                            </Dialog.Trigger>
+                            <Dialog.Content>
+                                <Dialog.Header title="Розклад" />
+                                <Card
+                                    cardType="subjectText"
+                                    id={String(event.id + event.id)}
+                                    weekday={day.weekday}
+                                    date={`${day.day}.${day.month}.${day.year}`}
+                                    startTime={event.startTime}
+                                    subjectType={getSubjectType(
+                                        event.type as SubjectType
+                                    )}
+                                    subjectName={event.subject.title}
+                                    auditory={event.auditorium}
+                                    teacher={event.teachers.map(adaptTeacher)}
+                                    groups={event.groups}
+                                />
+                            </Dialog.Content>
+                        </Dialog.Root>
+                    ))
                 ) : (
                     <S.StyledEmptyList>
                         <S.StyledEmoji />
