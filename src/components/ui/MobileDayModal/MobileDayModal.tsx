@@ -1,4 +1,4 @@
-import { IGroup } from "@nurejs/api";
+import { IGroup } from "nurekit";
 
 import * as C from "styles/components";
 import * as S from "./MobileDayModal.styles";

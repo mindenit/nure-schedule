@@ -1,4 +1,4 @@
-import { ISchedule } from "@nurejs/api";
+import { ISchedule } from "nurekit";
 import { TEvent } from "@onetools/calendar";
 
 type TModifiedSchedule = Omit<ISchedule, "startTime" | "endTime">;

@@ -1,4 +1,4 @@
-import { IAuditorium, IGroup, ITeacher } from "@nurejs/api";
+import { IAuditorium, IGroup, ITeacher } from "nurekit";
 
 interface IArgs {
     activeTeacher: ITeacher | null;

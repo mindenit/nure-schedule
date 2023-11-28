@@ -3,7 +3,7 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import fetchTeachersSlice from "./fetchTeachers.slice";
 
 import nurekit from "core/services/nurekit.serivce";
-import { ITeacher } from "@nurejs/api";
+import { ITeacher } from "nurekit";
 
 function* fetchTeachersSaga() {
     try {

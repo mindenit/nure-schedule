@@ -1,4 +1,4 @@
-import { ITeacher } from "@nurejs/api";
+import { ITeacher } from "nurekit";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ICommonData, adaptTeacher } from "core/types/data.types";
 

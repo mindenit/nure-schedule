@@ -1,4 +1,4 @@
-import { ISchedule } from "@nurejs/api";
+import { ISchedule } from "nurekit";
 import { useAuditoriumsFilter } from "./useAuditoriumsFilter";
 import { useTeachersFilter } from "./useTeachersFilter";
 import { pipe } from "core/utils/pipe";

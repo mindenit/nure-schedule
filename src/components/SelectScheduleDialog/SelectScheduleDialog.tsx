@@ -7,7 +7,7 @@ import { Tabs } from "components/ui/Tabs";
 import { useActions } from "core/hooks/useActions";
 import { useState } from "react";
 import { searchItems } from "core/utils/searchItems";
-import { IAuditorium, IGroup } from "@nurejs/api";
+import { IAuditorium, IGroup } from "nurekit";
 import * as S from "./SelectScheduleDialog.styles";
 import useMultiFetch from "core/hooks/useMultiFetch";
 import { useSelector } from "react-redux";

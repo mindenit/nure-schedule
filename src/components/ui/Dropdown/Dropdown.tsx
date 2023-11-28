@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-// import { IAuditorium, IGroup, ITeacher } from "@nurejs/api";
+// import { IAuditorium, IGroup, ITeacher } from "nurekit";
 
 import * as C from "styles/components";
 import * as S from "./Dropdown.styles";

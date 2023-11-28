@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-// import { IAuditorium, IGroup, ITeacher } from "@nurejs/api";
+// import { IAuditorium, IGroup, ITeacher } from "nurekit";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGroupsActions } from "core/store/slices/fetch/groups/fetchGroups.slice";
 import { fetchTeachersActions } from "core/store/slices/fetch/teachers/fetchTeachers.slice";

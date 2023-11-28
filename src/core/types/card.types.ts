@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef } from "react";
-import { IGroup } from "@nurejs/api";
+import { IGroup } from "nurekit";
 import { ICommonData } from "./data.types";
 
 export type SubjectType = "Лк" | "Лб" | "Пз";

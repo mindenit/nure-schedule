@@ -1,4 +1,4 @@
-import { IAuditorium, IGroup, ITeacher } from "@nurejs/api";
+import { IAuditorium, IGroup, ITeacher } from "nurekit";
 
 export interface ICommonData {
     id: number;

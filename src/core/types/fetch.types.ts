@@ -1,4 +1,4 @@
-import { ISchedule } from "@nurejs/api";
+import { ISchedule } from "nurekit";
 import { IError } from "./error.types";
 
 export interface IFetchScheduleProps {
