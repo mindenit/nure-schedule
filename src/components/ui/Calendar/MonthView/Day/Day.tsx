@@ -80,7 +80,7 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                                                     isFullWidth
                                                     startTime={event.startTime}
                                                     endTime={event.endTime}
-                                                    auditory={event.auditorium}
+                                                    auditory={event.auditory}
                                                     type={
                                                         event.type as SubjectType
                                                     }
@@ -110,7 +110,7 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                                                 subjectName={
                                                     event.subject.title
                                                 }
-                                                auditory={event.auditorium}
+                                                auditory={event.auditory}
                                                 teacher={event.teachers.map(
                                                     adaptTeacher
                                                 )}
@@ -161,7 +161,7 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                                             isFullWidth
                                             startTime={event.startTime}
                                             endTime={event.endTime}
-                                            auditory={event.auditorium}
+                                            auditory={event.auditory}
                                             type={event.type as SubjectType}
                                             subjectBrief={event.subject.brief}
                                             subjectName={event.subject.brief}
@@ -178,7 +178,7 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                                                 event.type as SubjectType
                                             )}
                                             subjectName={event.subject.title}
-                                            auditory={event.auditorium}
+                                            auditory={event.auditory}
                                             teacher={event.teachers.map(
                                                 adaptTeacher
                                             )}

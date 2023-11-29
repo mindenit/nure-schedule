@@ -13,7 +13,7 @@ export const useAuditoriumsFilter = () => {
         return events.filter((event) => {
             return !auditoriumsFilter
                 .map((auditorium) => auditorium.name)
-                .includes(event.auditorium);
+                .includes(event.auditory);
         });
     };
 

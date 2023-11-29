@@ -51,7 +51,7 @@ export const Event: FC<EventProps> = ({ event, type, ...props }) => {
                     startTime={event.startTime}
                     subjectType={getSubjectType(event.type as SubjectType)}
                     subjectName={event.subject.title}
-                    auditory={event.auditorium}
+                    auditory={event.auditory}
                     teacher={event.teachers.map(adaptTeacher)}
                     groups={event.groups}
                 />

@@ -29,7 +29,7 @@ export const EventsList: FC<EventsListProps> = ({ events, day, ...props }) => {
                                         startTime={event.startTime}
                                         endTime={event.endTime}
                                         type={event.type as SubjectType}
-                                        auditory={event.auditorium}
+                                        auditory={event.auditory}
                                         subjectBrief={event.subject.brief}
                                         subjectName={event.subject.brief}
                                     />
@@ -47,7 +47,7 @@ export const EventsList: FC<EventsListProps> = ({ events, day, ...props }) => {
                                         event.type as SubjectType
                                     )}
                                     subjectName={event.subject.title}
-                                    auditory={event.auditorium}
+                                    auditory={event.auditory}
                                     teacher={event.teachers.map(adaptTeacher)}
                                     groups={event.groups}
                                 />
