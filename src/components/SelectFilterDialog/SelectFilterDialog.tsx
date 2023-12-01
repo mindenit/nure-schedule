@@ -4,13 +4,13 @@ import { Dialog } from "components/ui/Dialog";
 import { SearchField } from "components/ui/SearchField";
 import { Tabs } from "components/ui/Tabs";
 import useMultiFetch from "core/hooks/useMultiFetch";
-import { FC, useState } from "react";
+import { FC, Suspense, memo, useState } from "react";
 import { AuditoriumsView } from "./AuditoriumsView";
+import { LessonsView } from "./LessonsView";
 import * as S from "./SelectFilterDialog.styles";
 import { TeachersView } from "./TeachersView";
-import { LessonsView } from "./LessonsView";
 
-export const SelectFilterDialog: FC = () => {
+export const SelectFilterDialog: FC = memo(() => {
     const [query, setQuery] = useState("");
     const { loading, error } = useMultiFetch(true, true, true);
 
@@ -43,18 +43,22 @@ export const SelectFilterDialog: FC = () => {
                             <Tabs.Trigger value="lessons">Пари</Tabs.Trigger>
                         </Tabs.List>
                         <Tabs.Content value="teachers">
-                            <TeachersView
-                                loading={loading}
-                                error={error}
-                                query={query}
-                            />
+                            <Suspense>
+                                <TeachersView
+                                    loading={loading}
+                                    error={error}
+                                    query={query}
+                                />
+                            </Suspense>
                         </Tabs.Content>
                         <Tabs.Content value="auditoriums">
-                            <AuditoriumsView
-                                loading={loading}
-                                error={error}
-                                query={query}
-                            />
+                            <Suspense>
+                                <AuditoriumsView
+                                    loading={loading}
+                                    error={error}
+                                    query={query}
+                                />
+                            </Suspense>
                         </Tabs.Content>
                         <Tabs.Content value="lessons">
                             <LessonsView />
@@ -64,4 +68,4 @@ export const SelectFilterDialog: FC = () => {
             </Dialog.Content>
         </Dialog.Root>
     );
-};
+});

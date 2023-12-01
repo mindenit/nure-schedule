@@ -10,24 +10,26 @@ interface CalendarMonthViewProps extends ComponentPropsWithoutRef<"section"> {
     headers: string[];
 }
 
-const Component: FC<CalendarMonthViewProps> = ({ days, headers, ...props }) => {
-    return (
-        <S.StyledMonthView {...props}>
-            <S.StyledHeadersRoot>
-                {headers.map((header) => (
-                    <CalendarHeader key={header}>{header}</CalendarHeader>
-                ))}
-            </S.StyledHeadersRoot>
-            <S.StyledDaysRoot {...props}>
-                {days.map((day) => (
-                    <CalendarDay
-                        key={`${day.day} ${day.month} ${day.year}`}
-                        day={day}
-                    />
-                ))}
-            </S.StyledDaysRoot>
-        </S.StyledMonthView>
-    );
-};
+const Component: FC<CalendarMonthViewProps> = memo(
+    ({ days, headers, ...props }) => {
+        return (
+            <S.StyledMonthView {...props}>
+                <S.StyledHeadersRoot>
+                    {headers.map((header) => (
+                        <CalendarHeader key={header}>{header}</CalendarHeader>
+                    ))}
+                </S.StyledHeadersRoot>
+                <S.StyledDaysRoot {...props}>
+                    {days.map((day) => (
+                        <CalendarDay
+                            key={`${day.day} ${day.month} ${day.year}`}
+                            day={day}
+                        />
+                    ))}
+                </S.StyledDaysRoot>
+            </S.StyledMonthView>
+        );
+    }
+);
 
 export const CalendarMonthView = memo(Component);

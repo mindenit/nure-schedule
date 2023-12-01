@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 export function usePagination<T>(items: T[]) {
     const [currentPage, setCurrentPage] = useState(1);
@@ -12,9 +12,9 @@ export function usePagination<T>(items: T[]) {
     const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
     const showButton = currentPage < totalPages;
 
-    const loadMore = () => {
+    const loadMore = useCallback(() => {
         if (currentPage < totalPages) setCurrentPage(currentPage + 1);
-    };
+    }, [currentPage, totalPages]);
 
     return { displayedItems, loadMore, showButton };
 }
