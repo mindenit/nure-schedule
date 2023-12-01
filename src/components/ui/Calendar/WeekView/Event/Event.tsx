@@ -1,13 +1,11 @@
-import { IEvent } from "core/types/events.types";
-import { SubjectType } from "core/types/ui.types";
-import { ComponentPropsWithoutRef, FC } from "react";
-import * as S from "./Event.styles";
 import { Card } from "components/ui/Card";
 import { Dialog } from "components/ui/Dialog";
-import { getSubjectType } from "core/utils/getSubjectType";
 import { adaptTeacher } from "core/types/data.types";
-
-type EventVariant = "pratical" | "labaratory" | "lection";
+import { IEvent } from "core/types/events.types";
+import { SubjectType } from "core/types/ui.types";
+import { getSubjectType } from "core/utils/getSubjectType";
+import { ComponentPropsWithoutRef, FC, memo, useMemo } from "react";
+import * as S from "./Event.styles";
 
 type EventType = "compact" | "default";
 
@@ -16,19 +14,17 @@ interface EventProps extends ComponentPropsWithoutRef<"div"> {
     type: EventType;
 }
 
-const getEventVariant = (brief: SubjectType): EventVariant => {
-    switch (brief) {
-        case "Лб":
-            return "labaratory";
-        case "Лк":
-            return "lection";
-        case "Пз":
-            return "pratical";
-    }
-};
-
-export const Event: FC<EventProps> = ({ event, type, ...props }) => {
-    const variant = getEventVariant(event.type as SubjectType);
+const Event: FC<EventProps> = memo(({ event, type, ...props }) => {
+    const variant = useMemo(() => {
+        switch (event.type as SubjectType) {
+            case "Лб":
+                return "labaratory";
+            case "Лк":
+                return "lection";
+            case "Пз":
+                return "pratical";
+        }
+    }, [event]);
 
     return (
         <Dialog.Root>
@@ -58,4 +54,8 @@ export const Event: FC<EventProps> = ({ event, type, ...props }) => {
             </Dialog.Content>
         </Dialog.Root>
     );
-};
+});
+
+Event.displayName = "Event";
+
+export { Event };
