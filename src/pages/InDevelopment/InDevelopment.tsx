@@ -3,7 +3,11 @@ import { InDevelopmentLoader } from "./InDevelopmentLoader";
 import * as S from "./InDevelopment.styles";
 import * as C from "styles/components";
 
-export const InDevelopment: React.FC = () => {
+interface Props {
+    children?: React.ReactNode | React.ReactNode[];
+}
+
+export const InDevelopment: React.FC<Props> = ({ children }) => {
     return (
         <MainLayout logoText="Упс...">
             <C.Container>
@@ -18,6 +22,7 @@ export const InDevelopment: React.FC = () => {
                             Трішки терпіння...
                         </C.TitleBig>
                     </C.CentredText>
+                    {children}
                     <InDevelopmentLoader />
                 </S.InDevContainer>
             </C.Container>

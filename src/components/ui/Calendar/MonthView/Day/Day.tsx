@@ -31,6 +31,7 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
         const [clickedCardId, setClickedCardId] = useState<number | null>(null);
         const [showDialog, setShowDialog] = useState(false);
         const { activeItem } = useSelector((state: RootState) => state.data);
+        console.log(`clicked id: ${clickedCardId}`);
 
         const handleClick = (id: number) => {
             if (clickedCardId === 0 || clickedCardId === null)
@@ -150,14 +151,14 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                             <C.TitleLarge>
                                 {formatMonth(day.day, day.month)}
                             </C.TitleLarge>
-                            {day.events.map((event) => (
-                                <Fragment key={event.id}>
+                            {day.events.map((event, index) => (
+                                <Fragment key={index}>
                                     <C.FullWidthContainer
-                                        onClick={() => handleClick(event.id)}
+                                        onClick={() => handleClick(index)}
                                     >
                                         <Card
                                             cardType="subject"
-                                            id={String(event.id)}
+                                            id={String(index)}
                                             isFullWidth
                                             startTime={event.startTime}
                                             endTime={event.endTime}
@@ -167,10 +168,10 @@ export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
                                             subjectName={event.subject.brief}
                                         />
                                     </C.FullWidthContainer>
-                                    {clickedCardId === event.id && (
+                                    {clickedCardId === index && (
                                         <Card
                                             cardType="subjectText"
-                                            id={String(event.id + event.id)}
+                                            id={String(index + index)}
                                             weekday={day.weekday}
                                             date={`${day.day}.${day.month}.${day.year}`}
                                             startTime={event.startTime}

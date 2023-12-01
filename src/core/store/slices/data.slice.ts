@@ -46,6 +46,10 @@ const dataSlice = createSlice({
                 );
             }
         },
+        clearAllData(state) {
+            state.activeItem = null;
+            state.allSelectedItems = [];
+        },
     },
 });
 

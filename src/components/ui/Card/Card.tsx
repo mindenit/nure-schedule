@@ -109,7 +109,7 @@ const SubjectCardText: React.FC<SubjectTextCardProps> = ({
             <C.TitleMedium>
                 Група(-и):{" "}
                 {groups.map((group: IGroup) => (
-                    <span key={group.id}>{group.name}</span>
+                    <span key={group.id}>{group.name} </span>
                 ))}
             </C.TitleMedium>
         </S.StyledSubjectTextCardContainer>

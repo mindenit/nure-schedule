@@ -13,8 +13,18 @@ import { SignupPage } from "./SignupPage";
 // import { ChangesPage } from "./ChangesPage";
 // import { AccountPage } from "./AccountPage";
 import { InDevelopment } from "./InDevelopment";
+import { Button } from "components/ui/Button";
+import clearCache from "core/utils/clearCache";
 
 // import { RawInfoCardProps } from "core/types/card.types";
+
+const InDev: React.FC = () => {
+    return (
+        <InDevelopment>
+            <Button onClick={clearCache}>Очистити кеш (Якщо є проблеми)</Button>
+        </InDevelopment>
+    );
+};
 
 const pagesData: IRouter[] = [
     {
@@ -61,7 +71,7 @@ const pagesData: IRouter[] = [
     {
         path: "/account",
         // element: <AccountPage />,
-        element: <InDevelopment />,
+        element: <InDev />,
         title: "Аккаунт",
         showInNavbar: false,
     },
