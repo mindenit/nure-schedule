@@ -2,7 +2,17 @@ import { ComponentPropsWithoutRef } from "react";
 import { IGroup } from "nurekit";
 import { ICommonData } from "./data.types";
 import { SubjectType } from "./ui.types";
+
 export type CardType = "info" | "subject" | "subjectText" | "group";
+
+type CardSubjectType =
+    | "Лекція"
+    | "Лабораторна робота"
+    | "Практичне заняття"
+    | "Консультація"
+    | "Залік"
+    | "Екзамен"
+    | "ПЕРЕВІРТЕ КОД getSubjectType";
 
 export interface CardProps extends ComponentPropsWithoutRef<"div"> {
     id: string;
@@ -23,7 +33,7 @@ export interface SubjectTextCardProps extends CardProps {
     weekday: string;
     date: string;
     startTime: string;
-    subjectType: SubjectType;
+    subjectType: CardSubjectType;
     subjectName: string;
     auditory: string;
     teacher: ICommonData[];
