@@ -8,5 +8,13 @@ export const getSubjectType = (brief: SubjectType) => {
             return "Лабораторна робота";
         case "Пз":
             return "Практичне заняття";
+        case "Конс":
+            return "Консультація";
+        case "Зал":
+            return "Залік";
+        case "Екз":
+            return "Екзамен";
+        default:
+            return "ПЕРЕВІРТЕ КОД getSubjectType";
     }
 };

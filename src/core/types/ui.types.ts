@@ -1,3 +1,3 @@
-type SubjectType = "Лк" | "Лб" | "Пз";
+type SubjectType = "Лк" | "Лб" | "Пз" | "Конс" | "Зал" | "Екз";
 
 export type { SubjectType };
