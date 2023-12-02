@@ -3,6 +3,8 @@ import {
     ElementRef,
     Fragment,
     forwardRef,
+    memo,
+    useCallback,
     useState,
 } from "react";
 import { useSelector } from "react-redux";
@@ -26,24 +28,33 @@ interface CalendarDayProps extends ComponentPropsWithoutRef<"div"> {
     day: TDayWithEvents<TModifiedSchedule>;
 }
 
-export const CalendarDay = forwardRef<ElementRef<"div">, CalendarDayProps>(
-    ({ day, ...props }, ref) => {
-        const [clickedCardId, setClickedCardId] = useState<number | null>(null);
-        const [showDialog, setShowDialog] = useState(false);
-        const { activeItem } = useSelector((state: RootState) => state.data);
-        console.log(`clicked id: ${clickedCardId}`);
+export const CalendarDay = memo(
+    forwardRef<ElementRef<"div">, CalendarDayProps>(
+        ({ day, ...props }, ref) => {
+            const [clickedCardId, setClickedCardId] = useState<number | null>(
+                null
+            );
+            const [showDialog, setShowDialog] = useState(false);
+            const { activeItem } = useSelector(
+                (state: RootState) => state.data
+            );
 
-        const handleClick = (id: number) => {
-            if (clickedCardId === 0 || clickedCardId === null)
-                setClickedCardId(id);
-            else setClickedCardId(0);
-        };
+            const handleClick = useCallback(
+                (id: number) => {
+                    if (clickedCardId === 0 || clickedCardId === null) {
+                        setClickedCardId(id);
+                    } else {
+                        setClickedCardId(0);
+                    }
+                },
+                [clickedCardId]
+            );
 
-        const isMobile = useMediaQuery({
-            query: media.medium,
-        });
+            const isMobile = useMediaQuery({
+                query: media.medium,
+            });
 
-        if (day.events.length > 0) {
+            if (day.events.length > 0) {
             if (isMobile) {
                 return (
                     <>

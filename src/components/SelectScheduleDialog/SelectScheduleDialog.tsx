@@ -5,7 +5,7 @@ import { Dialog } from "components/ui/Dialog";
 import { SearchField } from "components/ui/SearchField";
 import { Tabs } from "components/ui/Tabs";
 import { useActions } from "core/hooks/useActions";
-import { useState } from "react";
+import { Suspense, memo, useCallback, useState } from "react";
 import { searchItems } from "core/utils/searchItems";
 import { IAuditorium, IGroup } from "nurekit";
 import * as S from "./SelectScheduleDialog.styles";
@@ -14,13 +14,16 @@ import { useSelector } from "react-redux";
 import { RootState } from "core/store/store";
 import { ICommonData } from "core/types/data.types";
 
-export const SelectScheduleDialog = () => {
+export const SelectScheduleDialog = memo(() => {
     const [value, setValue] = useState("");
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const inputValue = event.target.value;
-        setValue(inputValue);
-    };
+    const handleChange = useCallback(
+        (event: React.ChangeEvent<HTMLInputElement>) => {
+            const inputValue = event.target.value;
+            setValue(inputValue);
+        },
+        []
+    );
 
     const { loading, error } = useMultiFetch(true, true, true);
 
@@ -62,53 +65,59 @@ export const SelectScheduleDialog = () => {
                             </Tabs.Trigger>
                         </Tabs.List>
                         <Tabs.Content value="groups">
-                            <NavigationView
-                                items={searchItems<IGroup>(
-                                    groups,
-                                    value,
-                                    (el) => el.name
-                                )}
-                                renderItem={(group) => group.name}
-                                loading={loading}
-                                error={error}
-                                onItemClick={(group) => {
-                                    addItem(group as ICommonData);
-                                }}
-                            />
+                            <Suspense>
+                                <NavigationView
+                                    items={searchItems<IGroup>(
+                                        groups,
+                                        value,
+                                        (el) => el.name
+                                    )}
+                                    renderItem={(group) => group.name}
+                                    loading={loading}
+                                    error={error}
+                                    onItemClick={(group) => {
+                                        addItem(group as ICommonData);
+                                    }}
+                                />
+                            </Suspense>
                         </Tabs.Content>
                         <Tabs.Content value="teachers">
-                            <NavigationView
-                                items={searchItems<ICommonData>(
-                                    teachers,
-                                    value,
-                                    (el) => el.fullName as string
-                                )}
-                                renderItem={(teacher) => teacher.fullName}
-                                loading={loading}
-                                error={error}
-                                onItemClick={(teacher) => {
-                                    addItem(teacher as ICommonData);
-                                }}
-                            />
+                            <Suspense>
+                                <NavigationView
+                                    items={searchItems<ICommonData>(
+                                        teachers,
+                                        value,
+                                        (el) => el.fullName as string
+                                    )}
+                                    renderItem={(teacher) => teacher.fullName}
+                                    loading={loading}
+                                    error={error}
+                                    onItemClick={(teacher) => {
+                                        addItem(teacher as ICommonData);
+                                    }}
+                                />
+                            </Suspense>
                         </Tabs.Content>
                         <Tabs.Content value="auditoriums">
-                            <NavigationView
-                                items={searchItems<IAuditorium>(
-                                    auditoriums,
-                                    value,
-                                    (el) => el.name
-                                )}
-                                renderItem={(auditorium) => auditorium.name}
-                                loading={loading}
-                                error={error}
-                                onItemClick={(aud) => {
-                                    addItem(aud as ICommonData);
-                                }}
-                            />
+                            <Suspense>
+                                <NavigationView
+                                    items={searchItems<IAuditorium>(
+                                        auditoriums,
+                                        value,
+                                        (el) => el.name
+                                    )}
+                                    renderItem={(auditorium) => auditorium.name}
+                                    loading={loading}
+                                    error={error}
+                                    onItemClick={(aud) => {
+                                        addItem(aud as ICommonData);
+                                    }}
+                                />
+                            </Suspense>
                         </Tabs.Content>
                     </S.StyledTabsContent>
                 </Tabs.Root>
             </Dialog.Content>
         </Dialog.Root>
     );
-};
+});

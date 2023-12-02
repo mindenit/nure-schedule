@@ -2,18 +2,22 @@ import { List } from "components/ui/List";
 import { LESSONS_TYPE } from "core/constants";
 import { useLessonsFilter } from "core/hooks/useLessonsFilter";
 import { ILessonFilter } from "core/interfaces/filters.interface";
+import { memo, useCallback } from "react";
 
-export const LessonsView = () => {
+export const LessonsView = memo(() => {
     const { lessonsFilter, addLessonToFilter, removeLessonFromFilter } =
         useLessonsFilter();
 
-    const handleClick = (lesson: ILessonFilter) => {
-        if (lessonsFilter.includes(lesson)) {
-            removeLessonFromFilter(lesson);
-        } else {
-            addLessonToFilter(lesson);
-        }
-    };
+    const handleClick = useCallback(
+        (lesson: ILessonFilter) => {
+            if (lessonsFilter.includes(lesson)) {
+                removeLessonFromFilter(lesson);
+            } else {
+                addLessonToFilter(lesson);
+            }
+        },
+        [lessonsFilter, removeLessonFromFilter, addLessonToFilter]
+    );
 
     return (
         <List.Root>
@@ -28,4 +32,4 @@ export const LessonsView = () => {
             ))}
         </List.Root>
     );
-};
+});

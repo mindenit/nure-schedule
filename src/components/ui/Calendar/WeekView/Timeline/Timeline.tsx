@@ -1,10 +1,10 @@
-import { ComponentPropsWithoutRef, FC } from "react";
+import { ComponentPropsWithoutRef, FC, memo } from "react";
 import * as S from "./Timeline.styles";
 import { TIMELINE } from "core/constants";
 
 interface CalendarTimelineProps extends ComponentPropsWithoutRef<"header"> {}
 
-export const CalendarTimeline: FC<CalendarTimelineProps> = (props) => {
+export const CalendarTimeline: FC<CalendarTimelineProps> = memo((props) => {
     return (
         <S.StyledTimeline {...props}>
             {TIMELINE.map((item) => (
@@ -12,4 +12,4 @@ export const CalendarTimeline: FC<CalendarTimelineProps> = (props) => {
             ))}
         </S.StyledTimeline>
     );
-};
+});

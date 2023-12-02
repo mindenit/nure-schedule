@@ -67,7 +67,15 @@ const useMultiFetch = (
                 error: error as Error,
             });
         }
-    }, []);
+    }, [
+        auditoriums,
+        groups,
+        teachers,
+        reqAuditoriums,
+        reqGroups,
+        reqTeachers,
+        dispatch,
+    ]);
 
     return data;
 };

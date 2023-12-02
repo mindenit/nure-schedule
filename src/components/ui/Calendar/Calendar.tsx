@@ -5,7 +5,7 @@ import { LOCALE } from "core/constants";
 import { useFilters } from "core/hooks/useFilters";
 import { RootState } from "core/store/store";
 import { getMonthName } from "core/utils/getMonthName";
-import { FC, Fragment, useEffect } from "react";
+import { FC, Fragment, memo, useEffect, useMemo, useTransition } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { media } from "styles/media";
@@ -25,7 +25,7 @@ interface CalendarProps {
     name: string;
 }
 
-export const Calendar: FC<CalendarProps> = ({ type, name }) => {
+const Calendar: FC<CalendarProps> = memo(({ type, name }) => {
     const { activeItem, allSelectedItems } = useSelector(
         (state: RootState) => state.data
     );
@@ -33,15 +33,13 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
         (state: RootState) => state.fetchEvents
     );
 
+    const [isPending, startTransition] = useTransition();
+
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(fetchEventsActions.fetchEventsAction({ type, name }));
     }, [type, name]);
-
-    useEffect(() => {
-        console.info(error);
-    }, [error]);
 
     const { applyFilters } = useFilters();
 
@@ -60,23 +58,25 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
         },
     });
 
-    const views = [
-        {
-            name: "Місяць",
-            onClick: calendar.getMonth,
-            value: "month",
-        },
-        {
-            name: "Тиждень",
-            onClick: calendar.getWeek,
-            value: "week",
-        },
-        {
-            name: "День",
-            onClick: calendar.getDay,
-            value: "day",
-        },
-    ];
+    const views = useMemo(() => {
+        return [
+            {
+                name: "Місяць",
+                onClick: calendar.getMonth,
+                value: "month",
+            },
+            {
+                name: "Тиждень",
+                onClick: calendar.getWeek,
+                value: "week",
+            },
+            {
+                name: "День",
+                onClick: calendar.getDay,
+                value: "day",
+            },
+        ];
+    }, [calendar]);
 
     if (loading) return <Loader />;
 
@@ -101,7 +101,11 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
                                             <Tabs.Trigger
                                                 key={view.value}
                                                 value={view.value}
-                                                onClick={view.onClick}
+                                                onClick={() => {
+                                                    startTransition(() =>
+                                                        view.onClick()
+                                                    );
+                                                }}
                                             >
                                                 {view.name}
                                             </Tabs.Trigger>
@@ -175,4 +179,8 @@ export const Calendar: FC<CalendarProps> = ({ type, name }) => {
             </Tabs.Root>
         </Fragment>
     );
-};
+});
+
+Calendar.displayName = "Calendar";
+
+export { Calendar };
