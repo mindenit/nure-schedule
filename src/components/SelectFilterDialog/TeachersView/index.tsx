@@ -8,6 +8,7 @@ import { searchItems } from "core/utils/searchItems";
 import { FC, Fragment, memo, useCallback } from "react";
 import { useSelector } from "react-redux";
 import * as S from "../styles";
+import * as C from "../../../styles/components";
 import { ICommonData } from "core/types/data.types";
 
 export interface TeachersViewProps {
@@ -43,6 +44,13 @@ export const TeachersView: FC<TeachersViewProps> = memo(
                 {loading && <Loader />}
                 {error !== undefined && (
                     <div>Сталася помилка: {error.message}</div>
+                )}
+                {!displayedItems.length && (
+                    <S.StyledEmptyFallback>
+                        <C.TitleMedium>
+                            Елементів з таким іменем не знайдено
+                        </C.TitleMedium>
+                    </S.StyledEmptyFallback>
                 )}
                 <List.Root>
                     {displayedItems.map((teacher) => (
