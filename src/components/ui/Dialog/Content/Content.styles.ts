@@ -17,7 +17,7 @@ export const StyledDialogContent = styled(DialogPrimitive.Content)`
 
     @media ${media.medium} {
         width: 100%;
-        max-height: 500px;
+        max-height: 85dvh;
         bottom: 0;
         border-radius: 25px 25px 0 0;
     }
