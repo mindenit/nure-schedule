@@ -40,8 +40,10 @@ const Calendar: FC<CalendarProps> = memo(({ type, name }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchEventsActions.fetchEventsAction({ type, name }));
-    }, [type, name]);
+        if (!allEvents.length) {
+            dispatch(fetchEventsActions.fetchEventsAction({ type, name }));
+        }
+    }, [type, name, allEvents.length]);
 
     const { applyFilters } = useFilters();
 
