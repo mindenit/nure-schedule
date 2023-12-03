@@ -1,7 +1,18 @@
+import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
+import { TDayWithEvents } from "@onetools/calendar";
+import { SubjectAccordion } from "components/SubjectAccordion";
+import { Card } from "components/ui/Card";
+import { Dialog } from "components/ui/Dialog";
+import { MobileDayModal } from "components/ui/MobileDayModal";
+import type { RootState } from "core/store/store";
+import { ICommonData, adaptTeacher } from "core/types/data.types";
+import { TModifiedSchedule } from "core/types/events.types";
+import { SubjectType } from "core/types/ui.types";
+import { formatMonth } from "core/utils/formatMonth";
+import { getSubjectType } from "core/utils/getSubjectType";
 import {
     ComponentPropsWithoutRef,
     ElementRef,
-    Fragment,
     forwardRef,
     memo,
     useCallback,
@@ -9,20 +20,9 @@ import {
 } from "react";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
-import { TDayWithEvents } from "@onetools/calendar";
-import { Dialog } from "components/ui/Dialog";
-import { MobileDayModal } from "components/ui/MobileDayModal";
-import { TModifiedSchedule } from "core/types/events.types";
-import * as S from "./Day.styles";
 import * as C from "styles/components";
 import { media } from "styles/media";
-import { SubjectType } from "core/types/ui.types";
-import { Card } from "components/ui/Card";
-import { formatMonth } from "core/utils/formatMonth";
-import type { RootState } from "core/store/store";
-import { getSubjectType } from "core/utils/getSubjectType";
-import { ICommonData, adaptTeacher } from "core/types/data.types";
-import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
+import * as S from "./Day.styles";
 
 interface CalendarDayProps extends ComponentPropsWithoutRef<"div"> {
     day: TDayWithEvents<TModifiedSchedule>;
@@ -174,47 +174,15 @@ export const CalendarDay = memo(
                                     {formatMonth(day.day, day.month)}
                                 </C.TitleLarge>
                                 {day.events.map((event, index) => (
-                                    <Fragment key={index}>
-                                        <C.FullWidthContainer
-                                            onClick={() => handleClick(index)}
-                                        >
-                                            <Card
-                                                cardType="subject"
-                                                id={String(index)}
-                                                isFullWidth
-                                                startTime={event.startTime}
-                                                endTime={event.endTime}
-                                                auditory={event.auditory}
-                                                type={event.type as SubjectType}
-                                                subjectBrief={
-                                                    event.subject.brief
-                                                }
-                                                subjectName={
-                                                    event.subject.brief
-                                                }
-                                            />
-                                        </C.FullWidthContainer>
-                                        {clickedCardId === index && (
-                                            <Card
-                                                cardType="subjectText"
-                                                id={String(index + index)}
-                                                weekday={day.weekday}
-                                                date={`${day.day}.${day.month}.${day.year}`}
-                                                startTime={event.startTime}
-                                                subjectType={getSubjectType(
-                                                    event.type as SubjectType
-                                                )}
-                                                subjectName={
-                                                    event.subject.title
-                                                }
-                                                auditory={event.auditory}
-                                                teacher={event.teachers.map(
-                                                    adaptTeacher
-                                                )}
-                                                groups={event.groups}
-                                            />
-                                        )}
-                                    </Fragment>
+                                    <SubjectAccordion
+                                        type="multiple"
+                                        key={index}
+                                        event={event}
+                                        day={day.day}
+                                        weekday={day.weekday}
+                                        month={day.month}
+                                        year={day.year}
+                                    />
                                 ))}
                             </Dialog.Content>
                         </Dialog.Root>

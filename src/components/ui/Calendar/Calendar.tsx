@@ -33,13 +33,17 @@ const Calendar: FC<CalendarProps> = memo(({ type, name }) => {
         (state: RootState) => state.fetchEvents
     );
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const [isPending, startTransition] = useTransition();
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchEventsActions.fetchEventsAction({ type, name }));
-    }, [type, name]);
+        if (!allEvents.length) {
+            dispatch(fetchEventsActions.fetchEventsAction({ type, name }));
+        }
+    }, [type, name, allEvents.length]);
 
     const { applyFilters } = useFilters();
 
@@ -183,4 +187,4 @@ const Calendar: FC<CalendarProps> = memo(({ type, name }) => {
 
 Calendar.displayName = "Calendar";
 
-export { Calendar };
+export default Calendar;
