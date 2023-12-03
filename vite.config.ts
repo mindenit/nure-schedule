@@ -4,9 +4,6 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
     plugins: [react(), tsconfigPaths()],
-    optimizeDeps: {
-        exclude: ["js-big-decimal"],
-    },
     build: {
         rollupOptions: {
             external: [
