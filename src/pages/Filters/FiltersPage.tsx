@@ -10,7 +10,7 @@ import { useMediaQuery } from "react-responsive";
 import { media } from "styles/media";
 import { useLessonsFilter } from "core/hooks/useLessonsFilter";
 
-export const FiltersPage: FC = () => {
+const FiltersPage: FC = () => {
     const { auditoriumsFilter, removeAuditoriumFromFilter } =
         useAuditoriumsFilter();
     const { teachersFilter, removeTeacherFromFilter } = useTeachersFilter();
@@ -108,3 +108,5 @@ export const FiltersPage: FC = () => {
         </MainLayout>
     );
 };
+
+export { FiltersPage };

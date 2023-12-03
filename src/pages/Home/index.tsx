@@ -3,9 +3,11 @@ import { useMediaQuery } from "react-responsive";
 import MainLayout from "pages/layout/MainLayout";
 import { media } from "styles/media";
 import * as S from "./Home.styles";
-import { Calendar } from "components/ui/Calendar/Calendar";
 import { SelectScheduleDialog } from "components/SelectScheduleDialog/SelectScheduleDialog";
 import { RootState } from "core/store/store";
+import { lazy } from "react";
+
+const Calendar = lazy(() => import("components/ui/Calendar/Calendar"));
 
 const Home: React.FC = () => {
     const isMobile = useMediaQuery({

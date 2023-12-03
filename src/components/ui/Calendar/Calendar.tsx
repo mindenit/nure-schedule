@@ -33,6 +33,8 @@ const Calendar: FC<CalendarProps> = memo(({ type, name }) => {
         (state: RootState) => state.fetchEvents
     );
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const [isPending, startTransition] = useTransition();
 
     const dispatch = useDispatch();
@@ -183,4 +185,4 @@ const Calendar: FC<CalendarProps> = memo(({ type, name }) => {
 
 Calendar.displayName = "Calendar";
 
-export { Calendar };
+export default Calendar;
