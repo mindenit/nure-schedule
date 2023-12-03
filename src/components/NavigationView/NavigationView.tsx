@@ -4,6 +4,7 @@ import { NavigationDrawer } from "components/ui/NavigationDrawer";
 import { Loader } from "components/ui/Loader";
 import { usePagination } from "core/hooks/usePagination";
 import * as S from "./Navigation.styles";
+import * as C from "../../styles/components";
 
 interface NavigationViewProps<T> {
     items: (T & { id: number })[];
@@ -26,6 +27,13 @@ function NavigationView<T>({
         <NavigationDrawer.Root>
             {loading && <Loader />}
             {error !== undefined && <div>Сталася помилка: {error.message}</div>}
+            {!displayedItems.length && (
+                <S.StyledEmptyFallback>
+                    <C.TitleMedium>
+                        Елементів з таким іменем не знайдено
+                    </C.TitleMedium>
+                </S.StyledEmptyFallback>
+            )}
             {displayedItems.map((item) => (
                 <NavigationDrawer.Item
                     key={item.id}

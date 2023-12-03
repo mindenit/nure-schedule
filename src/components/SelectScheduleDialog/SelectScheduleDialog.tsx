@@ -5,14 +5,14 @@ import { Dialog } from "components/ui/Dialog";
 import { SearchField } from "components/ui/SearchField";
 import { Tabs } from "components/ui/Tabs";
 import { useActions } from "core/hooks/useActions";
-import { Suspense, memo, useCallback, useState } from "react";
-import { searchItems } from "core/utils/searchItems";
-import { IAuditorium, IGroup } from "nurekit";
-import * as S from "./SelectScheduleDialog.styles";
 import useMultiFetch from "core/hooks/useMultiFetch";
-import { useSelector } from "react-redux";
 import { RootState } from "core/store/store";
 import { ICommonData } from "core/types/data.types";
+import { searchItems } from "core/utils/searchItems";
+import { IAuditorium, IGroup } from "nurekit";
+import { Suspense, memo, useCallback, useState } from "react";
+import { useSelector } from "react-redux";
+import * as S from "./SelectScheduleDialog.styles";
 
 export const SelectScheduleDialog = memo(() => {
     const [value, setValue] = useState("");
@@ -44,7 +44,7 @@ export const SelectScheduleDialog = memo(() => {
                 </Button>
             </Dialog.Trigger>
             <Dialog.Content>
-                <Dialog.Header title="Оберіть групу" />
+                <Dialog.Header title="Оберіть розклад" />
                 <SearchField
                     value={value}
                     name="search"
