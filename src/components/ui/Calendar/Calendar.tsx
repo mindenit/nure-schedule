@@ -1,3 +1,4 @@
+import { SelectScheduleDialog } from "components/SelectScheduleDialog/SelectScheduleDialog";
 import { Dropdown } from "components/ui/Dropdown";
 import { Loader } from "components/ui/Loader";
 import { Tabs } from "components/ui/Tabs";
@@ -5,7 +6,7 @@ import { LOCALE } from "core/constants";
 import { useFilters } from "core/hooks/useFilters";
 import { RootState } from "core/store/store";
 import { getMonthName } from "core/utils/getMonthName";
-import { FC, Fragment, memo, useEffect, useMemo, useTransition } from "react";
+import { FC, Fragment, useEffect, useTransition } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { media } from "styles/media";
@@ -13,19 +14,18 @@ import * as S from "./Calendar.styles";
 import { CalendarDayView } from "./DayView/DayView";
 import { CalendarMonthView } from "./MonthView/MonthView";
 import { CalendarWeekView } from "./WeekView/WeekView";
-import { SelectScheduleDialog } from "components/SelectScheduleDialog/SelectScheduleDialog";
 
 import { fetchEventsActions } from "core/store/slices/fetch/events/fetchEvents.slice";
 
-import * as C from "styles/components";
 import { useCalendar } from "@onetools/calendar";
+import * as C from "styles/components";
 
 interface CalendarProps {
     type: "auditorium" | "group" | "teacher" | undefined;
     name: string;
 }
 
-const Calendar: FC<CalendarProps> = memo(({ type, name }) => {
+const Calendar: FC<CalendarProps> = ({ type, name }) => {
     const { activeItem, allSelectedItems } = useSelector(
         (state: RootState) => state.data
     );
@@ -60,25 +60,23 @@ const Calendar: FC<CalendarProps> = memo(({ type, name }) => {
         },
     });
 
-    const views = useMemo(() => {
-        return [
-            {
-                name: "Місяць",
-                onClick: calendar.getMonth,
-                value: "month",
-            },
-            {
-                name: "Тиждень",
-                onClick: calendar.getWeek,
-                value: "week",
-            },
-            {
-                name: "День",
-                onClick: calendar.getDay,
-                value: "day",
-            },
-        ];
-    }, [calendar]);
+    const views = [
+        {
+            name: "Місяць",
+            onClick: calendar.getMonth,
+            value: "month",
+        },
+        {
+            name: "Тиждень",
+            onClick: calendar.getWeek,
+            value: "week",
+        },
+        {
+            name: "День",
+            onClick: calendar.getDay,
+            value: "day",
+        },
+    ];
 
     if (loading) return <Loader />;
 
@@ -181,7 +179,7 @@ const Calendar: FC<CalendarProps> = memo(({ type, name }) => {
             </Tabs.Root>
         </Fragment>
     );
-});
+};
 
 Calendar.displayName = "Calendar";
 

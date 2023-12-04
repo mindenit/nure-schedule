@@ -10,20 +10,17 @@ import { RootState } from "core/store/store";
 import { ICommonData } from "core/types/data.types";
 import { searchItems } from "core/utils/searchItems";
 import { IAuditorium, IGroup } from "nurekit";
-import { Suspense, memo, useCallback, useState } from "react";
+import { Suspense, useState } from "react";
 import { useSelector } from "react-redux";
 import * as S from "./SelectScheduleDialog.styles";
 
-export const SelectScheduleDialog = memo(() => {
+export const SelectScheduleDialog = () => {
     const [value, setValue] = useState("");
 
-    const handleChange = useCallback(
-        (event: React.ChangeEvent<HTMLInputElement>) => {
-            const inputValue = event.target.value;
-            setValue(inputValue);
-        },
-        []
-    );
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const inputValue = event.target.value;
+        setValue(inputValue);
+    };
 
     const { loading, error } = useMultiFetch(true, true, true);
 
@@ -120,4 +117,4 @@ export const SelectScheduleDialog = memo(() => {
             </Dialog.Content>
         </Dialog.Root>
     );
-});
+};

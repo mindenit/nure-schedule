@@ -4,7 +4,7 @@ import { adaptTeacher } from "core/types/data.types";
 import { IEvent } from "core/types/events.types";
 import { SubjectType } from "core/types/ui.types";
 import { getSubjectType } from "core/utils/getSubjectType";
-import { ComponentPropsWithoutRef, FC, memo, useMemo } from "react";
+import { ComponentPropsWithoutRef, FC } from "react";
 import * as S from "./Event.styles";
 
 type EventType = "compact" | "default";
@@ -14,17 +14,19 @@ interface EventProps extends ComponentPropsWithoutRef<"div"> {
     type: EventType;
 }
 
-const Event: FC<EventProps> = memo(({ event, type, ...props }) => {
-    const variant = useMemo(() => {
-        switch (event.type as SubjectType) {
-            case "Лб":
-                return "labaratory";
-            case "Лк":
-                return "lection";
-            case "Пз":
-                return "pratical";
-        }
-    }, [event]);
+const getVariant = (type: SubjectType) => {
+    switch (type) {
+        case "Лб":
+            return "labaratory";
+        case "Лк":
+            return "lection";
+        case "Пз":
+            return "pratical";
+    }
+};
+
+const Event: FC<EventProps> = ({ event, type, ...props }) => {
+    const variant = getVariant(event.type as SubjectType);
 
     return (
         <Dialog.Root>
@@ -54,7 +56,7 @@ const Event: FC<EventProps> = memo(({ event, type, ...props }) => {
             </Dialog.Content>
         </Dialog.Root>
     );
-});
+};
 
 Event.displayName = "Event";
 
