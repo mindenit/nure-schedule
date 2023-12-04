@@ -3,8 +3,9 @@ import { NavigationDrawer } from "components/ui/NavigationDrawer";
 
 import { Loader } from "components/ui/Loader";
 import { usePagination } from "core/hooks/usePagination";
-import * as S from "./Navigation.styles";
 import * as C from "../../styles/components";
+import * as S from "./Navigation.styles";
+import { Dialog } from "components/ui/Dialog";
 
 interface NavigationViewProps<T> {
     items: (T & { id: number })[];
@@ -35,14 +36,16 @@ function NavigationView<T>({
                 </S.StyledEmptyFallback>
             )}
             {displayedItems.map((item) => (
-                <NavigationDrawer.Item
-                    key={item.id}
-                    onClick={() => onItemClick(item)}
-                >
-                    <NavigationDrawer.Header>
-                        {renderItem(item)}
-                    </NavigationDrawer.Header>
-                </NavigationDrawer.Item>
+                <Dialog.Close>
+                    <NavigationDrawer.Item
+                        key={item.id}
+                        onClick={() => onItemClick(item)}
+                    >
+                        <NavigationDrawer.Header>
+                            {renderItem(item)}
+                        </NavigationDrawer.Header>
+                    </NavigationDrawer.Item>
+                </Dialog.Close>
             ))}
 
             {showButton && (
