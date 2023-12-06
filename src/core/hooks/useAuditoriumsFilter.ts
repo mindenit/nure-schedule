@@ -1,8 +1,7 @@
-import { ISchedule } from "nurekit";
 import { RootState } from "core/store/store";
+import { ISchedule } from "nurekit";
 import { useSelector } from "react-redux";
 import { useActions } from "./useActions";
-import { useCallback } from "react";
 
 export const useAuditoriumsFilter = () => {
     const { auditoriumsFilter } = useSelector(
@@ -10,16 +9,13 @@ export const useAuditoriumsFilter = () => {
     );
     const { addAuditoriumInFilter, removeAuditoriumFromFilter } = useActions();
 
-    const applyAuditoriumFilter = useCallback(
-        () => (events: ISchedule[]) => {
-            return events.filter((event) => {
-                return !auditoriumsFilter
-                    .map((auditorium) => auditorium.name)
-                    .includes(event.auditory);
-            });
-        },
-        [auditoriumsFilter]
-    );
+    const applyAuditoriumFilter = () => (events: ISchedule[]) => {
+        return events.filter((event) => {
+            return !auditoriumsFilter
+                .map((auditorium) => auditorium.name)
+                .includes(event.auditory);
+        });
+    };
 
     return {
         auditoriumsFilter,

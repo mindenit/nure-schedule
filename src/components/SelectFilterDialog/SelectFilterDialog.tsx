@@ -4,13 +4,13 @@ import { Dialog } from "components/ui/Dialog";
 import { SearchField } from "components/ui/SearchField";
 import { Tabs } from "components/ui/Tabs";
 import useMultiFetch from "core/hooks/useMultiFetch";
-import { FC, Suspense, memo, useState } from "react";
+import { FC, Suspense, useState } from "react";
 import { AuditoriumsView } from "./AuditoriumsView";
 import { LessonsView } from "./LessonsView";
 import * as S from "./SelectFilterDialog.styles";
 import { TeachersView } from "./TeachersView";
 
-export const SelectFilterDialog: FC = memo(() => {
+export const SelectFilterDialog: FC = () => {
     const [query, setQuery] = useState("");
     const { loading, error } = useMultiFetch(true, true, true);
 
@@ -68,4 +68,4 @@ export const SelectFilterDialog: FC = memo(() => {
             </Dialog.Content>
         </Dialog.Root>
     );
-});
+};

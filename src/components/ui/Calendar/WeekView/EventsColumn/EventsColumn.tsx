@@ -1,7 +1,7 @@
 import { TDayWithEvents } from "@onetools/calendar";
 import { TIMELINE } from "core/constants";
 import { TModifiedSchedule } from "core/types/events.types";
-import { ComponentPropsWithoutRef, FC, memo, useCallback } from "react";
+import { ComponentPropsWithoutRef, FC } from "react";
 import { EventCell } from "../EventCell/EventCell";
 import * as S from "./EventsColumn.styles";
 
@@ -9,15 +9,12 @@ interface EventColumnProps extends ComponentPropsWithoutRef<"div"> {
     day: TDayWithEvents<TModifiedSchedule>;
 }
 
-export const EventsColumn: FC<EventColumnProps> = memo(({ day, ...props }) => {
-    const getEvents = useCallback(
-        (startTime: string) => {
-            return day.events.filter((event) => {
-                return event.startTime === startTime;
-            });
-        },
-        [day]
-    );
+export const EventsColumn: FC<EventColumnProps> = ({ day, ...props }) => {
+    const getEvents = (startTime: string) => {
+        return day.events.filter((event) => {
+            return event.startTime === startTime;
+        });
+    };
 
     return (
         <S.StyledEventsColumn {...props}>
@@ -28,4 +25,4 @@ export const EventsColumn: FC<EventColumnProps> = memo(({ day, ...props }) => {
             })}
         </S.StyledEventsColumn>
     );
-});
+};
